@@ -1,0 +1,7 @@
+{
+  "name": "bds-v2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
