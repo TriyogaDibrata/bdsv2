@@ -1,0 +1,65 @@
+<ion-content [fullscreen]="true" id="main-content" scrollEvents="true" (ionScroll)="handleScrollEvents($event)">
+  <div class="container flex flex-col flex-grow min-h-full mx-auto">
+    <!-- Header -->
+    <div class="w-full p-4 flex justify-between items-center plt-ios:pt-10 sticky top-0 z-50"
+      [ngClass]="{'bg-[#d42d2d] bg-opacity-50' : scrollTop > 50, 'bg-[#d42d2d] bg-opacity-100' : scrollTop > 100}">
+      <ion-button mode="ios" (click)="toggleSideMenu()">
+        <ion-icon [name]="isMenuOpen ? 'close-outline' : 'menu-outline'"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Hero -->
+    <div class="w-full p-6 min-h-[150px]">
+      <div class="flex flex-row-reverse gap-4 items-center">
+        <img src="https://i.pravatar.cc/300" class="w-14 h-14 rounded-full shadow-xl" />
+        <div class="flex flex-col items-end text-white">
+          <div class="text-sm">Selamat datang,</div>
+          <div class="text-2xl font-bold">Administrator</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-grow w-full bg-white rounded-t-2xl">
+      <!-- Card Summary -->
+      <ion-card mode="ios" class="h-28 -mt-14 rounded-2xl p-4 flex flex-col justify-around">
+        <ion-item>
+          <ion-label>Dokumen belum TTE</ion-label>
+          <ion-badge color="primary">10</ion-badge>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Dokumen hari ini</ion-label>
+          <ion-badge color="tertiary">10</ion-badge>
+        </ion-item>
+      </ion-card>
+
+      <!-- Home Menus -->
+      <div class="flex justify-around mx-4">
+        <div *ngFor="let menu of menus" class="text-center">
+          <div class="w-16 menu-wrapper flex flex-col items-center">
+            <div class="w-12 h-12 bg-red-50 flex justify-center items-center rounded-xl">
+              <ion-icon [name]="menu.icon" class="text-2xl text-red-500"></ion-icon>
+            </div>
+            <div class="text-xs font-thin mt-2">{{ menu.name }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documents List-->
+      <div class="p-6">
+        <div class="flex justify-between items-center">
+          <div class="text-2xl font-bold">Dokumen Terbaru</div>
+          <ion-button fill="clear" mode="ios" size="small" class="text-xs">Lihat Semua</ion-button>
+        </div>
+        <app-document-thubmnail *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></app-document-thubmnail>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-menu contentId="main-content" menuId="main-menu" swipeGesture="true" type="push"
+  (ionWillClose)="isMenuOpen = false" (ionWillOpen)="isMenuOpen = true">
+
+</ion-menu>

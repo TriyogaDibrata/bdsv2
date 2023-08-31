@@ -1,0 +1,4 @@
+<ion-button mode="ios" fill="clear" color="light" (click)="target ? navCtrl.navigateBack(target) : navCtrl.back()">
+  <ion-icon name="arrow-back-outline"></ion-icon>
+  {{ backText ? backText : "" }}
+</ion-button>
