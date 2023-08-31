@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiResponse } from '@interfaces/api-response';
 import { NavController } from '@ionic/angular';
+import { AuthService } from '@services/auth.service';
+import { LoadingService } from '@services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +18,36 @@ export class LoginPage implements OnInit {
   public showPassword: boolean = false;
   public error: any = '';
 
-  constructor(public navCtrl: NavController) {}
+  constructor(
+    public navCtrl: NavController,
+    private auth: AuthService,
+    public loader: LoadingService,
+  ) {}
 
   ngOnInit() {}
 
   public login() {
-    console.log(this.loginForm.value);
-    this.navCtrl.navigateRoot('home');
+    let formValue = this.loginForm.value;
+    formValue['fcm_token'] = '';
+
+    this.auth.login(formValue).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.navCtrl.navigateRoot('home');
+        } else {
+          this.error = res.msg;
+        }
+      },
+      error: (err) => {
+        // console.log(err);
+      },
+      complete: () => {
+        // console.log('login process completed !');
+      },
+    });
+  }
+
+  onInput(ev) {
+    this.error = '';
   }
 }

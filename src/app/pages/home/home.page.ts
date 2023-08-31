@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@interfaces/user';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,7 @@ import { MenuController } from '@ionic/angular';
 export class HomePage implements OnInit {
   public isMenuOpen: boolean = false;
   public scrollTop: number = 0;
+  public user: User = this.auth.userData;
 
   public menus = [
     {
@@ -33,7 +36,12 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(public menuCtrl: MenuController) {}
+  constructor(
+    public menuCtrl: MenuController,
+    public auth: AuthService,
+  ) {
+    console.log(this.user);
+  }
 
   async ngOnInit() {}
 
