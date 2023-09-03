@@ -28,7 +28,8 @@
       "@pages/*" : ["src/app/pages/*"],
       "@services/*" : ["src/app/services/*"],
       "@interfaces/*" : ["src/app/interfaces/*"],
-      "@directives/*" : ["src/app/directives/*"]
+      "@directives/*" : ["src/app/directives/*"],
+      "@guards/*" : ["src/app/guards/*"]
     }
   },
   "angularCompilerOptions": {

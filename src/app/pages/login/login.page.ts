@@ -4,6 +4,7 @@ import { ApiResponse } from '@interfaces/api-response';
 import { NavController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,14 @@ export class LoginPage implements OnInit {
     this.auth.login(formValue).subscribe({
       next: (res: ApiResponse) => {
         if (res && res.success) {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            text: res.msg,
+            timer: 2000,
+            showConfirmButton: false,
+          });
           this.navCtrl.navigateRoot('home');
         } else {
           this.error = res.msg;
