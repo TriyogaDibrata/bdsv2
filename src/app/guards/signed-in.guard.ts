@@ -6,12 +6,12 @@ import {
 } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
-import { Observable, retry } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard {
+export class SignedInGuard {
   constructor(
     private auth: AuthService,
     private navCtrl: NavController,
@@ -26,10 +26,12 @@ export class AuthGuard {
     | boolean
     | UrlTree {
     const user = this.auth.userData;
+
     if (user) {
-      return true;
+      this.navCtrl.navigateRoot('/');
+      return false;
     }
-    this.navCtrl.navigateRoot('landing');
-    return false;
+
+    return true;
   }
 }

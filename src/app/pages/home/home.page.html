@@ -13,6 +13,10 @@
 
     <!-- Hero -->
     <div class="w-full p-6 mb-12">
+      <!-- <div class="flex flex-col items-start mt-4">
+        <div>{{ serverDate }}</div>
+        <div>{{ serverTime }}</div>
+      </div> -->
       <div class="flex justify-end gap-4 items-center">
         <div class="flex flex-col items-end text-white">
           <div class="text-sm">Selamat datang,</div>
@@ -30,33 +34,51 @@
       <ion-card mode="ios" class="h-28 -mt-14 rounded-2xl p-4 flex flex-col justify-around">
         <ion-item>
           <ion-label>Dokumen belum TTE</ion-label>
-          <ion-badge color="primary">10</ion-badge>
+          <ion-badge color="primary">{{ homeData?.doc_belum ? homeData?.doc_belum : '0'}}</ion-badge>
         </ion-item>
         <ion-item lines="none">
           <ion-label>Dokumen hari ini</ion-label>
-          <ion-badge color="tertiary">10</ion-badge>
+          <ion-badge color="tertiary">{{ homeData?.doc_today ? homeData?.doc_today : '0' }}</ion-badge>
         </ion-item>
       </ion-card>
 
       <!-- Home Menus -->
       <div class="flex justify-around mx-4">
-        <div *ngFor="let menu of menus" class="text-center">
-          <div class="w-16 menu-wrapper flex flex-col items-center">
+        <div *ngFor="let item of menu.homeMenus" class="text-center">
+          <div class="w-16 menu-wrapper flex flex-col items-center" (click)="handleMenuClick(item)">
             <div class="w-12 h-12 bg-red-50 flex justify-center items-center rounded-xl">
-              <ion-icon [name]="menu.icon" class="text-2xl text-red-500"></ion-icon>
+              <ion-icon [name]="item.icon" class="text-2xl text-red-500"></ion-icon>
             </div>
-            <div class="text-xs font-thin mt-2">{{ menu.name }}</div>
+            <div class="text-xs font-thin mt-2">{{ item.name }}</div>
           </div>
         </div>
       </div>
 
-      <!-- Documents List-->
+      <!-- Documents List New-->
       <div class="p-6">
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold">Dokumen Terbaru</div>
           <ion-button fill="clear" mode="ios" size="small" class="text-xs">Lihat Semua</ion-button>
         </div>
-        <app-document-thubmnail *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></app-document-thubmnail>
+        <div class="flex flex-col items-center text-slate-400 my-4"
+          *ngIf="!homeData?.lastest || homeData?.lastest.length < 1">
+          <ion-icon src="assets/images/file-pdf.svg" class="text-3xl"></ion-icon>
+          <ion-text class="text-sm my-2"> Tidak ada dokumen terbaru </ion-text>
+        </div>
+        <app-document-thubmnail *ngFor="let doc of homeData?.lastest" [data]="doc"></app-document-thubmnail>
+      </div>
+
+      <!-- Documents List Histories-->
+      <div class="p-6">
+        <div class="flex justify-between items-center">
+          <div class="text-2xl font-bold">Riwayat Dokumen</div>
+          <ion-button fill="clear" mode="ios" size="small" class="text-xs">Lihat Semua</ion-button>
+        </div>
+        <div class="flex flex-col items-center text-slate-400 my-4" *ngIf="!homeData?.lastest">
+          <ion-icon src="assets/images/file-pdf.svg" class="text-3xl"></ion-icon>
+          <ion-text class="text-sm my-2"> Tidak ada riwayat dokumen terakhir </ion-text>
+        </div>
+        <app-document-thubmnail *ngFor="let doc of homeData?.histories" [data]="doc"></app-document-thubmnail>
       </div>
     </div>
   </div>
@@ -64,5 +86,21 @@
 
 <ion-menu contentId="main-content" menuId="main-menu" swipeGesture="true" type="push"
   (ionWillClose)="isMenuOpen = false" (ionWillOpen)="isMenuOpen = true">
-
+  <div class="w-full flex flex-col flex-grow min-h-full">
+    <div class="p-4 plt-ios:pt-10 flex gap-4">
+      <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'" class="w-12 h-12 rounded-full shadow-xl"
+        appBrokenImage="assets/images/default-user.png" />
+      <div class="flex flex-col">
+        <div class="text-sm font-semibold">{{ user.name
+          }}
+        </div>
+        <div class="text-xs text-gray-400">
+          {{ user.role.name }}
+        </div>
+      </div>
+    </div>
+    <div class="p-4 flex-grow">
+      <ion-button (click)="auth.logout()">Logout</ion-button>
+    </div>
+  </div>
 </ion-menu>

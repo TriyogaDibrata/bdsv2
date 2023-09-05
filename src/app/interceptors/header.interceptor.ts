@@ -29,6 +29,11 @@ export class HeaderInterceptor implements HttpInterceptor {
       Accept: 'application/json',
     };
 
+    const user = this.auth.userData;
+    if (user && user.api_token) {
+      headers['authorization'] = 'Bearer ' + user.api_token;
+    }
+
     const request = req.clone({
       setHeaders: headers,
     });
