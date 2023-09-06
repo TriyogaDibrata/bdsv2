@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DocThumb } from '@interfaces/doc-thumb';
+import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
 
 @Component({
@@ -7,10 +9,10 @@ import * as moment from 'moment';
   styleUrls: ['./document-thubmnail.component.scss'],
 })
 export class DocumentThubmnailComponent implements OnInit {
-  @Input() data: any;
+  @Input() data: DocThumb;
   // @Input() status: number;
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {
     // console.log(this.status);
@@ -21,7 +23,7 @@ export class DocumentThubmnailComponent implements OnInit {
     return moment(date).format('dddd, DD MMMM YYYY');
   }
 
-  showDetail(data) {
-    console.log(data);
+  showDetail() {
+    this.navCtrl.navigateForward(['detail-doc/', this.data.id]);
   }
 }

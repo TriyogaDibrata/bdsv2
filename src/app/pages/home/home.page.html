@@ -58,7 +58,8 @@
       <div class="p-6">
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold">Dokumen Terbaru</div>
-          <ion-button fill="clear" mode="ios" size="small" class="text-xs">Lihat Semua</ion-button>
+          <ion-button fill="clear" mode="ios" size="small" class="text-xs"
+            (click)="navCtrl.navigateForward('signed-doc')">Lihat Semua</ion-button>
         </div>
         <div class="flex flex-col items-center text-slate-400 my-4"
           *ngIf="!homeData?.lastest || homeData?.lastest.length < 1">
@@ -72,7 +73,8 @@
       <div class="p-6">
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold">Riwayat Dokumen</div>
-          <ion-button fill="clear" mode="ios" size="small" class="text-xs">Lihat Semua</ion-button>
+          <ion-button fill="clear" mode="ios" size="small" class="text-xs"
+            (click)="navCtrl.navigateForward('signed-doc')">Lihat Semua</ion-button>
         </div>
         <div class="flex flex-col items-center text-slate-400 my-4" *ngIf="!homeData?.lastest">
           <ion-icon src="assets/images/file-pdf.svg" class="text-3xl"></ion-icon>
@@ -100,7 +102,7 @@
       </div>
     </div>
     <div class="p-4 flex-grow">
-      <ion-button (click)="auth.logout()">Logout</ion-button>
+      <ion-button (click)="auth.logout()" size="small">Logout</ion-button>
     </div>
   </div>
 </ion-menu>

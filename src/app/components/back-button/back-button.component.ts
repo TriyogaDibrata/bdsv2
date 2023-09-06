@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 export class BackButtonComponent implements OnInit {
   @Input() target: string = '';
   @Input() backText: string = '';
+  @Input() color: string;
 
   constructor(public navCtrl: NavController) {}
 

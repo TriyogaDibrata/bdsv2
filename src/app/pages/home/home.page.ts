@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component';
 import { ApiResponse } from '@interfaces/api-response';
 import { User } from '@interfaces/user';
-import { MenuController, ModalController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
 import { MenuService } from '@services/menu.service';
 import { RequestService } from '@services/request.service';
@@ -26,7 +25,7 @@ export class HomePage implements OnInit {
     public auth: AuthService,
     private req: RequestService,
     public menu: MenuService,
-    private modalCtrl: ModalController,
+    public navCtrl: NavController,
   ) {}
 
   async ngOnInit() {
@@ -67,6 +66,9 @@ export class HomePage implements OnInit {
   }
 
   handleMenuClick(item) {
-    item.action();
+    if (item.action && typeof item.action == 'function') {
+      item.action();
+    }
+    return;
   }
 }

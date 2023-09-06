@@ -10,4 +10,11 @@ export class SheetMenuComponent implements OnInit {
   constructor(public menu: MenuService) {}
 
   ngOnInit() {}
+
+  handleMenuOnClick(item) {
+    if (item.action) {
+      item.action();
+    }
+    return;
+  }
 }

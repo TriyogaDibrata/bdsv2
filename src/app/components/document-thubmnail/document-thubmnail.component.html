@@ -1,4 +1,4 @@
-<ion-card mode="ios" class="p-4 mx-0 rounded-xl" (click)="showDetail(data)">
+<ion-card mode="ios" class="p-4 mx-0 rounded-xl" (click)="showDetail()">
   <div class="flex flex-row gap-4 items-center">
     <ion-icon src="assets/images/file-pdf.svg" class="w-8 h-8"
       [ngClass]="{'text-blue-400' : data?.status == 0, 'text-red-400' : data?.status == -1, 'text-green-400' : data?.status == 1}"></ion-icon>

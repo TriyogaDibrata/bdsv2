@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +15,12 @@ export class MenuService {
     {
       name: 'Dokumen Belum TTE',
       icon: 'document-text-outline',
-      action: '',
+      action: () => this.navCtrl.navigateForward('new-doc'),
     },
     {
       name: 'Riwayat TTE',
       icon: 'documents-outline',
-      action: '',
+      action: () => this.navCtrl.navigateForward('signed-doc'),
     },
     {
       name: 'Lainnya',
@@ -38,31 +38,44 @@ export class MenuService {
     {
       name: 'Dokumen Belum TTE',
       icon: 'document-text-outline',
-      action: '',
+      action: () => {
+        this.closeModal().then(() => this.navigateTo('new-doc'));
+      },
     },
     {
       name: 'Riwayat TTE',
       icon: 'documents-outline',
-      action: '',
+      action: () => {
+        this.closeModal().then(() => this.navigateTo('signed-doc'));
+      },
     },
     {
       name: 'Surat Masuk',
       icon: 'file-tray-outline',
-      action: '',
+      action: () => {
+        this.closeModal().then(() => this.navigateTo('inbox'));
+      },
     },
     {
       name: 'Surat Keluar',
       icon: 'send-outline',
-      action: '',
+      action: () => {
+        this.closeModal().then(() => this.navigateTo('sent'));
+      },
     },
     {
       name: 'Agenda',
       icon: 'calendar-outline',
-      action: '',
+      action: () => {
+        this.closeModal().then(() => this.navigateTo('agenda'));
+      },
     },
   ];
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private navCtrl: NavController,
+  ) {}
 
   public async openSheetMenu() {
     const modal = await this.modalCtrl.create({
@@ -73,5 +86,13 @@ export class MenuService {
     });
 
     modal.present();
+  }
+
+  public async closeModal() {
+    return await this.modalCtrl.dismiss();
+  }
+
+  public async navigateTo(page: string = '') {
+    this.navCtrl.navigateForward(page);
   }
 }
