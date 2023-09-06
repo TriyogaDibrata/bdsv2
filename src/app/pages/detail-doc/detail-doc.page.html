@@ -2,13 +2,93 @@
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
     <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50"
-      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop > 100}">
+      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop >= 100}">
       <app-back-button></app-back-button>
-      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop > 100}">Detail Dokumen</div>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop >= 100}">Detail Dokumen</div>
     </div>
 
     <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
 
+      <!-- Infrmasi Dokumen-->
+      <ion-card class="mb-10 mx-0 p-6" mode="ios">
+        <div class="text-2xl font-bold text-[--ion-color-primary]">
+          Informasi Dokumen
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Nomor / Judul Surat
+          </div>
+          <div class="text-sm">
+            Test Nama
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Tanggal
+          </div>
+          <div class="text-sm">
+            Test Tanggal
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Perangkat Daerah
+          </div>
+          <div class="text-sm">
+            Test Nama
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Unit Kerja
+          </div>
+          <div class="text-sm">
+            Test Nama
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Keterangan
+          </div>
+          <div class="text-sm">
+            Test Nama
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Berkas
+          </div>
+          <div class="flex justify-between items-center">
+            <div>Surat (1 Halaman)</div>
+            <ion-button fill="solid" size="small" mode="ios" expand="block">Lihat</ion-button>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>Lampiran (1 Halaman)</div>
+            <ion-button fill="solid" size="small" mode="ios" expand="block">Lihat</ion-button>
+          </div>
+        </div>
+      </ion-card>
+
+      <!--Persetujuan Dokumen-->
+      <ion-card class="mx-0 p-6 rounded-xl" mode="ios">
+        <div class="text-2xl font-bold text-[--ion-color-primary]">
+          Persetujuan Dokumen
+        </div>
+
+        <div class="flex flex-col my-4" *ngFor="let i of [1,2,3]">
+          <div class="flex gap-4 items-center">
+            <div>{{ i }}</div>
+            <div class="font-bold">Nyoman Sukra Gumbreg Wariga Warigadean Surya Atmaja, S.Sos, Mars</div>
+            <div>Disetujui</div>
+          </div>
+        </div>
+      </ion-card>
     </div>
   </div>
 </ion-content>
