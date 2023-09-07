@@ -20,7 +20,7 @@
             Nomor / Judul Surat
           </div>
           <div class="text-sm">
-            Test Nama
+            {{ detailDoc?.name }}
           </div>
         </div>
 
@@ -29,7 +29,7 @@
             Tanggal
           </div>
           <div class="text-sm">
-            Test Tanggal
+            {{ convertDate(detailDoc?.date) }}
           </div>
         </div>
 
@@ -38,7 +38,7 @@
             Perangkat Daerah
           </div>
           <div class="text-sm">
-            Test Nama
+            {{ detailDoc?.nama_opd }}
           </div>
         </div>
 
@@ -47,7 +47,7 @@
             Unit Kerja
           </div>
           <div class="text-sm">
-            Test Nama
+            {{ detailDoc?.unit_kerja }}
           </div>
         </div>
 
@@ -56,36 +56,60 @@
             Keterangan
           </div>
           <div class="text-sm">
-            Test Nama
+            {{ detailDoc?.desc }}
           </div>
         </div>
 
-        <div class="flex flex-col my-4">
+        <div class="flex flex-col my-4" *ngIf="detailDoc?.file.length > 0 || detailDoc?.lampiran.length > 0">
           <div class="font-bold text-black text-base">
             Berkas
           </div>
-          <div class="flex justify-between items-center">
-            <div>Surat (1 Halaman)</div>
-            <ion-button fill="solid" size="small" mode="ios" expand="block">Lihat</ion-button>
+          <div class="flex justify-between items-center" *ngIf="detailDoc?.file.length > 0">
+            <div>Surat ({{detailDoc?.file.length }} Halaman)</div>
+            <ion-button fill="solid" size="small" mode="ios" expand="block"
+              (click)="showPdfViewer(detailDoc?.file)">Lihat</ion-button>
           </div>
-          <div class="flex justify-between items-center">
-            <div>Lampiran (1 Halaman)</div>
-            <ion-button fill="solid" size="small" mode="ios" expand="block">Lihat</ion-button>
+          <div class="flex justify-between items-center" *ngIf="detailDoc?.lampiran.length > 0">
+            <div>Lampiran ({{ detailDoc?.lampiran.length }} Halaman)</div>
+            <ion-button fill="solid" size="small" mode="ios" expand="block"
+              (click)="showPdfViewer(detailDoc?.lampiran)">Lihat</ion-button>
+          </div>
+        </div>
+
+        <div class="rounded-xl card-shadow w-full p-4 flex flex-col items-center text-center bg-gray-200 ring-gray-400"
+          [ngClass]="{'!bg-red-200 !border-solid !border-red-400 border-2 !text-red-600' : detailDoc?.status == -1, '!bg-green-200 !border-solid !border-green-400 border-2 !text-green-600' : detailDoc?.status == 1}">
+          <div>
+            {{ detailDoc?.status == 1 ? "Dokumen Telah Ditandangani" : detailDoc?.status == -1 ? "Dokumen Dikembalikan"
+            :
+            "Dokumen Akan Ditandatangani" }} Oleh
+          </div>
+          <div class="font-bold" *ngIf="detailDoc?.status == 1 || detailDoc?.status == 0">{{ detailDoc?.ttds.join(',')}}
+          </div>
+          <div *ngIf="detailDoc?.status == 1">
+            {{ convertDate(detailDoc?.signed_date) }}
+          </div>
+          <div *ngIf="detailDoc?.status == -1 && detailDoc?.notes.length > 0">
+            <div class="font-bold">{{ detailDoc?.notes[detailDoc?.notes.length - 1].name}}</div>
+            <div class="mt-4">Catatan : {{ detailDoc?.notes[detailDoc?.notes.length - 1].catatan}}</div>
+            <div class="mt-4">{{ convertDate(detailDoc?.notes[detailDoc?.notes.length - 1].created_at) }}</div>
           </div>
         </div>
       </ion-card>
 
       <!--Persetujuan Dokumen-->
-      <ion-card class="mx-0 p-6 rounded-xl" mode="ios">
+      <ion-card class="mx-0 p-6 rounded-xl" mode="ios" *ngIf="detailDoc?.acks.length > 0">
         <div class="text-2xl font-bold text-[--ion-color-primary]">
           Persetujuan Dokumen
         </div>
 
-        <div class="flex flex-col my-4" *ngFor="let i of [1,2,3]">
+        <div class="flex flex-col my-4" *ngFor="let ack of detailDoc?.acks">
           <div class="flex gap-4 items-center">
-            <div>{{ i }}</div>
-            <div class="font-bold">Nyoman Sukra Gumbreg Wariga Warigadean Surya Atmaja, S.Sos, Mars</div>
-            <div>Disetujui</div>
+            <div>{{ ack.order +'.'}}</div>
+            <div class="text-left text-sm">{{ ack?.nama }}</div>
+            <div class="text-end text-xs"
+              [ngClass]="{'text-green-400' : ack?.status == 1, 'text-red-400' : ack?.status == -1}">
+              {{ ack?.status == 1 ? 'Disetujui' : ack.status == -1 ? 'Dikembalikan' : 'Belum Disetujui'}}
+            </div>
           </div>
         </div>
       </ion-card>

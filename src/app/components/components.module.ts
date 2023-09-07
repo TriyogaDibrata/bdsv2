@@ -5,11 +5,13 @@ import { BackButtonComponent } from './back-button/back-button.component';
 import { DocumentThubmnailComponent } from './document-thubmnail/document-thubmnail.component';
 import { SheetMenuComponent } from './sheet-menu/sheet-menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
   DocumentThubmnailComponent,
   SheetMenuComponent,
+  PdfViewerComponent,
 ];
 
 @NgModule({

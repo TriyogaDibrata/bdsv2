@@ -28,7 +28,7 @@ export interface lampiran {
 }
 
 export interface ack {
-  name: string;
+  nama: string;
   status: number;
   order: number;
 }
