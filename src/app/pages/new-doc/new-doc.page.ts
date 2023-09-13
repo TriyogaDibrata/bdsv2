@@ -3,6 +3,7 @@ import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
 import { NavController } from '@ionic/angular';
 import { RequestService } from '@services/request.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-new-doc',
@@ -12,6 +13,14 @@ import { RequestService } from '@services/request.service';
 export class NewDocPage implements OnInit {
   public docs: DocThumb[];
   public scrollTop: number = 0;
+  public infiniteScrollData: any = {
+    enable: false,
+    page: 1,
+  };
+  public search: any = {
+    limit: 30,
+    value: '',
+  };
 
   constructor(
     private req: RequestService,
@@ -19,26 +28,80 @@ export class NewDocPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getNewDoc();
+    this.prepareInitialData();
+  }
+
+  private async prepareInitialData() {
+    return (await this.getNewDoc()).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.docs = res.data.docs.data;
+          if (res.data.docs.next_page_url) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          }
+        }
+        console.log(this.infiniteScrollData);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   private async getNewDoc() {
-    await this.req.apiGet('doc/belumttd', {}).subscribe({
+    let params = {
+      page: this.infiniteScrollData.page,
+      search: this.search.value,
+    };
+    return this.req.apiGet('doc/belumttd', params).pipe(
+      map((res) => {
+        return res;
+      }),
+    );
+  }
+
+  handleScroll(e) {
+    this.scrollTop = e.detail.scrollTop;
+  }
+
+  public async loadMore(ev) {
+    return (await this.getNewDoc()).subscribe({
       next: (res: ApiResponse) => {
-        if (res.success && res.data) {
-          this.docs = res.data.docs.data;
+        if (res && res.success) {
+          res.data.docs.data.forEach((el) => {
+            this.docs.push(el);
+          });
+          if (res.data.docs.next_page_url) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          }
         }
+        console.log(this.infiniteScrollData);
       },
       error: (err) => {
         console.log(err);
       },
       complete: () => {
-        console.log('new doc load complete !');
+        ev.target.complete();
       },
     });
   }
 
-  handleScroll(e) {
-    this.scrollTop = e.detail.scrollTop;
+  public async searchData() {
+    this.infiniteScrollData.enable = false;
+    this.infiniteScrollData.page = 1;
+    await this.prepareInitialData();
+  }
+
+  onInputCleared(ev) {
+    this.searchData();
+  }
+
+  onInputChanged(ev) {
+    let value = ev.target.value;
+    if (value < 1) {
+      this.searchData();
+    }
   }
 }

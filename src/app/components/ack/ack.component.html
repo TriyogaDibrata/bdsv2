@@ -1,0 +1,13 @@
+<div class="px-6 py-10">
+  <div class="text-xl font-bold">
+    {{ data?.state == 1 ? 'Setujui' : 'Kembalikan'}} Dokumen
+  </div>
+
+  <div class="input-wrapper flex flex-col items-end">
+    <ion-textarea [(ngModel)]="note" [autoGrow]="true" placeholder="Masukan catatan jika perlu" maxlength="300"
+      [counter]="true" class="bg-gray-100 p-4 rounded-xl my-4" rows="5"></ion-textarea>
+    <ion-button mode="ios" [color]="data?.state == 1 ? 'success' : 'danger'" (click)="doAck()">{{ data?.state == 1 ?
+      'Setujui' :
+      'Kembalikan'}}</ion-button>
+  </div>
+</div>

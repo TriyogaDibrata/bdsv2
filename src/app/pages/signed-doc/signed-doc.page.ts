@@ -3,6 +3,7 @@ import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
 import { NavController } from '@ionic/angular';
 import { RequestService } from '@services/request.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-signed-doc',
@@ -12,6 +13,14 @@ import { RequestService } from '@services/request.service';
 export class SignedDocPage implements OnInit {
   public docs: DocThumb[];
   public scrollTop: number = 0;
+  public infiniteScrollData: any = {
+    enable: false,
+    page: 1,
+  };
+  public search: any = {
+    limit: 30,
+    value: '',
+  };
 
   constructor(
     private req: RequestService,
@@ -19,26 +28,80 @@ export class SignedDocPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getSignedDoc();
+    this.prepareInitialData();
   }
 
-  private async getSignedDoc() {
-    await this.req.apiGet('doc/riwatatttd', {}).subscribe({
+  public handleScroll(e) {
+    this.scrollTop = e.detail.scrollTop;
+  }
+
+  public async prepareInitialData() {
+    return await this.getSignedDoc().subscribe({
       next: (res: ApiResponse) => {
         if (res) {
           this.docs = res.data;
+          if (res['next_page_url']) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          }
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  private getSignedDoc() {
+    let params = {
+      page: this.infiniteScrollData.page,
+      search: this.search.value,
+    };
+    return this.req.apiGet('doc/riwatatttd', params).pipe(
+      map((res) => {
+        return res;
+      }),
+    );
+  }
+
+  public async loadMore(ev) {
+    return await this.getSignedDoc().subscribe({
+      next: (res: ApiResponse) => {
+        if (res) {
+          res.data.forEach((el) => {
+            this.docs.push(el);
+          });
+          if (res['next_page_url']) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          } else {
+            this.infiniteScrollData.enable = false;
+          }
         }
       },
       error: (err) => {
         console.log(err);
       },
       complete: () => {
-        console.log('new doc load complete !');
+        ev.target.complete();
       },
     });
   }
 
-  handleScroll(e) {
-    this.scrollTop = e.detail.scrollTop;
+  public async searchData() {
+    this.infiniteScrollData.enable = false;
+    this.infiniteScrollData.page = 1;
+    await this.prepareInitialData();
+  }
+
+  onInputCleared(ev) {
+    this.searchData();
+  }
+
+  onInputChanged(ev) {
+    let value = ev.target.value;
+    if (value < 1) {
+      this.searchData();
+    }
   }
 }

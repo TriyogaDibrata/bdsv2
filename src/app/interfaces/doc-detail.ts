@@ -21,6 +21,7 @@ export interface DocDetail {
   signed_date: Date;
   public_url: string;
   file: file[];
+  ack_status: number;
 }
 
 export interface lampiran {

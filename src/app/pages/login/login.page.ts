@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiResponse } from '@interfaces/api-response';
 import { NavController } from '@ionic/angular';
+import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
 import Swal from 'sweetalert2';
@@ -23,6 +24,7 @@ export class LoginPage implements OnInit {
     public navCtrl: NavController,
     private auth: AuthService,
     public loader: LoadingService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {}
@@ -34,15 +36,18 @@ export class LoginPage implements OnInit {
     this.auth.login(formValue).subscribe({
       next: (res: ApiResponse) => {
         if (res && res.success) {
-          Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'success',
-            text: res.msg,
-            timer: 2000,
-            showConfirmButton: false,
-          });
-          this.navCtrl.navigateRoot('home');
+          this.alertService
+            .showAlert({
+              status: 'success',
+              autoClose: true,
+              duration: 1500,
+              showConfirmButton: true,
+              title: 'Success',
+              text: "You're logged in",
+            })
+            .then(() => {
+              this.navCtrl.navigateRoot('home');
+            });
         } else {
           this.error = res.msg;
         }

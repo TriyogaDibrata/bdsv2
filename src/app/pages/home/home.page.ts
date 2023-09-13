@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiResponse } from '@interfaces/api-response';
 import { User } from '@interfaces/user';
 import { MenuController, NavController } from '@ionic/angular';
+import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
 import { MenuService } from '@services/menu.service';
 import { RequestService } from '@services/request.service';
@@ -26,10 +27,14 @@ export class HomePage implements OnInit {
     private req: RequestService,
     public menu: MenuService,
     public navCtrl: NavController,
+    private alertService: AlertService,
   ) {}
 
   async ngOnInit() {
     moment.locale('ID');
+  }
+
+  ionViewWillEnter() {
     this.getHomeStat();
   }
 
@@ -48,10 +53,16 @@ export class HomePage implements OnInit {
         this.renderDateTime(res.data.time);
       },
       error: (err) => {
-        console.log(err);
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          title: err?.statusText,
+          text: err?.message,
+          showConfirmButton: true,
+        });
       },
       complete: () => {
-        console.log('load home stat complete!');
+        //do something when request complete
       },
     });
   }
@@ -70,5 +81,11 @@ export class HomePage implements OnInit {
       item.action();
     }
     return;
+  }
+
+  handleRefresh(ev) {
+    setTimeout(() => {
+      ev.target.complete();
+    }, 2000);
   }
 }

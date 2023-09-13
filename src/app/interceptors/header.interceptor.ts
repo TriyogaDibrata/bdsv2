@@ -40,7 +40,6 @@ export class HeaderInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        console.log(err);
         return throwError(() => err);
       }),
       finalize(() => {

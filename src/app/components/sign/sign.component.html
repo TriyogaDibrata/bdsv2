@@ -1,0 +1,27 @@
+<div class="px-6 py-10">
+  <div class="text-xl font-bold">
+    {{ data?.state == 1 ? 'Tandatangani' : 'Kembalikan'}} Dokumen
+  </div>
+
+  <div class="text-sm text-gray-500" *ngIf="data?.state == 1">
+    Masukan passhrase untutk dapat menandatangani dokumen. Passphrase merupakan kata sandi yang dibuat saat penerbitan
+    sertifikat elektronik oleh BSSN.
+  </div>
+
+  <div class="input-wrapper flex flex-col items-end">
+    <ion-textarea [(ngModel)]="note" [autoGrow]="true" placeholder="Masukan catatan jika perlu" maxlength="300"
+      [counter]="true" class="bg-gray-100 p-4 rounded-xl my-4" rows="5" *ngIf="data?.state == -1"></ion-textarea>
+    <div *ngIf="data?.state == 1" class="flex items-center w-full">
+      <ion-input [(ngModel)]="passphrase" placeholder="Masukan passphrase"
+        class="bg-gray-100 ion-padding-horizontal rounded-xl my-4" rows="5" [type]="showPassword ? 'text' : 'password'">
+      </ion-input>
+      <ion-button fill="clear" (click)="showPassword = !showPassword">
+        <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-button mode="ios" [color]="data?.state == 1 ? 'success' : 'danger'" (click)="doSign()"
+      [disabled]="data?.state == 1 && !passphrase">{{ data?.state == 1 ?
+      'Tandatangani' :
+      'Kembalikan'}}</ion-button>
+  </div>
+</div>

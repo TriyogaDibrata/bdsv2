@@ -1,14 +1,22 @@
 <ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
-    <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50"
-      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop > 100}">
+    <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50 bg-white "
+      [ngClass]="{'!flex-row items-centershadow-sm' : scrollTop > 150}">
       <app-back-button></app-back-button>
-      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop > 100}">Dokumen Terbaru</div>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-xl' : scrollTop > 150}">Dokumen Terbaru</div>
     </div>
 
     <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
+      <div>
+        <ion-searchbar mode="ios" (search)="searchData()" [(ngModel)]="search.value" (ionClear)="onInputCleared($event)"
+          (ionInput)="onInputChanged($event)"></ion-searchbar>
+      </div>
       <app-document-thubmnail *ngFor="let doc of docs" [data]="doc"></app-document-thubmnail>
+
+      <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!infiniteScrollData.enable">
+        <ion-infinite-scroll-content [loadingSpinner]="'crescent'"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
   </div>
 </ion-content>

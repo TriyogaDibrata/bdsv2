@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AckComponent } from '@components/ack/ack.component';
 import { PdfViewerComponent } from '@components/pdf-viewer/pdf-viewer.component';
+import { SheetActionComponent } from '@components/sheet-action/sheet-action.component';
+import { SignComponent } from '@components/sign/sign.component';
 import { ApiResponse } from '@interfaces/api-response';
-import { DocDetail } from '@interfaces/doc-detail';
+import { DocDetail, file, lampiran } from '@interfaces/doc-detail';
 import { ModalController, NavController } from '@ionic/angular';
+import { AlertService } from '@services/alert.service';
 import { RequestService } from '@services/request.service';
 import * as moment from 'moment';
 
@@ -22,6 +26,7 @@ export class DetailDocPage implements OnInit {
     private req: RequestService,
     public navCtrl: NavController,
     private modalCtrl: ModalController,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -37,14 +42,24 @@ export class DetailDocPage implements OnInit {
       next: (res: ApiResponse) => {
         if (res && res.success) {
           this.detailDoc = res.data.doc;
-          console.log(this.detailDoc);
+          this.detailDoc['ack_status'] = res.data.ack_status;
         }
       },
       error: (err) => {
-        console.log(err);
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
       },
       complete: () => {
-        console.log('get detail load complete !');
+        //get detail load complete !;
       },
     });
   }
@@ -57,11 +72,238 @@ export class DetailDocPage implements OnInit {
     return moment(date).format('dddd, DD MMMM YYYY');
   }
 
-  public async showPdfViewer(data) {
-    console.log(data);
+  prepareSurats(data: file[]) {
+    let surats = [];
+    data.forEach((el) => {
+      surats.push(el.doc_url);
+    });
+    this.showPdfViewer(surats);
+  }
+
+  prepareLampirans(data: lampiran[]) {
+    let lampirans = [];
+    data.forEach((el) => {
+      lampirans.push(el.external_path);
+    });
+    this.showPdfViewer(lampirans);
+  }
+
+  public async showPdfViewer(files: string[]) {
     const modal = await this.modalCtrl.create({
       component: PdfViewerComponent,
+      componentProps: {
+        files: files,
+      },
     });
     await modal.present();
+  }
+
+  public async openActionSheet(doc: DocDetail) {
+    const modal = await this.modalCtrl.create({
+      component: SheetActionComponent,
+      componentProps: {
+        doc: doc,
+      },
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then((res) => {
+      if (res.data) {
+        if (doc.type_user == 1) {
+          //sign
+          if (res.data == 1) {
+            this.openSignModal(1, 'accept');
+          } else {
+            this.openSignModal(-1, 'reject');
+          }
+        } else if (doc.type_user == 0) {
+          //acknowledge
+          if (res.data == 1) {
+            this.openAckModal(1, 'accept');
+          } else {
+            this.openAckModal(-1, 'reject');
+          }
+        }
+      }
+    });
+  }
+
+  public async openAckModal(state: number, state_desc: string) {
+    const modal = await this.modalCtrl.create({
+      component: AckComponent,
+      componentProps: {
+        data: {
+          state: state,
+          state_desc: state_desc,
+        },
+      },
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then((res) => {
+      if (res.data) {
+        this.ackDoc(res.data, this.detailDoc.id);
+      }
+    });
+  }
+
+  public async openSignModal(state: number, state_desc: string) {
+    const modal = await this.modalCtrl.create({
+      component: SignComponent,
+      componentProps: {
+        data: {
+          state: state,
+          state_desc: state_desc,
+        },
+      },
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then((res) => {
+      if (res.data) {
+        this.signDoc(res.data, this.detailDoc.id);
+      }
+    });
+  }
+
+  private async ackDoc(data, id) {
+    await this.req.apiPost(`doc/${id}/ack`, data).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.alertService
+            .showAlert({
+              status: 'success',
+              autoClose: true,
+              duration: 1500,
+              showConfirmButton: true,
+              title: 'Success',
+              text: res.msg,
+            })
+            .then(() => {
+              this.ngOnInit();
+            });
+        } else {
+          this.alertService.showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: 'Something went wrong',
+            text: res.msg,
+          });
+        }
+      },
+      error: (err) => {
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: err?.statusText,
+          text: err?.message,
+        });
+      },
+    });
+  }
+
+  private async signDoc(data, id) {
+    if (data?.status == 1) {
+      let signData = {
+        is_biometic: 0,
+        passphrase: data?.passphrase,
+      };
+      this.acceptDoc(signData, id);
+    } else if (data?.status == -1) {
+      let rejectData = {
+        catatan: data?.catatan,
+      };
+      this.rejectDoc(rejectData, id);
+    }
+  }
+
+  async acceptDoc(data, id) {
+    await this.req.apiPost(`doc/${id}/sign`, data).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.alertService
+            .showAlert({
+              status: 'success',
+              autoClose: true,
+              duration: 1500,
+              showConfirmButton: true,
+              title: 'Success',
+              text: res.msg,
+            })
+            .then(() => {
+              this.ngOnInit();
+            });
+        } else {
+          this.alertService.showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: 'Something went wrong',
+            text: res.msg,
+          });
+        }
+      },
+      error: (err) => {
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: err?.statusText,
+          text: err?.message,
+        });
+      },
+    });
+  }
+
+  async rejectDoc(data, id) {
+    await this.req.apiPost(`doc/${id}/reject`, data).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.alertService
+            .showAlert({
+              status: 'success',
+              autoClose: true,
+              duration: 1500,
+              showConfirmButton: true,
+              title: 'Success',
+              text: res.msg,
+            })
+            .then(() => {
+              this.ngOnInit();
+            });
+        } else {
+          this.alertService.showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: 'Something went wrong',
+            text: res.msg,
+          });
+        }
+      },
+      error: (err) => {
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: err?.statusText,
+          text: err?.message,
+        });
+      },
+    });
   }
 }

@@ -1,4 +1,8 @@
 <ion-content [fullscreen]="true" id="main-content" scrollEvents="true" (ionScroll)="handleScrollEvents($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content [refreshingSpinner]="'crescent'"></ion-refresher-content>
+  </ion-refresher>
+
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
     <div class="w-full p-4 flex justify-between items-center plt-ios:pt-10 sticky top-0 z-50"
@@ -59,7 +63,7 @@
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold">Dokumen Terbaru</div>
           <ion-button fill="clear" mode="ios" size="small" class="text-xs"
-            (click)="navCtrl.navigateForward('signed-doc')">Lihat Semua</ion-button>
+            (click)="navCtrl.navigateForward('new-doc')">Lihat Semua</ion-button>
         </div>
         <div class="flex flex-col items-center text-slate-400 my-4"
           *ngIf="!homeData?.lastest || homeData?.lastest.length < 1">

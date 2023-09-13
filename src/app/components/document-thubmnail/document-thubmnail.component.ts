@@ -10,13 +10,10 @@ import * as moment from 'moment';
 })
 export class DocumentThubmnailComponent implements OnInit {
   @Input() data: DocThumb;
-  // @Input() status: number;
 
   constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {
-    // console.log(this.status);
-  }
+  ngOnInit() {}
 
   convertDate(date) {
     moment.locale('ID');

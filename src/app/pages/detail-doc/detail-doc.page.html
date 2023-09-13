@@ -66,13 +66,13 @@
           </div>
           <div class="flex justify-between items-center" *ngIf="detailDoc?.file.length > 0">
             <div>Surat ({{detailDoc?.file.length }} Halaman)</div>
-            <ion-button fill="solid" size="small" mode="ios" expand="block"
-              (click)="showPdfViewer(detailDoc?.file)">Lihat</ion-button>
+            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
+              (click)="prepareSurats(detailDoc?.file)">Lihat</ion-button>
           </div>
           <div class="flex justify-between items-center" *ngIf="detailDoc?.lampiran.length > 0">
             <div>Lampiran ({{ detailDoc?.lampiran.length }} Halaman)</div>
-            <ion-button fill="solid" size="small" mode="ios" expand="block"
-              (click)="showPdfViewer(detailDoc?.lampiran)">Lihat</ion-button>
+            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
+              (click)="prepareLampirans(detailDoc?.lampiran)">Lihat</ion-button>
           </div>
         </div>
 
@@ -102,9 +102,9 @@
           Persetujuan Dokumen
         </div>
 
-        <div class="flex flex-col my-4" *ngFor="let ack of detailDoc?.acks">
+        <div class="flex flex-col my-4" *ngFor="let ack of detailDoc?.acks; let i = index;">
           <div class="flex gap-4 items-center">
-            <div>{{ ack.order +'.'}}</div>
+            <div>{{ i+1 }}.</div>
             <div class="text-left text-sm">{{ ack?.nama }}</div>
             <div class="text-end text-xs"
               [ngClass]="{'text-green-400' : ack?.status == 1, 'text-red-400' : ack?.status == -1}">
@@ -113,6 +113,12 @@
           </div>
         </div>
       </ion-card>
+    </div>
+
+    <div
+      class="h-14 w-14 bg-red-600 rounded-full fixed right-4 bottom-10 shadow-lg shadow-red-200 flex items-center justify-center"
+      (click)="openActionSheet(detailDoc)">
+      <ion-icon class="h-6 w-6" name="ellipsis-horizontal-outline" color="light"></ion-icon>
     </div>
   </div>
 </ion-content>
