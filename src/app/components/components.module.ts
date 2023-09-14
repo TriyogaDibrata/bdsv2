@@ -11,6 +11,7 @@ import { SheetActionComponent } from './sheet-action/sheet-action.component';
 import { AckComponent } from './ack/ack.component';
 import { SignComponent } from './sign/sign.component';
 import { ModalAlertComponent } from './modal-alert/modal-alert.component';
+import { SkeletonComponent } from './skeleton/skeleton.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -21,6 +22,7 @@ const _COMPONENTS = [
   AckComponent,
   SignComponent,
   ModalAlertComponent,
+  SkeletonComponent,
 ];
 
 @NgModule({

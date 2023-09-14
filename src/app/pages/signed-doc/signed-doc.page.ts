@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
 import { NavController } from '@ionic/angular';
+import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import { map } from 'rxjs';
 
@@ -25,6 +26,7 @@ export class SignedDocPage implements OnInit {
   constructor(
     private req: RequestService,
     public navCtrl: NavController,
+    public loader: LoadingService,
   ) {}
 
   ngOnInit() {

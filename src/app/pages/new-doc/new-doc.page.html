@@ -12,6 +12,14 @@
         <ion-searchbar mode="ios" (search)="searchData()" [(ngModel)]="search.value" (ionClear)="onInputCleared($event)"
           (ionInput)="onInputChanged($event)"></ion-searchbar>
       </div>
+
+      <div class="text-center w-full my-4" *ngIf="docs?.length < 1 && !loader.isLoading.value">- Tidak Ada Dokumen -
+      </div>
+
+      <div *ngIf="loader.isLoading.value && !docs">
+        <app-skeleton [type]="'doc-thumb'" *ngFor="let i of [1,2,3,4,5]"></app-skeleton>
+      </div>
+
       <app-document-thubmnail *ngFor="let doc of docs" [data]="doc"></app-document-thubmnail>
 
       <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!infiniteScrollData.enable">

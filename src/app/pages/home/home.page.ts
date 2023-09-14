@@ -4,6 +4,7 @@ import { User } from '@interfaces/user';
 import { MenuController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
+import { LoadingService } from '@services/loading.service';
 import { MenuService } from '@services/menu.service';
 import { RequestService } from '@services/request.service';
 import * as moment from 'moment';
@@ -28,13 +29,11 @@ export class HomePage implements OnInit {
     public menu: MenuService,
     public navCtrl: NavController,
     private alertService: AlertService,
+    public loader: LoadingService,
   ) {}
 
   async ngOnInit() {
     moment.locale('ID');
-  }
-
-  ionViewWillEnter() {
     this.getHomeStat();
   }
 
