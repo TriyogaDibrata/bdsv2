@@ -42,7 +42,7 @@
         </ion-item>
       </ion-card>
 
-      <div class="flex justify-between items-start px-6 mb-4 text-sm font-semibold">
+      <div class="flex justify-between items-start py-2 m-6 text-sm font-semibold text-black">
         <div>{{ serverDate }}</div>
         <div>{{ serverTime }}</div>
       </div>
@@ -99,7 +99,7 @@
 <ion-menu contentId="main-content" menuId="main-menu" swipeGesture="true" type="push"
   (ionWillClose)="isMenuOpen = false" (ionWillOpen)="isMenuOpen = true">
   <div class="w-full flex flex-col flex-grow min-h-full">
-    <div class="p-4 plt-ios:pt-10 flex gap-4">
+    <div class="p-6 plt-ios:pt-20 flex gap-4">
       <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'" class="w-12 h-12 rounded-full shadow-xl"
         appBrokenImage="assets/images/default-user.png" />
       <div class="flex flex-col">
@@ -111,8 +111,14 @@
         </div>
       </div>
     </div>
+    <div class="flex flex-col gap-6 p-6">
+      <div class="flex pb-4 gap-4 items-center border-b-gray-300 last:border-none" *ngFor="let menu of menu.menus">
+        <ion-icon [name]="menu.icon" class="w-6 h-6 flex-shrink-0 text-red-500"></ion-icon>
+        <div class="text-gray-800 text-sm">{{ menu.name }}</div>
+      </div>
+    </div>
     <div class="p-4 flex-grow">
-      <ion-button (click)="auth.logout()" size="small">Logout</ion-button>
+      <ion-button (click)="auth.logout()" expand="block" mode="ios">Logout</ion-button>
     </div>
   </div>
 </ion-menu>

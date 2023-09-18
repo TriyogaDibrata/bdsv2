@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SentPageRoutingModule } from './sent-routing.module';
+import { DetailMailPageRoutingModule } from './detail-mail-routing.module';
 
-import { SentPage } from './sent.page';
+import { DetailMailPage } from './detail-mail.page';
 import { ComponentsModule } from '@components/components.module';
 import { DirectivesModule } from '@directives/directives.module';
 
@@ -15,10 +15,10 @@ import { DirectivesModule } from '@directives/directives.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SentPageRoutingModule,
+    DetailMailPageRoutingModule,
     ComponentsModule,
     DirectivesModule,
   ],
-  declarations: [SentPage],
+  declarations: [DetailMailPage],
 })
-export class SentPageModule {}
+export class DetailMailPageModule {}

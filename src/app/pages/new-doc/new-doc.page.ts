@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
 import { NavController } from '@ionic/angular';
+import { AlertService } from '@services/alert.service';
 import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import { map } from 'rxjs';
@@ -27,6 +28,7 @@ export class NewDocPage implements OnInit {
     private req: RequestService,
     public navCtrl: NavController,
     public loader: LoadingService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -46,7 +48,17 @@ export class NewDocPage implements OnInit {
         console.log(this.infiniteScrollData);
       },
       error: (err) => {
-        console.log(err);
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
       },
     });
   }
@@ -77,12 +89,24 @@ export class NewDocPage implements OnInit {
           if (res.data.docs.next_page_url) {
             this.infiniteScrollData.enable = true;
             this.infiniteScrollData.page++;
+          } else {
+            this.infiniteScrollData.enable = false;
           }
         }
         console.log(this.infiniteScrollData);
       },
       error: (err) => {
-        console.log(err);
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
       },
       complete: () => {
         ev.target.complete();

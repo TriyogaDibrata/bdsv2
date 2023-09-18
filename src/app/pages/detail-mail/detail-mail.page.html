@@ -1,0 +1,80 @@
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
+  <div class="container flex flex-col flex-grow min-h-full mx-auto">
+    <!-- Header -->
+    <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50"
+      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop >= 100}">
+      <app-back-button></app-back-button>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop >= 100}">Detail Surat</div>
+    </div>
+
+    <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
+      <ion-card class="mb-10 mx-0 p-6" mode="ios">
+        <div class="text-2xl font-bold text-[--ion-color-primary]">
+          Informasi Dokumen
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Nomor / Judul Surat
+          </div>
+          <div class="text-sm">
+            <!-- {{ detailDoc?.name }} -->
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Tanggal
+          </div>
+          <div class="text-sm">
+            <!-- {{ convertDate(detailDoc?.date) }} -->
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Perangkat Daerah
+          </div>
+          <div class="text-sm">
+            <!-- {{ detailDoc?.nama_opd }} -->
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Unit Kerja
+          </div>
+          <div class="text-sm">
+            <!-- {{ detailDoc?.unit_kerja }} -->
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Keterangan
+          </div>
+          <div class="text-sm">
+            <!-- {{ detailDoc?.desc }} -->
+          </div>
+        </div>
+
+        <!-- <div class="flex flex-col my-4" *ngIf="detailDoc?.file.length > 0 || detailDoc?.lampiran.length > 0">
+          <div class="font-bold text-black text-base">
+            Berkas
+          </div>
+          <div class="flex justify-between items-center" *ngIf="detailDoc?.file.length > 0">
+            <div>Surat ({{detailDoc?.file.length }} Halaman)</div>
+            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
+              (click)="prepareSurats(detailDoc?.file)">Lihat</ion-button>
+          </div>
+          <div class="flex justify-between items-center" *ngIf="detailDoc?.lampiran.length > 0">
+            <div>Lampiran ({{ detailDoc?.lampiran.length }} Halaman)</div>
+            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
+              (click)="prepareLampirans(detailDoc?.lampiran)">Lihat</ion-button>
+          </div>
+        </div> -->
+
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

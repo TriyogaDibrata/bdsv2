@@ -1,0 +1,11 @@
+<ion-card mode="ios" class="p-4 mx-0 rounded-xl" (click)="showDetail()">
+  <div class="flex justify-between items-center w-full">
+    <div class="font-semibold text-gray-900 text-base">{{ data?.nomor }}</div>
+    <div class="text-xs text-gray-400 text-end">{{ convertDate(data?.tgl) }}</div>
+  </div>
+  <div class="flex flex-col">
+    <div class="text-sm font-semibold text-gray-500">{{
+      data?.perihal }}</div>
+    <ion-text class="text-xs" [color]="status[data?.id_status].color">{{ status[data?.id_status].nama }}</ion-text>
+  </div>
+</ion-card>

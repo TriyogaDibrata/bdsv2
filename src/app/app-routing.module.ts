@@ -67,6 +67,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'detail-mail/:id/:inbox_id',
+    loadChildren: () =>
+      import('./pages/detail-mail/detail-mail.module').then(
+        (m) => m.DetailMailPageModule,
+      ),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

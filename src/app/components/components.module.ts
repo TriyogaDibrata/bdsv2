@@ -12,6 +12,8 @@ import { AckComponent } from './ack/ack.component';
 import { SignComponent } from './sign/sign.component';
 import { ModalAlertComponent } from './modal-alert/modal-alert.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
+import { MailThumbnailComponent } from './mail-thumbnail/mail-thumbnail.component';
+import { SentThumbnailComponent } from './sent-thumbnail/sent-thumbnail.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -23,6 +25,8 @@ const _COMPONENTS = [
   SignComponent,
   ModalAlertComponent,
   SkeletonComponent,
+  MailThumbnailComponent,
+  SentThumbnailComponent,
 ];
 
 @NgModule({

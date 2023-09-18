@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
 import { NavController } from '@ionic/angular';
+import { AlertService } from '@services/alert.service';
 import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import { map } from 'rxjs';
@@ -27,6 +28,7 @@ export class SignedDocPage implements OnInit {
     private req: RequestService,
     public navCtrl: NavController,
     public loader: LoadingService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,17 @@ export class SignedDocPage implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
       },
     });
   }
@@ -82,7 +94,17 @@ export class SignedDocPage implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
       },
       complete: () => {
         ev.target.complete();
