@@ -53,7 +53,13 @@ export class LoginPage implements OnInit {
         }
       },
       error: (err) => {
-        // console.log(err);
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: 'Something went wrong',
+          text: err.message,
+        });
       },
       complete: () => {
         // console.log('login process completed !');

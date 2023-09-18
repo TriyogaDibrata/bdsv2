@@ -17,10 +17,6 @@
 
     <!-- Hero -->
     <div class="w-full p-6 mb-12">
-      <!-- <div class="flex flex-col items-start mt-4">
-        <div>{{ serverDate }}</div>
-        <div>{{ serverTime }}</div>
-      </div> -->
       <div class="flex justify-end gap-4 items-center">
         <div class="flex flex-col items-end text-white">
           <div class="text-sm">Selamat datang,</div>
@@ -45,6 +41,11 @@
           <ion-badge color="tertiary">{{ homeData?.doc_today ? homeData?.doc_today : '0' }}</ion-badge>
         </ion-item>
       </ion-card>
+
+      <div class="flex justify-between items-start px-6 mb-4 text-sm font-semibold">
+        <div>{{ serverDate }}</div>
+        <div>{{ serverTime }}</div>
+      </div>
 
       <!-- Home Menus -->
       <div class="flex justify-around mx-4">
@@ -102,7 +103,7 @@
       <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'" class="w-12 h-12 rounded-full shadow-xl"
         appBrokenImage="assets/images/default-user.png" />
       <div class="flex flex-col">
-        <div class="text-sm font-semibold">{{ user.name
+        <div class="text-sm text-gray-700 font-semibold">{{ user.name
           }}
         </div>
         <div class="text-xs text-gray-400">
