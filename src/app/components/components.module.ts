@@ -14,6 +14,13 @@ import { ModalAlertComponent } from './modal-alert/modal-alert.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 import { MailThumbnailComponent } from './mail-thumbnail/mail-thumbnail.component';
 import { SentThumbnailComponent } from './sent-thumbnail/sent-thumbnail.component';
+import { AgendaSummaryComponent } from './agenda-summary/agenda-summary.component';
+import { AgendaDetailComponent } from './agenda-detail/agenda-detail.component';
+import { UploadLaporanAgendaComponent } from './upload-laporan-agenda/upload-laporan-agenda.component';
+import { ModalActionDisposisiComponent } from './modal-action-disposisi/modal-action-disposisi.component';
+import { ModalRiwayatDisposisiComponent } from './modal-riwayat-disposisi/modal-riwayat-disposisi.component';
+import { ModalUplaodDisposisiComponent } from './modal-uplaod-disposisi/modal-uplaod-disposisi.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -27,6 +34,12 @@ const _COMPONENTS = [
   SkeletonComponent,
   MailThumbnailComponent,
   SentThumbnailComponent,
+  AgendaSummaryComponent,
+  AgendaDetailComponent,
+  UploadLaporanAgendaComponent,
+  ModalActionDisposisiComponent,
+  ModalRiwayatDisposisiComponent,
+  ModalUplaodDisposisiComponent,
 ];
 
 @NgModule({
@@ -37,6 +50,7 @@ const _COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     PdfViewerModule,
+    NgSelectModule,
   ],
   exports: [_COMPONENTS],
 })

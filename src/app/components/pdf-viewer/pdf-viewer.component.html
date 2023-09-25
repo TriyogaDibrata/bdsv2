@@ -11,7 +11,8 @@
       <pdf-viewer *ngFor="let file of files" [render-text]="true" [src]="file" [fit-to-page]="true"
         [zoom-scale]="'page-width'" [show-borders]="true" [original-size]="false" [autoresize]="true"
         [zoom]="pdfOptions.zoom" [rotation]="pdfOptions.rotation"
-        class="w-full h-[calc(100vh-170px)] border border-solid border-gray-500 plt-ios:h-[calc(100vh-230px)]"></pdf-viewer>
+        class="w-full h-[calc(100vh-170px)] border border-solid border-gray-500 plt-ios:h-[calc(100vh-230px)]"
+        (error)="onLoadError($event)"></pdf-viewer>
     </div>
 
     <div

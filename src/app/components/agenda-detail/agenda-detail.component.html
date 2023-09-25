@@ -1,0 +1,49 @@
+<div class="p-6">
+  <div class="text-2xl font-bold my-4">Detail Kegiatan</div>
+  <div class="p-2">
+    <div class="text-xl font-semibold text-black">Kegiatan</div>
+    <div class="text-sm text-gray-500">{{ detail?.event ? detail?.event : '-' }}</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Tanggal dan Waktu</div>
+    <div class="text-sm text-gray-500">{{ detail?.start +' '+ detail?.time_start +' s.d '+ detail?.end + ' ' +
+      detail?.time_end }}</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Informasi</div>
+    <div class="text-sm text-gray-500">{{ detail?.event_type ? detail?.event_type : '-' }}</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Pakaian</div>
+    <div class="text-sm text-gray-500">{{ detail?.dresscode ? detail?.dresscode : '-' }}</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Lokasi</div>
+    <div class="text-sm text-gray-500">{{ detail?.location ? detail?.location : '-' }}</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Keterangan</div>
+    <div class="text-sm text-gray-500">{{ detail?.desc ? detail?.desc : '-'}}</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Surat</div>
+    <ion-button *ngIf="detail?.url_surat" size="small" mode="ios" (click)="openUrl(detail.url_surat)">Lihat Surat
+      <ion-icon slot="start" name="document-text-outline"></ion-icon></ion-button>
+    <div class="text-sm text-gray-300" *ngIf="!detail?.url_surat">-Tidak ada file surat-</div>
+  </div>
+
+  <div class="p-2">
+    <div class="text-lg font-semibold text-black">Laporan Kegiatan</div>
+    <div class="text-gray-500" *ngIf="detail?.deskripsi_laporan">{{ detail?.deskripsi_laporan }}</div>
+    <ion-button *ngIf="detail?.laporan" size="small" mode="ios" (click)="openUrl(detail.laporan)">Lihat Laporan
+      <ion-icon slot="start" name="document-text-outline"></ion-icon></ion-button>
+    <ion-button *ngIf="!detail?.laporan" size="small" mode="ios" (click)="createLaporan()">Buat Laporan
+      <ion-icon slot="start" name="create-outline"></ion-icon></ion-button>
+  </div>
+</div>

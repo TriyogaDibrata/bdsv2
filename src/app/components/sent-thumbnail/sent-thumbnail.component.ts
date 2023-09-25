@@ -64,10 +64,14 @@ export class SentThumbnailComponent implements OnInit {
 
   convertDate(date) {
     moment.locale('ID');
-    return moment(date).calendar();
+    return moment(date).format('DD/MM/YYYY');
   }
 
   showDetail() {
-    this.navCtrl.navigateForward(['detail-mail/', this.data.surat_id, '']);
+    this.navCtrl.navigateForward([
+      'detail-mail/',
+      this.data.surat_id,
+      'outbox',
+    ]);
   }
 }

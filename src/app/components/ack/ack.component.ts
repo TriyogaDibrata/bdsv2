@@ -12,9 +12,7 @@ export class AckComponent implements OnInit {
 
   constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() {}
 
   doAck() {
     let data = {

@@ -1,0 +1,26 @@
+<div class="p-6">
+  <div class="text-xl font-bold text-black">Buat Laporan Kegiatan</div>
+  <div class="text-sm text-black font-semibold">Kegiatan yang diikuti : </div>
+  <div class="text-sm text-gray-500">
+    {{ data.event }}
+  </div>
+
+  <form [formGroup]="formLaporan" (submit)="submitData()">
+    <ion-item class="border border-gray-400 rounded-lg mt-4" lines="none">
+      <input type="file" accept=".pdf, .doc, .docx, .jpg, .jpeg, .png, .webp" formControlName="docfile"
+        (change)="onFileChanged($event)">
+    </ion-item>
+    <div class="text-xs text-gray-500 p-2">
+      Dokumen laporan yang dapat diupload dalam format pdf, doc, docx, jpg, jpeg, png atau webp
+    </div>
+
+    <ion-item class="border border-gray-400 rounded-lg mt-4" lines="none">
+      <ion-textarea placeholder="Masukan deskripsi laporan kegiatan" formControlName="description" autoGrow="true"
+        rows="6" counter="true" maxlength="300"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" mode="ios" [disabled]="formLaporan.invalid || loader.isLoading.value" type="submit">
+      <ion-spinner name="crescent" *ngIf="loader.isLoading.value"></ion-spinner>
+      {{ loader.isLoading.value ? 'Uploading..' : 'Simpan Laporan'}}</ion-button>
+  </form>
+</div>

@@ -12,9 +12,7 @@ export class SheetActionComponent implements OnInit {
 
   constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {
-    console.log(this.doc);
-  }
+  ngOnInit() {}
 
   onDismiss(data, role) {
     this.modalCtrl.dismiss(data, role);

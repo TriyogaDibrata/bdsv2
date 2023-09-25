@@ -1,0 +1,19 @@
+<div class="p-6">
+
+  <div class="my-4 flex flex-col">
+    <div class="text-xs font-semibold">Tujuan disposisi</div>
+    <ng-select [(ngModel)]="selected_uk" [multiple]="partials?.flag_multi_disposisi">
+      <ng-option *ngFor="let uk of partials?.uk_disposisi" [value]="uk.id">{{ uk.name }}</ng-option>
+    </ng-select>
+  </div>
+
+  <div class="my-4 flex flex-col">
+    <div class="text-xs font-semibold">Keterangan</div>
+    <ion-textarea rows="6" class="border border-gray-300 px-4 rounded-lg" placeholder="Tuliskan keterangan disposisi"
+      [(ngModel)]="note"></ion-textarea>
+  </div>
+
+  <ion-button expand="block" mode="ios" (click)="sendDisposisi()" [disabled]="!selected_uk || !note">Kirim
+    Disposisi</ion-button>
+
+</div>

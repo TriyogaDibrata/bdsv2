@@ -2,8 +2,8 @@
   <div class="absolute left-2 top-2 h-2 w-2 rounded-full bg-red-400" [ngClass]="{'hidden' : data?.flag_read == 1}">
   </div>
   <div class="flex justify-between items-center w-full">
-    <div class="font-semibold text-gray-900 text-base">{{ data?.pengirim }}</div>
-    <div class="text-xs text-gray-400 text-end">{{ convertDate(data?.tgl) }}</div>
+    <div class="font-semibold text-gray-900 text-base flex-grow">{{ data?.pengirim }}</div>
+    <div class="text-xs text-gray-400 text-end min-w-[100px] flex-shrink-0">{{ convertDate(data?.tgl) }}</div>
   </div>
   <div class="flex flex-col">
     <div class="text-sm font-semibold text-gray-500" [ngClass]="{'!text-gray-900' : data?.flag_read == 0}">{{

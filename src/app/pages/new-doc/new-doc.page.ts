@@ -45,7 +45,6 @@ export class NewDocPage implements OnInit {
             this.infiniteScrollData.page++;
           }
         }
-        console.log(this.infiniteScrollData);
       },
       error: (err) => {
         this.alertService
@@ -93,7 +92,6 @@ export class NewDocPage implements OnInit {
             this.infiniteScrollData.enable = false;
           }
         }
-        console.log(this.infiniteScrollData);
       },
       error: (err) => {
         this.alertService

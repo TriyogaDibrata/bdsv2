@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AlertService } from '@services/alert.service';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -14,7 +15,10 @@ export class PdfViewerComponent implements OnInit {
     rotation: 0,
   };
 
-  constructor(private modalCrtl: ModalController) {}
+  constructor(
+    private modalCrtl: ModalController,
+    private alertService: AlertService,
+  ) {}
 
   ngOnInit() {}
 
@@ -45,5 +49,15 @@ export class PdfViewerComponent implements OnInit {
     }
 
     this.pdfOptions.rotation += 90;
+  }
+
+  onLoadError(ev) {
+    this.alertService.showAlert({
+      status: 'error',
+      autoClose: false,
+      showConfirmButton: true,
+      title: ev.name,
+      text: ev.message,
+    });
   }
 }

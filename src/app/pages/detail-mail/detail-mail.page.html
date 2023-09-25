@@ -18,7 +18,7 @@
             Nomor / Judul Surat
           </div>
           <div class="text-sm">
-            <!-- {{ detailDoc?.name }} -->
+            {{ mailDetail?.nomor }}
           </div>
         </div>
 
@@ -27,25 +27,130 @@
             Tanggal
           </div>
           <div class="text-sm">
-            <!-- {{ convertDate(detailDoc?.date) }} -->
+            {{ convertDate(mailDetail?.tgl) }}
           </div>
         </div>
 
         <div class="flex flex-col my-4">
           <div class="font-bold text-black text-base">
-            Perangkat Daerah
+            Perihal
           </div>
           <div class="text-sm">
-            <!-- {{ detailDoc?.nama_opd }} -->
+            {{ mailDetail?.perihal }}
           </div>
         </div>
 
         <div class="flex flex-col my-4">
           <div class="font-bold text-black text-base">
-            Unit Kerja
+            Pengirim
           </div>
           <div class="text-sm">
-            <!-- {{ detailDoc?.unit_kerja }} -->
+            {{ mailDetail?.pengirim }}
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Tujuan
+          </div>
+          <div class="text-sm">
+            <div *ngFor="let tujuan of mailDetail?.tujuan; let i = index;">{{ tujuan }}</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4" *ngIf="mailDetail?.tembusan.length > 0">
+          <div class="font-bold text-black text-base">
+            Tembusan
+          </div>
+          <div class="text-sm">
+            <div *ngFor="let tembusan of mailDetail?.tembusan; let i = index;">{{ tembusan }}</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4" *ngIf="mailDetail?.tembusan_khusus.length > 0">
+          <div class="font-bold text-black text-base">
+            Tembusan khusus
+          </div>
+          <div class="text-sm">
+            <div *ngFor="let tembusan_khusus of mailDetail?.tembusan_khusus; let i = index;">{{ tembusan_khusus }}</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4" *ngIf="fileSurat || lampirans?.length > 0">
+          <div class="font-bold text-black text-base">
+            Berkas
+          </div>
+          <div class="flex justify-between items-center" *ngIf="fileSurat">
+            <div>Surat</div>
+            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
+              (click)="prepareSurat(fileSurat)">Lihat</ion-button>
+          </div>
+          <div class="flex justify-between items-center" *ngIf="lampirans.length > 0">
+            <div>Lampiran</div>
+            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
+              (click)="prepareLampiran(lampirans)">Lihat</ion-button>
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4" *ngIf="balasan?.balasan && balasan?.balasan.length > 0">
+          <div class="font-bold text-black text-base">
+            Balasan
+          </div>
+          <ion-button size="small" *ngFor="let balasan of balasan?.balasan; let i = index;"
+            (click)="openUrl(balasan)">Surat Balasan {{ i + 1
+            }}</ion-button>
+        </div>
+
+
+        <div class="flex flex-col my-4" *ngIf="balasan?.balasan && balasan?.balasan.length > 0">
+          <div class="font-bold text-black text-base">
+            Balasan
+          </div>
+          <ion-button size="small" *ngFor="let balasan of balasan?.balasan; let i = index;"
+            (click)="openUrl(balasan)">Surat Balasan {{ i + 1
+            }}</ion-button>
+        </div>
+
+        <div class="flex flex-col my-4" *ngIf="balasan?.balasan_dari && balasan?.balasan_dari.length > 0">
+          <div class="font-bold text-black text-base">
+            Balasan dari
+          </div>
+          <ion-button size="small" *ngFor="let balasan of balasan?.balasan; let i = index;"
+            (click)="openUrl(balasan)">Surat Balasan {{ i + 1
+            }}</ion-button>
+        </div>
+      </ion-card>
+
+      <ion-card class="mb-10 mx-0 p-6" mode="ios" *ngIf="mailDetail?.undangan_acara">
+        <div class="text-2xl font-bold text-[--ion-color-primary]">
+          Informasi Undangan
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Nama Acara
+          </div>
+          <div class="text-sm">
+            {{ mailDetail?.undangan_acara }}
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Tanggal dan Waktu
+          </div>
+          <div class="text-sm">
+            {{ convertDateWithTime(mailDetail?.undangan_awal) + ' s.d ' +
+            convertDateWithTime(mailDetail?.undangan_akhir) }}
+          </div>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <div class="font-bold text-black text-base">
+            Lokasi
+          </div>
+          <div class="text-sm">
+            {{ mailDetail?.undangan_lokasi }}
           </div>
         </div>
 
@@ -54,27 +159,16 @@
             Keterangan
           </div>
           <div class="text-sm">
-            <!-- {{ detailDoc?.desc }} -->
+            {{ mailDetail?.undangan_desc }}
           </div>
         </div>
-
-        <!-- <div class="flex flex-col my-4" *ngIf="detailDoc?.file.length > 0 || detailDoc?.lampiran.length > 0">
-          <div class="font-bold text-black text-base">
-            Berkas
-          </div>
-          <div class="flex justify-between items-center" *ngIf="detailDoc?.file.length > 0">
-            <div>Surat ({{detailDoc?.file.length }} Halaman)</div>
-            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
-              (click)="prepareSurats(detailDoc?.file)">Lihat</ion-button>
-          </div>
-          <div class="flex justify-between items-center" *ngIf="detailDoc?.lampiran.length > 0">
-            <div>Lampiran ({{ detailDoc?.lampiran.length }} Halaman)</div>
-            <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
-              (click)="prepareLampirans(detailDoc?.lampiran)">Lihat</ion-button>
-          </div>
-        </div> -->
-
       </ion-card>
+
+    </div>
+    <div
+      class="h-14 w-14 bg-red-600 rounded-full fixed right-4 bottom-10 shadow-lg shadow-red-200 flex items-center justify-center"
+      (click)="openDisposisiModal()" *ngIf="data?.surat_masuk_id">
+      <ion-icon class="h-6 w-6" name="ellipsis-horizontal-outline" color="light"></ion-icon>
     </div>
   </div>
 </ion-content>

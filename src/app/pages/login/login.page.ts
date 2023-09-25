@@ -61,9 +61,6 @@ export class LoginPage implements OnInit {
           text: err.message,
         });
       },
-      complete: () => {
-        // console.log('login process completed !');
-      },
     });
   }
 

@@ -1,13 +1,23 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>agenda</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
+  <div class="container flex flex-col flex-grow min-h-full mx-auto">
+    <!-- Header -->
+    <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50 bg-white "
+      [ngClass]="{'!flex-row items-center shadow-sm' : scrollTop > 150}">
+      <app-back-button></app-back-button>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-xl' : scrollTop > 150}">Agenda</div>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">agenda</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
+      <ion-datetime class="mx-auto rounded-xl" locale="id-ID" presentation="date" (ionChange)="onDateChanged($event)"
+        mode="ios"></ion-datetime>
+
+      <div class="font-bold text-2xl mt-4">Informasi Kegiatan</div>
+      <div class="text-sm text-gray-500">{{ convertDate(selectedDate) }}</div>
+
+      <!-- List Kegiatan -->
+      <div class="text-gray-400 text-center my-4" *ngIf="!activities || activities.length < 1">-Tidak ada kegiatan-
+      </div>
+      <app-agenda-summary *ngFor="let activity of activities" [data]="activity"></app-agenda-summary>
+    </div>
+  </div>
 </ion-content>

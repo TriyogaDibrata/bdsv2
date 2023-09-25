@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiResponse } from '@interfaces/api-response';
 import { MailThumb } from '@interfaces/mail-thumb';
+import { AlertService } from '@services/alert.service';
 import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import { map } from 'rxjs';
@@ -25,6 +26,7 @@ export class InboxPage implements OnInit {
   constructor(
     private req: RequestService,
     public loader: LoadingService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -40,16 +42,20 @@ export class InboxPage implements OnInit {
       next: (res: ApiResponse) => {
         if (res && res.success) {
           this.mails = res.data.surat.data;
-          console.log(this.mails);
           if (res.data.surat.next_page_url) {
             this.infiniteScrollData.enable = true;
             this.infiniteScrollData.page++;
           }
         }
-        console.log(this.infiniteScrollData);
       },
       error: (err) => {
-        console.log(err);
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: 'Something went wrong',
+          text: err.message,
+        });
       },
     });
   }
@@ -80,10 +86,15 @@ export class InboxPage implements OnInit {
             this.infiniteScrollData.enable = false;
           }
         }
-        console.log(this.infiniteScrollData);
       },
       error: (err) => {
-        console.log(err);
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: 'Something went wrong',
+          text: err.message,
+        });
       },
       complete: () => {
         ev.target.complete();

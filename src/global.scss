@@ -24,6 +24,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 // @import 'sweetalert2/src/sweetalert2.scss';
 /* Tailwind css */
 @tailwind base;
@@ -45,6 +46,8 @@
 
 .modal-sheet-auto-height {
     --height: auto !important;
+    --max-height: 90vh;
+    --overflow: auto;
 }
 
 ion-textarea.custom {
