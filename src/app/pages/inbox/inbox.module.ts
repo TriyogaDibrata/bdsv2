@@ -9,6 +9,7 @@ import { InboxPageRoutingModule } from './inbox-routing.module';
 import { InboxPage } from './inbox.page';
 import { ComponentsModule } from '@components/components.module';
 import { DirectivesModule } from '@directives/directives.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { DirectivesModule } from '@directives/directives.module';
     InboxPageRoutingModule,
     ComponentsModule,
     DirectivesModule,
+    NgSelectModule,
   ],
   declarations: [InboxPage],
 })

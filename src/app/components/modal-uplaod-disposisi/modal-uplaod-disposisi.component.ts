@@ -10,25 +10,6 @@ import { RequestService } from '@services/request.service';
   styleUrls: ['./modal-uplaod-disposisi.component.scss'],
 })
 export class ModalUplaodDisposisiComponent implements OnInit {
-  unit_kerjas = [
-    {
-      id: 1,
-      nama: 'Sekretariat',
-    },
-    {
-      id: 2,
-      nama: 'e-Government',
-    },
-    {
-      id: 3,
-      nama: 'TIK',
-    },
-    {
-      id: 4,
-      nama: 'PIP',
-    },
-  ];
-
   selected_uk: number[];
   is_mustiple: boolean = false;
   note: string;

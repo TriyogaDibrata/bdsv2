@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalLogoutComponent } from '@components/modal-logout/modal-logout.component';
 import { ApiResponse } from '@interfaces/api-response';
 import { User } from '@interfaces/user';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
@@ -30,6 +31,7 @@ export class HomePage implements OnInit {
     public navCtrl: NavController,
     private alertService: AlertService,
     public loader: LoadingService,
+    private modalCtrl: ModalController,
   ) {}
 
   async ngOnInit() {
@@ -86,5 +88,22 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       ev.target.complete();
     }, 2000);
+  }
+
+  async logoutPrompt() {
+    const modal = await this.modalCtrl.create({
+      component: ModalLogoutComponent,
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    let onDidDismiss = await modal.onDidDismiss();
+
+    if (onDidDismiss.role == 'confirm') {
+      this.auth.logout();
+    }
   }
 }

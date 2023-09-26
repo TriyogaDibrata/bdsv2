@@ -9,9 +9,40 @@
 
     <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
 
-      <div>
+      <div class="flex justify-end">
+        <ion-button mode="ios" size="small" fill="clear" (click)="toggleDateInput()">
+          <ion-icon slot="start" [name]="showDateInput? 'chevron-up-outline' : 'chevron-down-outline'"
+            class="w-4 h-4"></ion-icon>
+          Search
+          <ion-icon slot="end" name="search-outline" class=" w-4 h-4"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div *ngIf="showDateInput">
         <ion-searchbar mode="ios" (search)="searchData()" [(ngModel)]="search.value" (ionClear)="onInputCleared($event)"
           (ionInput)="onInputChanged($event)"></ion-searchbar>
+        <div class="flex gap-2 justify-center px-4">
+          <div class="h-10 w-full border border-gray-300 rounded-lg flex items-center justify-center"
+            (click)="selectStartDate()">
+            <div class="text-sm text-gray-500">{{ selectedStartDate ? selectedStartDate : 'Tanggal Awal' }}</div>
+          </div>
+          <div class="h-10 w-full border border-gray-300 rounded-lg flex items-center justify-center"
+            (click)="selectEndDate()">
+            <div class="text-sm text-gray-500">{{ selectedEndDate ? selectedEndDate : 'Tanggal Akhir' }}</div>
+          </div>
+        </div>
+
+        <div class="flex gap-2 px-4 py-2">
+          <ion-button size="small" class="w-full" fill="outline" color="secondary" expand="block" mode="ios"
+            (click)="resetSearch()">
+            Reset
+            <ion-icon slot="start" name="refresh-outline" class="w-4 h-4"></ion-icon>
+          </ion-button>
+          <ion-button size="small" class="w-full" expand="block" mode="ios" (click)="searchData()">
+            Cari
+            <ion-icon slot="start" name="search-outline" class="w-4 h-4"></ion-icon>
+          </ion-button>
+        </div>
       </div>
 
       <div class="text-center w-full my-4" *ngIf="mails?.length < 1 && !loader.isLoading.value">- Tidak Ada Dokumen -

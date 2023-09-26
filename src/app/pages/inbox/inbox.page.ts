@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { ApiResponse } from '@interfaces/api-response';
 import { MailThumb } from '@interfaces/mail-thumb';
+import { ModalController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
 import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
@@ -23,10 +25,18 @@ export class InboxPage implements OnInit {
   };
   public mails: MailThumb[];
 
+  showDateInput: boolean = false;
+  selectedStartDate: Date;
+  selectedEndDate: Date;
+  emptyDate: Date;
+  roles = [];
+  selectedRole: number;
+
   constructor(
     private req: RequestService,
     public loader: LoadingService,
     private alertService: AlertService,
+    private modalCtrl: ModalController,
   ) {}
 
   ngOnInit() {
@@ -42,6 +52,7 @@ export class InboxPage implements OnInit {
       next: (res: ApiResponse) => {
         if (res && res.success) {
           this.mails = res.data.surat.data;
+          this.roles = res.data.roles;
           if (res.data.surat.next_page_url) {
             this.infiniteScrollData.enable = true;
             this.infiniteScrollData.page++;
@@ -64,6 +75,9 @@ export class InboxPage implements OnInit {
     let params = {
       page: this.infiniteScrollData.page,
       search: this.search.value,
+      start: this.selectedStartDate ? this.selectedStartDate : '',
+      end: this.selectedEndDate ? this.selectedEndDate : '',
+      role: this.selectedRole ? this.selectedRole : '',
     };
     return this.req.apiGet('surat/inbox', params).pipe(
       map((res) => {
@@ -116,6 +130,66 @@ export class InboxPage implements OnInit {
     let value = ev.target.value;
     if (value < 1) {
       this.searchData();
+    }
+  }
+
+  resetSearch() {
+    this.search.value = '';
+    this.selectedStartDate = this.emptyDate;
+    this.selectedEndDate = this.emptyDate;
+    this.selectedRole = null;
+    this.searchData();
+  }
+
+  toggleDateInput() {
+    this.showDateInput = !this.showDateInput;
+  }
+
+  async selectStartDate() {
+    const modal = await this.modalCtrl.create({
+      component: DatePickerComponent,
+      componentProps: {
+        value: this.selectedStartDate,
+        max: this.selectedEndDate,
+      },
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    let onDismiss = await modal.onDidDismiss();
+
+    console.log(onDismiss.data);
+
+    if (onDismiss.role == 'confirm') {
+      this.selectedStartDate = onDismiss.data;
+    } else if (onDismiss.role == 'reset') {
+      this.selectedStartDate = null;
+    }
+  }
+
+  async selectEndDate() {
+    const modal = await this.modalCtrl.create({
+      component: DatePickerComponent,
+      componentProps: {
+        value: this.selectedEndDate,
+        min: this.selectedStartDate,
+      },
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    let onDismiss = await modal.onDidDismiss();
+
+    if (onDismiss.role == 'confirm') {
+      this.selectedEndDate = onDismiss.data;
+    } else if (onDismiss.role == 'reset') {
+      this.selectedEndDate = null;
     }
   }
 }

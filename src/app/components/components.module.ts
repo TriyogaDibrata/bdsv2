@@ -21,6 +21,8 @@ import { ModalActionDisposisiComponent } from './modal-action-disposisi/modal-ac
 import { ModalRiwayatDisposisiComponent } from './modal-riwayat-disposisi/modal-riwayat-disposisi.component';
 import { ModalUplaodDisposisiComponent } from './modal-uplaod-disposisi/modal-uplaod-disposisi.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ModalLogoutComponent } from './modal-logout/modal-logout.component';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -40,6 +42,8 @@ const _COMPONENTS = [
   ModalActionDisposisiComponent,
   ModalRiwayatDisposisiComponent,
   ModalUplaodDisposisiComponent,
+  ModalLogoutComponent,
+  DatePickerComponent,
 ];
 
 @NgModule({

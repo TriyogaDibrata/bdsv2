@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
 import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
@@ -24,11 +25,17 @@ export class SignedDocPage implements OnInit {
     value: '',
   };
 
+  showDateInput: boolean = false;
+  selectedStartDate: Date;
+  selectedEndDate: Date;
+  emptyDate: Date;
+
   constructor(
     private req: RequestService,
     public navCtrl: NavController,
     public loader: LoadingService,
     private alertService: AlertService,
+    private modalCtrl: ModalController,
   ) {}
 
   ngOnInit() {
@@ -70,6 +77,8 @@ export class SignedDocPage implements OnInit {
     let params = {
       page: this.infiniteScrollData.page,
       search: this.search.value,
+      start: this.selectedStartDate ? this.selectedStartDate : '',
+      end: this.selectedEndDate ? this.selectedEndDate : '',
     };
     return this.req.apiGet('doc/riwatatttd', params).pipe(
       map((res) => {
@@ -122,10 +131,69 @@ export class SignedDocPage implements OnInit {
     this.searchData();
   }
 
+  resetSearch() {
+    this.search.value = '';
+    this.selectedStartDate = this.emptyDate;
+    this.selectedEndDate = this.emptyDate;
+    this.searchData();
+  }
+
   onInputChanged(ev) {
     let value = ev.target.value;
     if (value < 1) {
       this.searchData();
+    }
+  }
+
+  toggleDateInput() {
+    this.showDateInput = !this.showDateInput;
+  }
+
+  async selectStartDate() {
+    const modal = await this.modalCtrl.create({
+      component: DatePickerComponent,
+      componentProps: {
+        value: this.selectedStartDate,
+        max: this.selectedEndDate,
+      },
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    let onDismiss = await modal.onDidDismiss();
+
+    console.log(onDismiss.data);
+
+    if (onDismiss.role == 'confirm') {
+      this.selectedStartDate = onDismiss.data;
+    } else if (onDismiss.role == 'reset') {
+      this.selectedStartDate = null;
+    }
+  }
+
+  async selectEndDate() {
+    const modal = await this.modalCtrl.create({
+      component: DatePickerComponent,
+      componentProps: {
+        value: this.selectedEndDate,
+        min: this.selectedStartDate,
+      },
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
+
+    let onDismiss = await modal.onDidDismiss();
+
+    if (onDismiss.role == 'confirm') {
+      this.selectedEndDate = onDismiss.data;
+    } else if (onDismiss.role == 'reset') {
+      this.selectedEndDate = null;
     }
   }
 }
