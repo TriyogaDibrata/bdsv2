@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.badungkab.digital_signature',
-  appName: 'bds-v2',
+  appName: 'Badung Digital Signature',
   webDir: 'www',
   server: {
     androidScheme: 'https',

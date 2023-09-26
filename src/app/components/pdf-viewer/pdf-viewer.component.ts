@@ -20,7 +20,9 @@ export class PdfViewerComponent implements OnInit {
     private alertService: AlertService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    (<any>window).pdfWorkerSrc = '/assets/lib/pdf.worker.js';
+  }
 
   public async closeModal() {
     await this.modalCrtl.dismiss();
