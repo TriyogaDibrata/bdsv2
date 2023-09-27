@@ -6,7 +6,6 @@ import { DocumentThubmnailComponent } from './document-thubmnail/document-thubmn
 import { SheetMenuComponent } from './sheet-menu/sheet-menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SheetActionComponent } from './sheet-action/sheet-action.component';
 import { AckComponent } from './ack/ack.component';
 import { SignComponent } from './sign/sign.component';
@@ -23,6 +22,7 @@ import { ModalUplaodDisposisiComponent } from './modal-uplaod-disposisi/modal-up
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalLogoutComponent } from './modal-logout/modal-logout.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -53,8 +53,8 @@ const _COMPONENTS = [
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    PdfViewerModule,
     NgSelectModule,
+    PdfViewerModule,
   ],
   exports: [_COMPONENTS],
 })

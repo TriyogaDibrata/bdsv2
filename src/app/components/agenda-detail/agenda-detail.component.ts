@@ -5,7 +5,6 @@ import { AgendaDetail } from '@interfaces/agenda';
 import { ApiResponse } from '@interfaces/api-response';
 import { ModalController } from '@ionic/angular';
 import { RequestService } from '@services/request.service';
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'app-agenda-detail',
