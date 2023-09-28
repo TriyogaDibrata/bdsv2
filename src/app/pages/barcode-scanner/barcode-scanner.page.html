@@ -1,0 +1,17 @@
+<ion-content [fullscreen]="true" scrollEvents="true">
+    <div class="container flex flex-col flex-grow min-h-full mx-auto">
+        <!-- Header -->
+        <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50">
+            <app-back-button></app-back-button>
+        </div>
+
+        <div class="flex-grow w-full rounded-t-2xl p-6">
+            <button
+                class="absolute flex justify-center items-center left-1/2 -translate-x-1/2 bottom-20 h-16 w-16 bg-red-600 rounded-full"
+                (click)="toggleTorch()">
+                <ion-icon [name]="torchState ? 'flash-off-outline' : 'flash-outline'"
+                    class="w-8 h-8 text-white"></ion-icon>
+            </button>
+        </div>
+    </div>
+</ion-content>

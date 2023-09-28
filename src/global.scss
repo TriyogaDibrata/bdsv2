@@ -58,3 +58,8 @@ ion-textarea.custom {
     --placeholder-color: #ffeded;
     --placeholder-opacity: 0.8;
 }
+
+body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+}

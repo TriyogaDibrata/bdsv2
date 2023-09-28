@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LandingPageRoutingModule } from './landing-routing.module';
+import { BarcodeScannerPageRoutingModule } from './barcode-scanner-routing.module';
 
-import { LandingPage } from './landing.page';
+import { BarcodeScannerPage } from './barcode-scanner.page';
 import { ComponentsModule } from '@components/components.module';
 import { DirectivesModule } from '@directives/directives.module';
 
@@ -15,10 +15,10 @@ import { DirectivesModule } from '@directives/directives.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    LandingPageRoutingModule,
+    BarcodeScannerPageRoutingModule,
     ComponentsModule,
     DirectivesModule,
   ],
-  declarations: [LandingPage],
+  declarations: [BarcodeScannerPage],
 })
-export class LandingPageModule {}
+export class BarcodeScannerPageModule {}

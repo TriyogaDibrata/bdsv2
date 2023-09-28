@@ -23,6 +23,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalLogoutComponent } from './modal-logout/modal-logout.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ModalOptionVerifyComponent } from './modal-option-verify/modal-option-verify.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -44,6 +45,7 @@ const _COMPONENTS = [
   ModalUplaodDisposisiComponent,
   ModalLogoutComponent,
   DatePickerComponent,
+  ModalOptionVerifyComponent,
 ];
 
 @NgModule({
