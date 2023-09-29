@@ -12,9 +12,7 @@ export class ModalVerifyResultComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() {}
 
   convertDate(date) {
     moment.locale('ID');

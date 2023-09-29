@@ -21,9 +21,7 @@ export class DatePickerComponent implements OnInit {
 
   ngOnInit() {}
 
-  onValueChanged(ev) {
-    console.log(ev);
-  }
+  onValueChanged(ev) {}
 
   confirm() {
     let data = moment(this.value).format('YYYY-MM-DD');

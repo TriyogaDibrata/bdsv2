@@ -18,19 +18,6 @@ export class LandingPage implements OnInit {
 
   ngOnInit() {}
 
-  async scanBarcode() {
-    const permission = await this.barcodeService.checkPermission();
-
-    if (permission.granted) {
-      const scan = await this.barcodeService.startScan();
-
-      if (scan.hasContent) {
-        this.barcodeService.stopScan();
-        alert(scan.content);
-      }
-    }
-  }
-
   async showModalOption() {
     const modal = await this.modalCtrl.create({
       component: ModalOptionVerifyComponent,

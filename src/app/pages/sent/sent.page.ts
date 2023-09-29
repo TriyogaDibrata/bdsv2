@@ -155,8 +155,6 @@ export class SentPage implements OnInit {
 
     let onDismiss = await modal.onDidDismiss();
 
-    console.log(onDismiss.data);
-
     if (onDismiss.role == 'confirm') {
       this.selectedStartDate = onDismiss.data;
     } else if (onDismiss.role == 'reset') {
