@@ -24,6 +24,8 @@ import { ModalLogoutComponent } from './modal-logout/modal-logout.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ModalOptionVerifyComponent } from './modal-option-verify/modal-option-verify.component';
+import { ModalVerifyUploadComponent } from './modal-verify-upload/modal-verify-upload.component';
+import { ModalVerifyResultComponent } from './modal-verify-result/modal-verify-result.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -46,6 +48,8 @@ const _COMPONENTS = [
   ModalLogoutComponent,
   DatePickerComponent,
   ModalOptionVerifyComponent,
+  ModalVerifyUploadComponent,
+  ModalVerifyResultComponent,
 ];
 
 @NgModule({

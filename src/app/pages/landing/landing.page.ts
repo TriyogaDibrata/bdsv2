@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalOptionVerifyComponent } from '@components/modal-option-verify/modal-option-verify.component';
+import { ModalVerifyUploadComponent } from '@components/modal-verify-upload/modal-verify-upload.component';
 import { ModalController, NavController } from '@ionic/angular';
 import { BarcodeService } from '@services/barcode.service';
 
@@ -46,8 +47,19 @@ export class LandingPage implements OnInit {
       if (onDismiss.data == 'scan') {
         this.navCtrl.navigateForward('barcode-scanner');
       } else if (onDismiss.data == 'upload') {
-        console.log('do upload');
+        this.showModalVerifyUpload();
       }
     }
+  }
+
+  async showModalVerifyUpload() {
+    const modal = await this.modalCtrl.create({
+      component: ModalVerifyUploadComponent,
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+    });
+
+    await modal.present();
   }
 }

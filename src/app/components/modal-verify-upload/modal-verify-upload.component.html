@@ -1,0 +1,17 @@
+<div class="p-6">
+  <div class="text-xl font-bold text-black">Unggah Dokumen</div>
+  <div class="text-sm text-black font-semibold">Unggah dokumen yang sudah ditandatangani secara digital dalam format pdf
+  </div>
+
+  <form [formGroup]="formUpload" (submit)="uploadFile()">
+    <ion-item class="border border-gray-400 rounded-lg mt-4" lines="none">
+      <input type="file" accept=".pdf, .doc, .docx, .jpg, .jpeg, .png, .webp" formControlName="docfile"
+        (change)="onFileChanged($event)">
+    </ion-item>
+
+    <ion-button class="my-2" expand="block" mode="ios" [disabled]="formUpload.invalid || loader.isLoading.value"
+      type="submit">
+      <ion-spinner name="crescent" *ngIf="loader.isLoading.value"></ion-spinner>
+      {{ loader.isLoading.value ? 'Uploading..' : 'Verifikasi Dokumen'}}</ion-button>
+  </form>
+</div>

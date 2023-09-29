@@ -1,0 +1,49 @@
+<div class="p-6">
+  <div class="p-4 bg-gray-500 bg-gray-700 text-white rounded-xl flex flex-col items-center gap-4 text-center"
+    [ngClass]="{'bg-green-500 border border-green-700 border-4' : data.summary == 'VALID', 'bg-red-500 border border-red-700 border-4' : data.summary == 'INVALID'}">
+    <div class="h-12 w-12 rounded-full bg-white flex justify-center items-center font-bold">
+      <ion-icon class="h-8 w-8"
+        [name]="data.summary == 'VALID' ? 'checkmark' : data.summary == 'INVALID' ? 'close' : 'information'"
+        [ngClass]="data.summary == 'VALID' ? 'text-green-500' : data.summary == 'INVALID' ? 'text-red-500' : 'text-black'"></ion-icon>
+    </div>
+    {{ data.notes }}
+  </div>
+
+  <div class="my-4">
+    <div class="text-2xl font-bold my-2">
+      Status Tanda Tangan
+    </div>
+
+    <div class="p-4 border border-gray-300 rounded-xl" *ngFor="let sign_info of data.details">
+      <div class="my-2">
+        <div class="text-gray-500">Ditandatangani oleh</div>
+        <div class="font-semibold">{{ sign_info.info_signer.signer_name ? sign_info.info_signer.signer_name : '-' }}
+        </div>
+      </div>
+
+      <div class="my-2">
+        <div class="text-gray-500">Lokasi</div>
+        <div class="font-semibold">{{ sign_info.signature_document.location ? sign_info.signature_document.location :
+          '-'}}</div>
+      </div>
+
+      <div class="my-2">
+        <div class="text-gray-500">Alasan</div>
+        <div class="font-semibold">{{ sign_info.signature_document.reason ? sign_info.signature_document.reason : '-' }}
+        </div>
+      </div>
+
+      <div class="my-2">
+        <div class="text-gray-500">Ditandatangani pada</div>
+        <div class="font-semibold">{{ sign_info.signature_document.signed_in ?
+          convertDate(sign_info.signature_document.signed_in) :
+          '-' }}</div>
+      </div>
+
+      <div class="my-2">
+        <div class="text-gray-500">Diterbitkan Oleh</div>
+        <div class="font-semibold">{{ sign_info.info_signer.issuer_dn ? sign_info.info_signer.issuer_dn : '-' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
