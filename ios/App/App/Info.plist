@@ -23,7 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>The app enables the scanning of various barcodes.</string>
+	<string>The app enables the scanning of various barcodes or qrcode and to change user avatar.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>The app enables to users update thier avatar profile</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The app enables to users update thier avatar profile</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

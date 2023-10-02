@@ -3,12 +3,16 @@ import { ModalOptionVerifyComponent } from '@components/modal-option-verify/moda
 import { ModalVerifyResultComponent } from '@components/modal-verify-result/modal-verify-result.component';
 import { ModalVerifyUploadComponent } from '@components/modal-verify-upload/modal-verify-upload.component';
 import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component';
-import { ModalController, NavController } from '@ionic/angular';
+import { MenuController, ModalController, NavController } from '@ionic/angular';
+import { AuthService } from './auth.service';
+import { Browser } from '@capacitor/browser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
+  public user = this.auth.userData;
+
   public homeMenus = [
     {
       name: 'Verifikasi Dokumen',
@@ -77,9 +81,64 @@ export class MenuService {
     },
   ];
 
+  public sideMenus = {
+    'Kelola Akun': [
+      {
+        name: 'Sunting Profil',
+        icon: 'person-circle-outline',
+        action: () => {
+          this.menuCtrl.close().then(() => this.navigateTo('update-profile'));
+        },
+        isShow: true,
+      },
+      {
+        name: 'Ubah Kata Sandi',
+        icon: 'lock-closed-outline',
+        action: () => {
+          this.menuCtrl.close().then(() => this.navigateTo('update-password'));
+        },
+        isShow: true,
+      },
+      {
+        name: 'Ubah Passphrase',
+        icon: 'key-outline',
+        action: () => {
+          this.menuCtrl
+            .close()
+            .then(() => this.navigateTo('update-passphrase'));
+        },
+        isShow: this.user.role?.slug == 'signer' ? true : false,
+      },
+    ],
+    Lainnya: [
+      {
+        name: 'Panduan Verifikasi Dokumen',
+        icon: 'document-lock-outline',
+        action: () => {
+          this.menuCtrl
+            .close()
+            .then(() =>
+              this.openBrowser('https://tte.badungkab.go.id/validation'),
+            );
+        },
+        isShow: true,
+      },
+      {
+        name: 'Tentang Aplikasi',
+        icon: 'information-circle-outline',
+        action: () => {
+          this.menuCtrl.close().then(() => this.navigateTo('about-app'));
+        },
+        isShow: true,
+      },
+    ],
+  };
+
   constructor(
     private modalCtrl: ModalController,
     private navCtrl: NavController,
+    private auth: AuthService,
+    private menuCtrl: MenuController,
   ) {}
 
   public async openSheetMenu() {
@@ -131,5 +190,11 @@ export class MenuService {
     });
 
     await modal.present();
+  }
+
+  async openBrowser(url) {
+    const browser = await Browser.open({
+      url: url,
+    });
   }
 }

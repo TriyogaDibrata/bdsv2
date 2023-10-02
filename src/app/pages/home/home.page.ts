@@ -39,6 +39,12 @@ export class HomePage implements OnInit {
     this.getHomeStat();
   }
 
+  ionViewWillEnter() {
+    this.auth.user.subscribe((res) => {
+      this.user = res;
+    });
+  }
+
   public async toggleSideMenu() {
     this.menuCtrl.toggle('main-menu');
   }

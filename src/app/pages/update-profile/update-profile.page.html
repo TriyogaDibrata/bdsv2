@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
+  <div class="container flex flex-col flex-grow min-h-full mx-auto">
+    <!-- Header -->
+    <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50 bg-white "
+      [ngClass]="{'!flex-row items-center shadow-sm' : scrollTop > 150}">
+      <app-back-button></app-back-button>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-xl' : scrollTop > 150}">Sunting Profil</div>
+    </div>
+
+    <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
+
+      <div class="w-full text-center">
+        <img [src]="base64Image ? base64Image : user.avatar ? user.avatar : 'assets/images/default-user.png'"
+          class="w-20 h-20 object-scale-down rounded-full shadow-xl mx-auto"
+          appBrokenImage="assets/images/default-user.png" />
+        <button class="my-2 text-sm text-red-600 font-semibold" (click)="getPhoto()">Ubah</button>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-black mt-4">Informasi Umum</div>
+        <ion-item lines="none" class="border border-gray-300 rounded-xl my-2">
+          <ion-input [(ngModel)]="user.username" label="Username/NIP" labelPlacement="stacked"
+            disabled="true"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="border border-gray-300 rounded-xl my-2">
+          <ion-input [(ngModel)]="user.email_contact" label="Email" labelPlacement="stacked"
+            disabled="true"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="border border-gray-300 rounded-xl my-2">
+          <ion-input [(ngModel)]="user.name" label="Nama Lengkap" labelPlacement="stacked"></ion-input>
+        </ion-item>
+
+        <div class="text-xl font-bold text-black mt-4">Informasi Khusus</div>
+        <ion-item *ngIf="user.signing_name" lines="none" class="border border-gray-300 rounded-xl my-2">
+          <ion-input [(ngModel)]="user.signing_name" label="Nama Penandatangan" labelPlacement="stacked"
+            disabled="true"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="user.jabatan" lines="none" class="border border-gray-300 rounded-xl my-2">
+          <ion-input [(ngModel)]="user.jabatan" label="Jabatan" labelPlacement="stacked" disabled="true"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" mode="ios" class="my-4" (click)="updateProfile()"
+          [disabled]="loader.isLoading.value">{{
+          loader.isLoading.value ? 'Updating...' : 'Simpan Perubahan'}}</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

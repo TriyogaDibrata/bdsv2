@@ -20,12 +20,12 @@
       <div class="flex justify-end gap-4 items-center">
         <div class="flex flex-col items-end text-white">
           <div class="text-sm">Selamat datang,</div>
-          <div class="text-xl font-bold text-end">{{ user.name
+          <div class="text-xl font-bold text-end">{{ user?.name
             }}
           </div>
         </div>
-        <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'"
-          class="w-14 h-14 rounded-full shadow-xl" appBrokenImage="assets/images/default-user.png" />
+        <img [src]="user?.avatar ? user?.avatar : 'assets/images/default-user.png'"
+          class="w-14 h-14 rounded-full shadow-xl object-scale-down" appBrokenImage="assets/images/default-user.png" />
       </div>
     </div>
 
@@ -99,11 +99,11 @@
 <ion-menu contentId="main-content" menuId="main-menu" swipeGesture="true" type="push"
   (ionWillClose)="isMenuOpen = false" (ionWillOpen)="isMenuOpen = true">
   <div class="w-full flex flex-col flex-grow min-h-full">
-    <div class="p-6 plt-ios:pt-20 flex gap-4">
-      <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'" class="w-12 h-12 rounded-full shadow-xl"
+    <div class="pb-4 px-4 pt-10 plt-ios:pt-20 flex flex-col gap-4">
+      <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'" class="w-16 h-16 rounded-full shadow-xl"
         appBrokenImage="assets/images/default-user.png" />
       <div class="flex flex-col">
-        <div class="text-sm text-gray-700 font-semibold">{{ user.name
+        <div class="text-xl text-black font-bold">{{ user.name
           }}
         </div>
         <div class="text-xs text-gray-400">
@@ -111,13 +111,18 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-6 p-6">
-      <div class="flex pb-4 gap-4 items-center border-b-gray-300 last:border-none" *ngFor="let menu of menu.menus">
-        <ion-icon [name]="menu.icon" class="w-6 h-6 flex-shrink-0 text-red-500"></ion-icon>
-        <div class="text-gray-800 text-sm">{{ menu.name }}</div>
+    <div class="p-4" *ngFor="let sidemus of menu.sideMenus | keyvalue">
+      <div class="text-xl font-bold text-black">
+        {{ sidemus.key }}
+      </div>
+
+      <div class="text-sm text-black my-2 flex gap-4 items-center border-b border-b-gray-200 p-2"
+        *ngFor="let detail of sidemus.value" [ngClass]="{'hidden' : !detail.isShow }" (click)="detail.action()">
+        <ion-icon [name]="detail.icon" class="text-gray-500 h-5 w-5 flex-shrink-0"></ion-icon>
+        <div class="text-gray-500">{{ detail.name }}</div>
       </div>
     </div>
-    <div class="p-4 flex-grow">
+    <div class="absolute bottom-0 w-full p-6">
       <ion-button (click)="logoutPrompt()" expand="block" mode="ios">Logout</ion-button>
     </div>
   </div>

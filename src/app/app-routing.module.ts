@@ -77,7 +77,38 @@ const routes: Routes = [
   },
   {
     path: 'barcode-scanner',
-    loadChildren: () => import('./pages/barcode-scanner/barcode-scanner.module').then( m => m.BarcodeScannerPageModule)
+    loadChildren: () =>
+      import('./pages/barcode-scanner/barcode-scanner.module').then(
+        (m) => m.BarcodeScannerPageModule,
+      ),
+  },
+  {
+    path: 'update-password',
+    loadChildren: () =>
+      import('./pages/update-password/update-password.module').then(
+        (m) => m.UpdatePasswordPageModule,
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'update-passphrase',
+    loadChildren: () =>
+      import('./pages/update-passphrase/update-passphrase.module').then(
+        (m) => m.UpdatePassphrasePageModule,
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'update-profile',
+    loadChildren: () =>
+      import('./pages/update-profile/update-profile.module').then(
+        (m) => m.UpdateProfilePageModule,
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'about-app',
+    loadChildren: () => import('./pages/about-app/about-app.module').then( m => m.AboutAppPageModule)
   },
 ];
 
