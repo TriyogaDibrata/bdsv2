@@ -26,6 +26,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ModalOptionVerifyComponent } from './modal-option-verify/modal-option-verify.component';
 import { ModalVerifyUploadComponent } from './modal-verify-upload/modal-verify-upload.component';
 import { ModalVerifyResultComponent } from './modal-verify-result/modal-verify-result.component';
+import { IframerComponent } from './iframer/iframer.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -50,6 +51,7 @@ const _COMPONENTS = [
   ModalOptionVerifyComponent,
   ModalVerifyUploadComponent,
   ModalVerifyResultComponent,
+  IframerComponent,
 ];
 
 @NgModule({

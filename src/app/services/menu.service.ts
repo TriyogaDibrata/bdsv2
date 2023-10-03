@@ -5,7 +5,7 @@ import { ModalVerifyUploadComponent } from '@components/modal-verify-upload/moda
 import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from './auth.service';
-import { Browser } from '@capacitor/browser';
+import { IframerComponent } from '@components/iframer/iframer.component';
 
 @Injectable({
   providedIn: 'root',
@@ -118,7 +118,7 @@ export class MenuService {
           this.menuCtrl
             .close()
             .then(() =>
-              this.openBrowser('https://tte.badungkab.go.id/validation'),
+              this.openIframer('https://tte.badungkab.go.id/validation'),
             );
         },
         isShow: true,
@@ -192,9 +192,15 @@ export class MenuService {
     await modal.present();
   }
 
-  async openBrowser(url) {
-    const browser = await Browser.open({
-      url: url,
+  async openIframer(url) {
+    const modal = await this.modalCtrl.create({
+      component: IframerComponent,
+      componentProps: {
+        url: url,
+        title: 'Panduan Verifikasi',
+      },
     });
+
+    await modal.present();
   }
 }

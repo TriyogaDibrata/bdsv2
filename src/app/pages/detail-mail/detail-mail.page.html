@@ -101,21 +101,11 @@
             }}</ion-button>
         </div>
 
-
-        <div class="flex flex-col my-4" *ngIf="balasan?.balasan && balasan?.balasan.length > 0">
-          <div class="font-bold text-black text-base">
-            Balasan
-          </div>
-          <ion-button size="small" *ngFor="let balasan of balasan?.balasan; let i = index;"
-            (click)="openUrl(balasan)">Surat Balasan {{ i + 1
-            }}</ion-button>
-        </div>
-
         <div class="flex flex-col my-4" *ngIf="balasan?.balasan_dari && balasan?.balasan_dari.length > 0">
           <div class="font-bold text-black text-base">
             Balasan dari
           </div>
-          <ion-button size="small" *ngFor="let balasan of balasan?.balasan; let i = index;"
+          <ion-button size="small" *ngFor="let balasan of balasan?.balasan_dari; let i = index;"
             (click)="openUrl(balasan)">Surat Balasan {{ i + 1
             }}</ion-button>
         </div>
