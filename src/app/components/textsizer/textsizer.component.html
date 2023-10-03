@@ -1,0 +1,9 @@
+<div class="p-6 pb-10">
+  <div class="text-black text-center my-4">
+    Ukuran text akan terlihat seperti ini
+  </div>
+  <div class="p-4">
+    <ion-range [ticks]="true" [snaps]="true" [min]="3" [max]="8" mode="ios" (ionChange)="onRangeChange($event)"
+      [(ngModel)]="barValue"></ion-range>
+  </div>
+</div>

@@ -20,7 +20,6 @@ export class IframerComponent implements OnInit {
 
   ngOnInit() {
     this.sanitizedUrl = this.sanitize.bypassSecurityTrustResourceUrl(this.url);
-    console.log(this.sanitizedUrl);
   }
 
   handleScroll(e) {

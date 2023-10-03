@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TextZoom } from '@capacitor/text-zoom';
+import { TextService } from '@services/text.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {
-    // localStorage.clear();
+  constructor(private textService: TextService) {
+    this.setTextSize();
+  }
+
+  setTextSize() {
+    if (this.textService.zoomValue) {
+      TextZoom.set({ value: this.textService.zoomValue });
+    }
   }
 }

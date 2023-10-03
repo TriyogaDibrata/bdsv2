@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { UpdatePassphrasePageRoutingModule } from './update-passphrase-routing.module';
 
 import { UpdatePassphrasePage } from './update-passphrase.page';
+import { ComponentsModule } from '@components/components.module';
+import { DirectivesModule } from '@directives/directives.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UpdatePassphrasePageRoutingModule
+    UpdatePassphrasePageRoutingModule,
+    ComponentsModule,
+    DirectivesModule,
   ],
-  declarations: [UpdatePassphrasePage]
+  declarations: [UpdatePassphrasePage],
 })
 export class UpdatePassphrasePageModule {}

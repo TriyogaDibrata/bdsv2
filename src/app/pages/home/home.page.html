@@ -25,13 +25,13 @@
           </div>
         </div>
         <img [src]="user?.avatar ? user?.avatar : 'assets/images/default-user.png'"
-          class="w-14 h-14 rounded-full shadow-xl object-scale-down" appBrokenImage="assets/images/default-user.png" />
+          class="w-20 h-20 object-cover rounded-full shadow-xl" appBrokenImage="assets/images/default-user.png" />
       </div>
     </div>
 
     <div class="flex-grow w-full bg-white rounded-t-2xl">
       <!-- Card Summary -->
-      <ion-card mode="ios" class="h-28 -mt-14 rounded-2xl p-4 flex flex-col justify-around">
+      <ion-card mode="ios" class="min-h-[108px] -mt-14 rounded-2xl p-4 flex flex-col justify-around">
         <ion-item>
           <ion-label>Dokumen belum TTE</ion-label>
           <ion-badge color="primary">{{ homeData?.doc_belum ? homeData?.doc_belum : '0'}}</ion-badge>
@@ -98,10 +98,10 @@
 
 <ion-menu contentId="main-content" menuId="main-menu" swipeGesture="true" type="push"
   (ionWillClose)="isMenuOpen = false" (ionWillOpen)="isMenuOpen = true">
-  <div class="w-full flex flex-col flex-grow min-h-full">
+  <div class="w-full flex flex-col overflow-y-auto min-h-full">
     <div class="pb-4 px-4 pt-10 plt-ios:pt-20 flex flex-col gap-4">
-      <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'" class="w-16 h-16 rounded-full shadow-xl"
-        appBrokenImage="assets/images/default-user.png" />
+      <img [src]="user.avatar ? user.avatar : 'assets/images/default-user.png'"
+        class="w-16 h-16 rounded-full object-cover shadow-xl" appBrokenImage="assets/images/default-user.png" />
       <div class="flex flex-col">
         <div class="text-xl text-black font-bold">{{ user.name
           }}
@@ -117,13 +117,15 @@
       </div>
 
       <div class="text-sm text-black my-2 flex gap-4 items-center border-b border-b-gray-200 p-2"
-        *ngFor="let detail of sidemus.value" [ngClass]="{'hidden' : !detail.isShow }" (click)="detail.action()">
+        *ngFor="let detail of sidemus.value"
+        [ngClass]="{'hidden' : detail.name === 'Ubah Passphrase' && user.role.slug !== 'signer'}"
+        (click)="detail.action()">
         <ion-icon [name]="detail.icon" class="text-gray-500 h-5 w-5 flex-shrink-0"></ion-icon>
         <div class="text-gray-500">{{ detail.name }}</div>
       </div>
     </div>
-    <div class="absolute bottom-0 w-full p-6">
-      <ion-button (click)="logoutPrompt()" expand="block" mode="ios">Logout</ion-button>
+    <div class="p-6">
+      <ion-button (click)="logoutPrompt()" expand="block" mode="ios" fill="outline">Logout</ion-button>
     </div>
   </div>
 </ion-menu>

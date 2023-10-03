@@ -11,7 +11,7 @@
 
       <div class="w-full text-center">
         <img [src]="base64Image ? base64Image : user.avatar ? user.avatar : 'assets/images/default-user.png'"
-          class="w-20 h-20 object-scale-down rounded-full shadow-xl mx-auto"
+          class="w-20 h-20 object-cover rounded-full shadow-xl mx-auto"
           appBrokenImage="assets/images/default-user.png" />
         <button class="my-2 text-sm text-red-600 font-semibold" (click)="getPhoto()">Ubah</button>
       </div>

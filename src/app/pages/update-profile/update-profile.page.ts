@@ -32,9 +32,9 @@ export class UpdateProfilePage implements OnInit {
   }
 
   async getPhoto() {
-    const permission = await Camera.checkPermissions();
+    const status = await Camera.checkPermissions();
 
-    if (permission.camera == 'granted' && permission.photos == 'granted') {
+    if (status.camera == 'granted' && status.photos == 'granted') {
       const image = await Camera.getPhoto({
         quality: 50,
         resultType: CameraResultType.DataUrl,
@@ -43,6 +43,12 @@ export class UpdateProfilePage implements OnInit {
       });
 
       this.base64Image = image.dataUrl;
+    } else {
+      const cameraPermissions = await Camera.requestPermissions({
+        permissions: ['camera', 'photos'],
+      }).then(() => {
+        this.getPhoto();
+      });
     }
   }
 

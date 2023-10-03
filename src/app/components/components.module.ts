@@ -27,6 +27,7 @@ import { ModalOptionVerifyComponent } from './modal-option-verify/modal-option-v
 import { ModalVerifyUploadComponent } from './modal-verify-upload/modal-verify-upload.component';
 import { ModalVerifyResultComponent } from './modal-verify-result/modal-verify-result.component';
 import { IframerComponent } from './iframer/iframer.component';
+import { TextsizerComponent } from './textsizer/textsizer.component';
 
 const _COMPONENTS = [
   BackButtonComponent,
@@ -52,6 +53,7 @@ const _COMPONENTS = [
   ModalVerifyUploadComponent,
   ModalVerifyResultComponent,
   IframerComponent,
+  TextsizerComponent,
 ];
 
 @NgModule({

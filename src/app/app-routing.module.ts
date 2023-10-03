@@ -110,6 +110,10 @@ const routes: Routes = [
     path: 'about-app',
     loadChildren: () => import('./pages/about-app/about-app.module').then( m => m.AboutAppPageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
 ];
 
 @NgModule({

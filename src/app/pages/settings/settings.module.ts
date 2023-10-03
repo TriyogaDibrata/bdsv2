@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AboutAppPageRoutingModule } from './about-app-routing.module';
+import { SettingsPageRoutingModule } from './settings-routing.module';
 
-import { AboutAppPage } from './about-app.page';
+import { SettingsPage } from './settings.page';
 import { ComponentsModule } from '@components/components.module';
 import { DirectivesModule } from '@directives/directives.module';
 
@@ -15,10 +15,10 @@ import { DirectivesModule } from '@directives/directives.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    AboutAppPageRoutingModule,
+    SettingsPageRoutingModule,
     ComponentsModule,
     DirectivesModule,
   ],
-  declarations: [AboutAppPage],
+  declarations: [SettingsPage],
 })
-export class AboutAppPageModule {}
+export class SettingsPageModule {}

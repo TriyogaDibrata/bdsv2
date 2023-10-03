@@ -6,13 +6,14 @@ import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component'
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { IframerComponent } from '@components/iframer/iframer.component';
+import { User } from '@interfaces/user';
+import { TextsizerComponent } from '@components/textsizer/textsizer.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
   public user = this.auth.userData;
-
   public homeMenus = [
     {
       name: 'Verifikasi Dokumen',
@@ -97,7 +98,6 @@ export class MenuService {
         action: () => {
           this.menuCtrl.close().then(() => this.navigateTo('update-password'));
         },
-        isShow: true,
       },
       {
         name: 'Ubah Passphrase',
@@ -107,7 +107,6 @@ export class MenuService {
             .close()
             .then(() => this.navigateTo('update-passphrase'));
         },
-        isShow: this.user.role?.slug == 'signer' ? true : false,
       },
     ],
     Lainnya: [
@@ -121,18 +120,40 @@ export class MenuService {
               this.openIframer('https://tte.badungkab.go.id/validation'),
             );
         },
-        isShow: true,
       },
       {
-        name: 'Tentang Aplikasi',
-        icon: 'information-circle-outline',
+        name: 'Pengaturan',
+        icon: 'settings-outline',
         action: () => {
-          this.menuCtrl.close().then(() => this.navigateTo('about-app'));
+          this.menuCtrl.close().then(() => this.navigateTo('settings'));
         },
-        isShow: true,
       },
     ],
   };
+
+  settingsMenu = [
+    {
+      name: 'Biometrics',
+      icon: 'person-circle-outline',
+      action: () => {
+        console.log('clicked!');
+      },
+    },
+    {
+      name: 'Ukuran Font',
+      icon: 'text-outline',
+      action: async () => {
+        this.openTextZoomModal();
+      },
+    },
+    {
+      name: 'Tentang Aplikasi',
+      icon: 'information-circle-outline',
+      action: () => {
+        this.navCtrl.navigateForward('about-app');
+      },
+    },
+  ];
 
   constructor(
     private modalCtrl: ModalController,
@@ -199,6 +220,17 @@ export class MenuService {
         url: url,
         title: 'Panduan Verifikasi',
       },
+    });
+
+    await modal.present();
+  }
+
+  async openTextZoomModal() {
+    const modal = await this.modalCtrl.create({
+      component: TextsizerComponent,
+      breakpoints: [0, 1],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
     });
 
     await modal.present();
