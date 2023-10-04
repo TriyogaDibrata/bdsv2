@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import { TextZoom } from '@capacitor/text-zoom';
 import { PushNotifService } from '@services/push-notif.service';
 import { TextService } from '@services/text.service';

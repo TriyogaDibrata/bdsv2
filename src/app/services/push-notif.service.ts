@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import { PushNotifications } from '@capacitor/push-notifications';
 
 @Injectable({
@@ -7,7 +9,8 @@ import { PushNotifications } from '@capacitor/push-notifications';
 export class PushNotifService {
   constructor() {}
 
-  initPushNotif() {
+  async initPushNotif() {
+    if (!(await Capacitor.isNativePlatform())) return;
     PushNotifications.removeAllListeners().then(() => {
       this.recievedNotif();
     });
@@ -40,8 +43,20 @@ export class PushNotifService {
 
     await PushNotifications.addListener(
       'pushNotificationReceived',
-      (notification) => {
+      async (notification) => {
         console.info('Message recieved : ', notification);
+        if ((await Capacitor.getPlatform()) === 'android') {
+          LocalNotifications.schedule({
+            notifications: [
+              {
+                id: Number(notification?.id),
+                title: notification?.title,
+                body: notification?.body,
+              },
+            ],
+          });
+        }
+        return;
       },
     );
 

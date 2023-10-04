@@ -116,11 +116,11 @@
         {{ sidemus.key }}
       </div>
 
-      <div class="text-black my-2 flex gap-4 items-center border-b border-b-gray-200 p-2"
+      <div class="text-black my-2 flex gap-4 items-center border-b border-b-gray-200 p-2 text-sm"
         *ngFor="let detail of sidemus.value"
         [ngClass]="{'hidden' : detail.name === 'Ubah Passphrase' && user.role.slug !== 'signer'}"
         (click)="detail.action()">
-        <ion-icon [name]="detail.icon" class="text-gray-500 h-7 w-7 flex-shrink-0"></ion-icon>
+        <ion-icon [name]="detail.icon" class="text-gray-500 h-6 w-6 flex-shrink-0"></ion-icon>
         <div class="text-gray-500">{{ detail.name }}</div>
       </div>
     </div>
