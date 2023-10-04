@@ -28,6 +28,7 @@ def capacitor_pods
   pod 'CapacitorCamera', :path => '../../node_modules/@capacitor/camera'
   pod 'CapacitorHaptics', :path => '../../node_modules/@capacitor/haptics'
   pod 'CapacitorKeyboard', :path => '../../node_modules/@capacitor/keyboard'
+  pod 'CapacitorPushNotifications', :path => '../../node_modules/@capacitor/push-notifications'
   pod 'CapacitorStatusBar', :path => '../../node_modules/@capacitor/status-bar'
   pod 'CapacitorTextZoom', :path => '../../node_modules/@capacitor/text-zoom'
   pod 'CapawesomeCapacitorAppUpdate', :path => '../../node_modules/@capawesome/capacitor-app-update'
@@ -36,8 +37,21 @@ end
 target 'App' do
   capacitor_pods
   # Add your Pods here
+  pod 'Firebase/Messaging'
 end
+
+#post_install do |installer|
+#  assertDeploymentTarget(installer)
+#end
 
 post_install do |installer|
   assertDeploymentTarget(installer)
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+    xcconfig_path = config.base_configuration_reference.real_path
+    xcconfig = File.read(xcconfig_path)
+    xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+    File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
+    end
+  end
 end

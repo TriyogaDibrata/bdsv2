@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>554320008321-j5of9reg6778lmh83ouli6cvn7bi7509.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.554320008321-j5of9reg6778lmh83ouli6cvn7bi7509</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAHu4eiq7qregEZ3aTLdAGV2jncbIsu004</string>
+	<key>GCM_SENDER_ID</key>
+	<string>554320008321</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.badungkab.digital-signature</string>
+	<key>PROJECT_ID</key>
+	<string>digital-signature-824ce</string>
+	<key>STORAGE_BUCKET</key>
+	<string>digital-signature-824ce.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:554320008321:ios:8d000c86e3d73108a5a980</string>
+	<key>DATABASE_URL</key>
+	<string>https://digital-signature-824ce.firebaseio.com</string>
+</dict>
+</plist>

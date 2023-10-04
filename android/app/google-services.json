@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "554320008321",
+    "firebase_url": "https://digital-signature-824ce.firebaseio.com",
+    "project_id": "digital-signature-824ce",
+    "storage_bucket": "digital-signature-824ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554320008321:android:a42910d812ade136a5a980",
+        "android_client_info": {
+          "package_name": "com.badungkab.digital_signature"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554320008321-016s25r93vs2s9fghgm82fqcltj9rj1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJCyq5qwiLG7JYffD5OurTCxJu1S9CbbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554320008321-016s25r93vs2s9fghgm82fqcltj9rj1g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "554320008321-j5of9reg6778lmh83ouli6cvn7bi7509.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.badungkab.digital-signature",
+                "app_store_id": "1520501838"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

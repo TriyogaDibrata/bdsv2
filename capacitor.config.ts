@@ -10,6 +10,11 @@ const config: CapacitorConfig = {
   ios: {
     preferredContentMode: 'mobile',
   },
+  plugins: {
+    PushNotifications: {
+      presentationOptions: ['badge', 'sound', 'alert'],
+    },
+  },
 };
 
 export default config;

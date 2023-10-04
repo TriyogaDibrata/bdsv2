@@ -35,6 +35,7 @@ export class HomePage implements OnInit {
   ) {}
 
   async ngOnInit() {
+    console.log(this.user);
     moment.locale('ID');
     this.getHomeStat();
   }
