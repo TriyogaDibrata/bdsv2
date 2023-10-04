@@ -106,7 +106,7 @@
           <div class="flex gap-4 items-center">
             <div>{{ i+1 }}.</div>
             <div class="text-left text-sm">{{ ack?.nama }}</div>
-            <div class="text-end text-xs"
+            <div class="text-end text-sm"
               [ngClass]="{'text-green-400' : ack?.status == 1, 'text-red-400' : ack?.status == -1}">
               {{ ack?.status == 1 ? 'Disetujui' : ack.status == -1 ? 'Dikembalikan' : 'Belum Disetujui'}}
             </div>

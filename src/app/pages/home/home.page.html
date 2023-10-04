@@ -51,10 +51,10 @@
       <div class="flex justify-around mx-4">
         <div *ngFor="let item of menu.homeMenus" class="text-center">
           <div class="w-16 menu-wrapper flex flex-col items-center" (click)="handleMenuClick(item)">
-            <div class="w-12 h-12 bg-red-50 flex justify-center items-center rounded-xl">
+            <div class="w-14 h-14 bg-red-50 flex justify-center items-center rounded-xl">
               <ion-icon [name]="item.icon" class="text-2xl text-red-500"></ion-icon>
             </div>
-            <div class="text-xs font-thin mt-2">{{ item.name }}</div>
+            <div class="text-sm font-light mt-2">{{ item.name }}</div>
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
       <div class="p-6">
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold">Dokumen Terbaru</div>
-          <ion-button fill="clear" mode="ios" size="small" class="text-xs"
+          <ion-button fill="clear" mode="ios" size="small" class="text-sm"
             (click)="navCtrl.navigateForward('new-doc')">Lihat Semua</ion-button>
         </div>
         <div class="flex flex-col items-center text-slate-400 my-4"
@@ -80,7 +80,7 @@
       <div class="p-6">
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold">Riwayat Dokumen</div>
-          <ion-button fill="clear" mode="ios" size="small" class="text-xs"
+          <ion-button fill="clear" mode="ios" size="small" class="text-sm"
             (click)="navCtrl.navigateForward('signed-doc')">Lihat Semua</ion-button>
         </div>
         <div class="flex flex-col items-center text-slate-400 my-4"
@@ -106,7 +106,7 @@
         <div class="text-xl text-black font-bold">{{ user.name
           }}
         </div>
-        <div class="text-xs text-gray-400">
+        <div class="text-sm text-gray-400">
           {{ user.role.name }}
         </div>
       </div>

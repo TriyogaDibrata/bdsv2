@@ -21,7 +21,7 @@ export class MenuService {
       action: () => this.showModalOption(),
     },
     {
-      name: 'Dokumen Belum TTE',
+      name: 'Belum TTE',
       icon: 'document-text-outline',
       action: () => this.navCtrl.navigateForward('new-doc'),
     },
@@ -46,7 +46,7 @@ export class MenuService {
       },
     },
     {
-      name: 'Dokumen Belum TTE',
+      name: 'Belum TTE',
       icon: 'document-text-outline',
       action: () => {
         this.closeModal().then(() => this.navigateTo('new-doc'));
