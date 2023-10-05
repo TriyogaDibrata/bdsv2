@@ -20,6 +20,7 @@
           <div class="text-sm">
             {{ mailDetail?.nomor }}
           </div>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -29,6 +30,7 @@
           <div class="text-sm">
             {{ convertDate(mailDetail?.tgl) }}
           </div>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -38,6 +40,8 @@
           <div class="text-sm">
             {{ mailDetail?.perihal }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -47,6 +51,7 @@
           <div class="text-sm">
             {{ mailDetail?.pengirim }}
           </div>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -56,6 +61,8 @@
           <div class="text-sm">
             <div *ngFor="let tujuan of mailDetail?.tujuan; let i = index;">{{ tujuan }}</div>
           </div>
+          <app-skeleton [type]="'text-thumb-1/2'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-1/2'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4" *ngIf="mailDetail?.tembusan.length > 0">
@@ -65,6 +72,8 @@
           <div class="text-sm">
             <div *ngFor="let tembusan of mailDetail?.tembusan; let i = index;">{{ tembusan }}</div>
           </div>
+          <app-skeleton [type]="'text-thumb-1/2'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-1/2'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4" *ngIf="mailDetail?.tembusan_khusus.length > 0">
@@ -74,6 +83,8 @@
           <div class="text-sm">
             <div *ngFor="let tembusan_khusus of mailDetail?.tembusan_khusus; let i = index;">{{ tembusan_khusus }}</div>
           </div>
+          <app-skeleton [type]="'text-thumb-1/2'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-1/2'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4" *ngIf="fileSurat || lampirans?.length > 0">
@@ -90,6 +101,8 @@
             <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
               (click)="prepareLampiran(lampirans)">Lihat</ion-button>
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4" *ngIf="balasan?.balasan && balasan?.balasan.length > 0">
@@ -123,6 +136,7 @@
           <div class="text-sm">
             {{ mailDetail?.undangan_acara }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -133,6 +147,7 @@
             {{ convertDateWithTime(mailDetail?.undangan_awal) + ' s.d ' +
             convertDateWithTime(mailDetail?.undangan_akhir) }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -142,6 +157,8 @@
           <div class="text-sm">
             {{ mailDetail?.undangan_lokasi }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -151,6 +168,8 @@
           <div class="text-sm">
             {{ mailDetail?.undangan_desc }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
       </ion-card>
 

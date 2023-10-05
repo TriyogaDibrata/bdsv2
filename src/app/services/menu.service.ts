@@ -6,7 +6,6 @@ import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component'
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { IframerComponent } from '@components/iframer/iframer.component';
-import { User } from '@interfaces/user';
 import { TextsizerComponent } from '@components/textsizer/textsizer.component';
 
 @Injectable({

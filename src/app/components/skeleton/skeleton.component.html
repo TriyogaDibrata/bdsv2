@@ -1,4 +1,4 @@
-<ion-card mode="ios" class="p-4 mx-0 rounded-xl animate-pulse" *ngIf="type == 'doc-thumb'">
+<ion-card mode="ios" class="p-4 mx-0 rounded-xl animate-pulse" *ngIf="type === 'doc-thumb'">
   <div class="flex flex-row gap-4 items-center">
     <ion-icon src="assets/images/file-pdf.svg" class="w-8 h-8 flex-shrink-0 text-slate-400"></ion-icon>
     <div class="flex flex-col gap-2">
@@ -9,7 +9,7 @@
   </div>
 </ion-card>
 
-<ion-card mode="ios" class="p-4 mx-0 rounded-xl animate-pulse" *ngIf="type == 'surat-thumb'">
+<ion-card mode="ios" class="p-4 mx-0 rounded-xl animate-pulse" *ngIf="type === 'surat-thumb'">
   <div class="flex flex-row gap-4 items-center">
     <div class="flex flex-col gap-2">
       <div class="h-3 bg-slate-200 rounded-full w-40"></div>
@@ -18,3 +18,7 @@
     </div>
   </div>
 </ion-card>
+
+<div class="h-3 my-1 bg-slate-200 animate-pulse rounded-xl" *ngIf="type === 'text-thumb-full'"></div>
+<div class="h-3 w-5/6 my-1 bg-slate-200 animate-pulse rounded-xl" *ngIf="type === 'text-thumb-5/6'"></div>
+<div class="h-3 w-1/2 my-1 bg-slate-200 animate-pulse rounded-xl" *ngIf="type === 'text-thumb-1/2'"></div>

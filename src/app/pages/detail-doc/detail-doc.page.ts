@@ -8,6 +8,7 @@ import { ApiResponse } from '@interfaces/api-response';
 import { DocDetail, file, lampiran } from '@interfaces/doc-detail';
 import { ModalController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
+import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import * as moment from 'moment';
 
@@ -27,6 +28,7 @@ export class DetailDocPage implements OnInit {
     public navCtrl: NavController,
     private modalCtrl: ModalController,
     private alertService: AlertService,
+    public loader: LoadingService,
   ) {}
 
   ngOnInit() {
@@ -69,6 +71,9 @@ export class DetailDocPage implements OnInit {
   }
 
   public convertDate(date) {
+    if (!date) {
+      return '';
+    }
     return moment(date).format('dddd, DD MMMM YYYY');
   }
 

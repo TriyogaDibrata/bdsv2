@@ -9,6 +9,7 @@ import { ApiResponse } from '@interfaces/api-response';
 import { DetailMail } from '@interfaces/mail';
 import { ModalController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
+import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import * as moment from 'moment';
 
@@ -31,6 +32,7 @@ export class DetailMailPage implements OnInit {
     private alertService: AlertService,
     public navCtrl: NavController,
     private modalCtrl: ModalController,
+    public loader: LoadingService,
   ) {}
 
   ngOnInit() {
@@ -77,6 +79,9 @@ export class DetailMailPage implements OnInit {
 
   convertDate(date) {
     moment.locale('ID');
+    if (!date) {
+      return '';
+    }
     return moment(date).format('dddd, DD MMMM YYYY');
   }
 

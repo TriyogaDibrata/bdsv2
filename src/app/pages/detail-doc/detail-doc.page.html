@@ -22,6 +22,7 @@
           <div class="text-sm">
             {{ detailDoc?.name }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -31,6 +32,7 @@
           <div class="text-sm">
             {{ convertDate(detailDoc?.date) }}
           </div>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -40,6 +42,7 @@
           <div class="text-sm">
             {{ detailDoc?.nama_opd }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -49,6 +52,7 @@
           <div class="text-sm">
             {{ detailDoc?.unit_kerja }}
           </div>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
@@ -58,6 +62,8 @@
           <div class="text-sm">
             {{ detailDoc?.desc }}
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4" *ngIf="detailDoc?.file.length > 0 || detailDoc?.lampiran.length > 0">
@@ -74,6 +80,8 @@
             <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
               (click)="prepareLampirans(detailDoc?.lampiran)">Lihat</ion-button>
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="rounded-xl card-shadow w-full p-4 flex flex-col items-center text-center bg-gray-200 ring-gray-400"
@@ -113,6 +121,9 @@
               {{ ack?.status === 1 ? 'Disetujui' : ack.status === -1 ? 'Dikembalikan' : 'Belum Disetujui'}}
             </div>
           </div>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
       </ion-card>
     </div>
