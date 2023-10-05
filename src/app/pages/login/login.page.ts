@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
+import { PushNotifService } from '@services/push-notif.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,13 +26,14 @@ export class LoginPage implements OnInit {
     private auth: AuthService,
     public loader: LoadingService,
     private alertService: AlertService,
+    private pushNotif: PushNotifService,
   ) {}
 
   ngOnInit() {}
 
   public login() {
     let formValue = this.loginForm.value;
-    formValue['fcm_token'] = '';
+    formValue['fcm_token'] = this.pushNotif.fcmTokenValue;
 
     this.auth.login(formValue).subscribe({
       next: (res: ApiResponse) => {

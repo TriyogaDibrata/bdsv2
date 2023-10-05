@@ -1,8 +1,8 @@
 <ion-card mode="ios" class="p-4 mx-0 rounded-xl" (click)="showDetail()">
-  <div class="flex flex-row gap-4 items-center">
+  <div class="flex flex-row items-center">
     <ion-icon src="assets/images/file-pdf.svg" class="w-8 h-8 flex-shrink-0"
       [ngClass]="{'text-blue-400' : data?.status === 0, 'text-red-400' : data?.status === -1, 'text-green-400' : data?.status === 1}"></ion-icon>
-    <div class="flex flex-col">
+    <div class="flex flex-col mx-4">
       <div class="font-bold text-base">{{ data?.name }}</div>
       <div class="text-sm text-gray-400">{{ convertDate(data?.date) }}</div>
       <div class="text-sm"

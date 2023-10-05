@@ -1,19 +1,21 @@
 <ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
-    <div class="w-full p-4 flex flex-col gap-4 mt-4 plt-ios:pt-10 sticky top-0 z-50 bg-white "
-      [ngClass]="{'!flex-row items-center shadow-sm' : scrollTop > 150}">
+    <div class="w-full h-[92px] p-4 flex flex-col mt-4 plt-ios:pt-10 plt-ios:h-[120px] sticky top-0 z-50"
+      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop > 50}">
       <app-back-button></app-back-button>
-      <div class="text-4xl font-bold" [ngClass]="{'!text-xl' : scrollTop > 150}">Ubah Passphrase</div>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop > 50}">Ubah Passphrase</div>
     </div>
 
-    <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
-      <div>
-        Pengajuan akan verifikasi oleh admin. Apabila pengajuan sudah disetujui, anda akan menerima email untuk proses
-        ubah passphrase.
-      </div>
+    <div class="flex-grow w-full bg-white rounded-t-2xl px-6 py-10 mt-4">
+      <div class="my-4">
+        <div>
+          Pengajuan akan verifikasi oleh admin. Apabila pengajuan sudah disetujui, anda akan menerima email untuk proses
+          ubah passphrase.
+        </div>
 
-      <ion-button mode="ios" expand="block" class="my-4" (click)="sendRequest()">Kirim Pengajuan</ion-button>
+        <ion-button mode="ios" expand="block" class="my-4" (click)="sendRequest()">Kirim Pengajuan</ion-button>
+      </div>
     </div>
   </div>
 </ion-content>

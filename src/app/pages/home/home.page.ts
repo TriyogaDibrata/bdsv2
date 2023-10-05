@@ -7,6 +7,7 @@ import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
 import { MenuService } from '@services/menu.service';
+import { PushNotifService } from '@services/push-notif.service';
 import { RequestService } from '@services/request.service';
 import * as moment from 'moment';
 
@@ -32,11 +33,12 @@ export class HomePage implements OnInit {
     private alertService: AlertService,
     public loader: LoadingService,
     private modalCtrl: ModalController,
+    private pushNotif: PushNotifService,
   ) {}
 
   async ngOnInit() {
-    console.log(this.user);
     moment.locale('ID');
+    this.pushNotif.updateFcmToken();
     this.getHomeStat();
   }
 
@@ -110,7 +112,9 @@ export class HomePage implements OnInit {
     let onDidDismiss = await modal.onDidDismiss();
 
     if (onDidDismiss.role == 'confirm') {
-      this.auth.logout();
+      this.pushNotif.removeFcmToken().then(() => {
+        this.auth.logout();
+      });
     }
   }
 }

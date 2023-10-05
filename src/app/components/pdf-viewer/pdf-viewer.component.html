@@ -7,7 +7,7 @@
       </ion-button>
     </div>
 
-    <div class="flex-grow w-full bg-white rounded-t-2xl p-6">
+    <div class="flex-grow w-full bg-white rounded-t-2xl px-6 py-10 mt-4">
       <pdf-viewer *ngFor="let file of files" [render-text]="true" [src]="file" [fit-to-page]="true"
         [zoom-scale]="'page-width'" [show-borders]="true" [original-size]="false" [autoresize]="true"
         [zoom]="pdfOptions.zoom" [rotation]="pdfOptions.rotation"

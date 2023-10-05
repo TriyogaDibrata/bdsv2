@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { ApiResponse } from '@interfaces/api-response';
 import { User } from '@interfaces/user';
 import { NavController } from '@ionic/angular';
+import { PushNotifService } from './push-notif.service';
 
 @Injectable({
   providedIn: 'root',
