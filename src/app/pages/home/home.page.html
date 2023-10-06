@@ -10,9 +10,9 @@
       <ion-button mode="ios" fill="clear" (click)="toggleSideMenu()">
         <ion-icon class="p-1 text-white" [name]="isMenuOpen ? 'close-outline' : 'menu-outline'"></ion-icon>
       </ion-button>
-      <ion-button mode="ios" fill="clear">
+      <ion-button mode="ios" fill="clear" (click)="navCtrl.navigateForward('/notifications')">
         <ion-icon name="notifications-outline" class="p-1 text-white"
-          [ngClass]="{'after:h-2 after:w-2 after:bg-yellow-500 after:rounded-full after:absolute after:top-0 after:right-0' : user}"></ion-icon>
+          [ngClass]="{'after:h-2 after:w-2 after:bg-yellow-500 after:rounded-full after:absolute after:top-0 after:right-0' : notifs?.length > 0 }"></ion-icon>
       </ion-button>
     </div>
 

@@ -9,6 +9,7 @@ import { LoadingService } from '@services/loading.service';
 import { MenuService } from '@services/menu.service';
 import { PushNotifService } from '@services/push-notif.service';
 import { RequestService } from '@services/request.service';
+import { UserNotificationService } from '@services/user-notification.service';
 import * as moment from 'moment';
 
 @Component({
@@ -23,6 +24,7 @@ export class HomePage implements OnInit {
   public homeData: any;
   public serverDate: string;
   public serverTime: string;
+  public notifs: [];
 
   constructor(
     public menuCtrl: MenuController,
@@ -34,12 +36,18 @@ export class HomePage implements OnInit {
     public loader: LoadingService,
     private modalCtrl: ModalController,
     private pushNotif: PushNotifService,
+    private userNotif: UserNotificationService,
   ) {}
 
   async ngOnInit() {
     moment.locale('ID');
     this.pushNotif.updateFcmToken();
     this.getHomeStat();
+    this.userNotif.getUserNotif().subscribe((res: ApiResponse) => {
+      if (res && res.success) {
+        this.notifs = res.data.notif.data;
+      }
+    });
   }
 
   ionViewWillEnter() {

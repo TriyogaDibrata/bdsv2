@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
+  <div class="container flex flex-col flex-grow min-h-full mx-auto">
+    <!-- Header -->
+    <div class="w-full h-[92px] p-4 flex flex-col mt-4 plt-ios:pt-10 plt-ios:h-[120px] sticky top-0 z-50"
+      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop > 50}">
+      <app-back-button></app-back-button>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop > 50}">Notifikasi</div>
+    </div>
+
+    <div class="flex-grow w-full bg-white rounded-t-2xl px-6 py-10 mt-4">
+
+      <div *ngFor="let notif of notifs" class="p-2 border-b border-b-gray-300">
+        <div class="text-sm text-black">{{ notif.content }}</div>
+        <div class="text-xs text-gray-500 text-right">{{ convertDate(notif.created_at) }}</div>
+      </div>
+
+      <div class="p-2 border-b border-b-gray-300" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"
+        [ngClass]="{'hidden' : !loader.isLoading.value || notifs}">
+        <app-skeleton [type]="'text-thumb-full'"></app-skeleton>
+        <app-skeleton [type]="'text-thumb-full'"></app-skeleton>
+        <app-skeleton [type]="'text-thumb-1/2'"></app-skeleton>
+      </div>
+
+      <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!infiniteScrollData.enable">
+        <ion-infinite-scroll-content [loadingSpinner]="'crescent'"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>
