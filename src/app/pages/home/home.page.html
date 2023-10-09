@@ -78,8 +78,9 @@
           <ion-text class="text-sm my-2"> Tidak ada dokumen terbaru </ion-text>
         </div>
         <app-document-thubmnail *ngFor="let doc of homeData?.lastest" [data]="doc"></app-document-thubmnail>
-        <app-skeleton [ngClass]="{'hidden' : !loader.isLoading.value && homeData?.lastest}"
-          *ngFor="let i of [1,2,3,4,5]" [type]="'doc-thumb'"></app-skeleton>
+        <div *ngIf="loader.isLoading.value && !homeData?.lastest">
+          <app-skeleton *ngFor="let i of [1,2,3,4,5]" [type]="'doc-thumb'"></app-skeleton>
+        </div>
       </div>
 
       <!-- Documents List Histories-->
@@ -95,8 +96,9 @@
           <ion-text class="text-sm my-2"> Tidak ada riwayat dokumen terakhir </ion-text>
         </div>
         <app-document-thubmnail *ngFor="let doc of homeData?.histories" [data]="doc"></app-document-thubmnail>
-        <app-skeleton [ngClass]="{'hidden' : !loader.isLoading.value && homeData?.histories}"
-          *ngFor="let i of [1,2,3,4,5]" [type]="'doc-thumb'"></app-skeleton>
+        <div *ngIf="loader.isLoading.value && !homeData?.histories">
+          <app-skeleton *ngFor="let i of [1,2,3,4,5]" [type]="'doc-thumb'"></app-skeleton>
+        </div>
       </div>
     </div>
   </div>

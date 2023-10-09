@@ -42,7 +42,6 @@ export class HomePage implements OnInit {
   async ngOnInit() {
     moment.locale('ID');
     this.pushNotif.updateFcmToken();
-    this.getHomeStat();
     this.userNotif.getUserNotif().subscribe((res: ApiResponse) => {
       if (res && res.success) {
         this.notifs = res.data.notif.data;
@@ -54,6 +53,7 @@ export class HomePage implements OnInit {
     this.auth.user.subscribe((res) => {
       this.user = res;
     });
+    this.getHomeStat();
   }
 
   public async toggleSideMenu() {

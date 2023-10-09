@@ -20,6 +20,7 @@ export class BiometricRegistrationPage implements OnInit {
   public passphrase: string;
   public user = this.auth.userData;
   private secretToken: SecretToken;
+  public isBiometricAvailable: boolean = false;
 
   constructor(
     private biometricService: BiometricsService,
@@ -30,7 +31,24 @@ export class BiometricRegistrationPage implements OnInit {
     public loader: LoadingService,
   ) {}
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    this.isBiometricAvailable = (
+      await this.biometricService.checkAvailablity()
+    ).isAvailable;
+    if (!this.isBiometricAvailable) {
+      this.alertService
+        .showAlert({
+          title: 'No Biometrics Available',
+          text: 'Biometrics is not available on this devices',
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+        })
+        .then(() => {
+          this.navCtrl.pop();
+        });
+    }
+  }
 
   handleScroll(e) {
     this.scrollTop = e.detail.scrollTop;

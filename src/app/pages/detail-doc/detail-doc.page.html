@@ -19,51 +19,51 @@
           <div class="font-bold text-black text-base">
             Nomor / Judul Surat
           </div>
-          <div class="text-sm">
+          <div class="text-sm" *ngIf="!loader.isLoading.value">
             {{ detailDoc?.name }}
           </div>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
           <div class="font-bold text-black text-base">
             Tanggal
           </div>
-          <div class="text-sm">
+          <div class="text-sm" *ngIf="!loader.isLoading.value">
             {{ convertDate(detailDoc?.date) }}
           </div>
-          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
           <div class="font-bold text-black text-base">
             Perangkat Daerah
           </div>
-          <div class="text-sm">
+          <div class="text-sm" *ngIf="!loader.isLoading.value">
             {{ detailDoc?.nama_opd }}
           </div>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
           <div class="font-bold text-black text-base">
             Unit Kerja
           </div>
-          <div class="text-sm">
+          <div class="text-sm" *ngIf="!loader.isLoading.value">
             {{ detailDoc?.unit_kerja }}
           </div>
-          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4">
           <div class="font-bold text-black text-base">
             Keterangan
           </div>
-          <div class="text-sm">
+          <div class="text-sm" *ngIf="!loader.isLoading.value">
             {{ detailDoc?.desc }}
           </div>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
-          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
+          <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="flex flex-col my-4" *ngIf="detailDoc?.file.length > 0 || detailDoc?.lampiran.length > 0">
@@ -80,8 +80,6 @@
             <ion-button fill="solid" color="tertiary" size="small" mode="ios" expand="block"
               (click)="prepareLampirans(detailDoc?.lampiran)">Lihat</ion-button>
           </div>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
         </div>
 
         <div class="rounded-xl card-shadow w-full p-4 flex flex-col items-center text-center bg-gray-200 ring-gray-400"
@@ -121,9 +119,6 @@
               {{ ack?.status === 1 ? 'Disetujui' : ack.status === -1 ? 'Dikembalikan' : 'Belum Disetujui'}}
             </div>
           </div>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
-          <app-skeleton [type]="'text-thumb-full'" *ngIf="!detailDoc && loader.isLoading.value"></app-skeleton>
         </div>
       </ion-card>
     </div>
