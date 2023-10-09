@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>The app enables the scanning of various barcodes or qrcode and to change user avatar.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>The app enable user to use quick login feature with face ID</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>The app enables to users update thier avatar profile</string>
 	<key>NSPhotoLibraryUsageDescription</key>

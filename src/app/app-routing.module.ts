@@ -128,6 +128,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'biometric-registration',
+    loadChildren: () =>
+      import(
+        './pages/biometric-registration/biometric-registration.module'
+      ).then((m) => m.BiometricRegistrationPageModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

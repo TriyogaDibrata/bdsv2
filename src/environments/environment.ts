@@ -4,6 +4,10 @@
 
 export const environment = {
   production: false,
+  bundle_id: {
+    ios: 'com.badungkab.digital-signature',
+    android: 'com.badungkab.digital_signature',
+  },
   url: {
     live: 'https://demo-tte.badungkab.go.id/api/',
     demo: 'https://demo-tte.badungkab.go.id/api/',

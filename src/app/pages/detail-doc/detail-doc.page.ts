@@ -223,10 +223,18 @@ export class DetailDocPage implements OnInit {
 
   private async signDoc(data, id) {
     if (data?.status == 1) {
-      let signData = {
-        is_biometic: 0,
-        passphrase: data?.passphrase,
-      };
+      let signData = {};
+      if (data?.isBiometric == 1) {
+        signData = {
+          is_biometric: 1,
+          secretkey: data.secretKey,
+        };
+      } else {
+        signData = {
+          is_biometric: 0,
+          passphrase: data.passphrase,
+        };
+      }
       this.acceptDoc(signData, id);
     } else if (data?.status == -1) {
       let rejectData = {

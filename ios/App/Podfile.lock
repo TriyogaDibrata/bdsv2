@@ -24,6 +24,8 @@ PODS:
     - Capacitor
   - CapawesomeCapacitorAppUpdate (5.0.1):
     - Capacitor
+  - CapgoCapacitorNativeBiometric (0.0.1):
+    - Capacitor
   - Firebase/CoreOnly (10.13.0):
     - FirebaseCore (= 10.13.0)
   - Firebase/Messaging (10.13.0):
@@ -91,6 +93,7 @@ DEPENDENCIES:
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - "CapacitorTextZoom (from `../../node_modules/@capacitor/text-zoom`)"
   - "CapawesomeCapacitorAppUpdate (from `../../node_modules/@capawesome/capacitor-app-update`)"
+  - "CapgoCapacitorNativeBiometric (from `../../node_modules/@capgo/capacitor-native-biometric`)"
   - Firebase/Messaging
 
 SPEC REPOS:
@@ -132,6 +135,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/text-zoom"
   CapawesomeCapacitorAppUpdate:
     :path: "../../node_modules/@capawesome/capacitor-app-update"
+  CapgoCapacitorNativeBiometric:
+    :path: "../../node_modules/@capgo/capacitor-native-biometric"
 
 SPEC CHECKSUMS:
   Capacitor: 1ac9165943bc4f2137642d218c5ba05df811de69
@@ -147,6 +152,7 @@ SPEC CHECKSUMS:
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
   CapacitorTextZoom: bd623313a291bc1f38cdc01bd94c39b2b48d794a
   CapawesomeCapacitorAppUpdate: abbfaa26fe3817dce42bd722731acc23e7a3274c
+  CapgoCapacitorNativeBiometric: 44b0bb31118f6ed5171087a77a856a80a0cfa250
   Firebase: 343d7539befb614d22b2eae24759f6307b1175e9
   FirebaseCore: 9948a31ff2c6cf323f9b040068201a95d271b68d
   FirebaseCoreInternal: b342e37cd4f5b4454ec34308f073420e7920858e
@@ -157,6 +163,6 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
 
-PODFILE CHECKSUM: c3b20b7d7925aba3155dc2194cd0068dfb593509
+PODFILE CHECKSUM: fb8ea18a2c35a751245dea72783bdf5f3c048c76
 
 COCOAPODS: 1.12.1

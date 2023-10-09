@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ModalOptionVerifyComponent } from '@components/modal-option-verify/modal-option-verify.component';
-import { ModalVerifyResultComponent } from '@components/modal-verify-result/modal-verify-result.component';
 import { ModalVerifyUploadComponent } from '@components/modal-verify-upload/modal-verify-upload.component';
 import { SheetMenuComponent } from '@components/sheet-menu/sheet-menu.component';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
@@ -133,9 +132,9 @@ export class MenuService {
   settingsMenu = [
     {
       name: 'Biometrics',
-      icon: 'person-circle-outline',
+      icon: 'assets/images/face-id.svg',
       action: () => {
-        console.log('clicked!');
+        this.navCtrl.navigateForward('biometric-registration');
       },
     },
     {

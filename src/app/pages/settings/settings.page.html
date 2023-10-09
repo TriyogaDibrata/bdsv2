@@ -10,9 +10,11 @@
     <div class="flex-grow w-full bg-white rounded-t-2xl px-6 py-10 mt-4">
       <div class="p-2">
         <div class="flex gap-4 items-center justify-between p-4 my-4 rounded-xl card-shadow min-h-[80px]"
-          *ngFor="let menu of menu.settingsMenu" (click)="menu.action()">
+          *ngFor="let menu of menu.settingsMenu" (click)="menu.action()"
+          [ngClass]="{'hidden' : menu?.name === 'Biometrics' && user?.role.slug !== 'signer'}">
+          <!-- [ngClass]="{'hidden' : menu?.name === 'Biometrics' && !isBiometricsAvailable || user?.role.slug !== 'signer'}"> -->
           <div class="flex gap-4 items-center">
-            <ion-icon [name]="menu.icon" class="h-8 w-8 flex-shrink-0"></ion-icon>
+            <ion-icon [name]="menu.icon" [src]="menu.icon" class="h-8 w-8 flex-shrink-0"></ion-icon>
             <ion-label>{{ menu.name }}</ion-label>
           </div>
           <ion-icon name="chevron-forward-outline"></ion-icon>

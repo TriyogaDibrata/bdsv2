@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
+  <div class="container flex flex-col flex-grow min-h-full mx-auto">
+    <!-- Header -->
+    <div class="w-full h-[92px] p-4 flex flex-col mt-4 plt-ios:pt-10 plt-ios:h-[120px] sticky top-0 z-50"
+      [ngClass]="{'!flex-row items-center bg-white shadow-sm' : scrollTop > 50}">
+      <app-back-button></app-back-button>
+      <div class="text-4xl font-bold" [ngClass]="{'!text-2xl' : scrollTop > 50}">Biometric Setup</div>
+    </div>
+
+    <div class="flex-grow w-full bg-white rounded-t-2xl px-6 py-10 mt-4">
+
+      <div class="my-4">
+        <div class="p-2">Dengan mengaktifkan fitur biometric ini akan mempermudah anda untuk melakukan login dan
+          penandatanganan
+          dokumen
+          dengan Finger ID atau Face ID. Masukan passphrase anda pada kolom dibawah ini untuk dapat melanjutkan
+          pendafatran biometric.</div>
+        <ion-item lines="none" class="border border-gray-300 rounded-xl">
+          <ion-input placeholder="Masukan Passphrase" [type]="showPassphrase ? 'text' : 'password'"
+            [(ngModel)]="passphrase"></ion-input>
+          <ion-icon slot="end" [name]="showPassphrase ? 'eye-off-outline' : 'eye-outline' "
+            (click)="showPassphrase = !showPassphrase"></ion-icon>
+        </ion-item>
+        <ion-button expand="block" mode="ios" class="my-4" [disabled]="loader.isLoading.value || !passphrase"
+          (click)="generateBiometricToken()">{{ loader.isLoading.value ? 'Verifiying...' : 'Lanjutkan
+          Pendaftaran'}}</ion-button>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

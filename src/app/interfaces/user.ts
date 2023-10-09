@@ -10,6 +10,8 @@ export interface User {
   api_token?: string;
   role: Role;
   is_biometric: number;
+  is_biometric_login: number;
+  biometric: Biometric;
 }
 
 export class Role {
@@ -25,5 +27,4 @@ export class Role {
 export class Biometric {
   biometric_token: String;
   biometric_user_id: String;
-  name: String;
 }

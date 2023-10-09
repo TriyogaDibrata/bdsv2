@@ -36,6 +36,7 @@
     "@capacitor/status-bar": "5.0.6",
     "@capacitor/text-zoom": "^5.0.6",
     "@capawesome/capacitor-app-update": "^5.0.1",
+    "@capgo/capacitor-native-biometric": "^5.1.0",
     "@ionic/angular": "^7.0.0",
     "@ng-select/ng-select": "^11.1.1",
     "ionicons": "^7.0.0",

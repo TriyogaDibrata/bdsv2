@@ -11,7 +11,7 @@
 
       <div *ngFor="let notif of notifs" class="p-2 border-b border-b-gray-300">
         <div class="text-sm text-black">{{ notif.content }}</div>
-        <div class="text-xs text-gray-500 text-right">{{ convertDate(notif.created_at) }}</div>
+        <div class="text-xs text-gray-500">{{ convertDate(notif.created_at) }}</div>
       </div>
 
       <div class="p-2 border-b border-b-gray-300" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"

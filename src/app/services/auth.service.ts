@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RequestService } from './request.service';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { ApiResponse } from '@interfaces/api-response';
-import { User } from '@interfaces/user';
+import { Biometric, User } from '@interfaces/user';
 import { NavController } from '@ionic/angular';
 import { PushNotifService } from './push-notif.service';
 
@@ -10,8 +10,11 @@ import { PushNotifService } from './push-notif.service';
   providedIn: 'root',
 })
 export class AuthService {
-  userSubject: BehaviorSubject<User>;
-  user: Observable<User>;
+  public userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
+
+  public biometricSubject: BehaviorSubject<Biometric>;
+  public biometric: Observable<Biometric>;
 
   constructor(
     private request: RequestService,
@@ -21,6 +24,11 @@ export class AuthService {
       JSON.parse(localStorage.getItem('user')),
     );
     this.user = this.userSubject.asObservable();
+
+    this.biometricSubject = new BehaviorSubject<Biometric>(
+      JSON.parse(localStorage.getItem('biometric')),
+    );
+    this.biometric = this.biometricSubject.asObservable();
   }
 
   login(logindata = {}) {
@@ -39,12 +47,22 @@ export class AuthService {
     this.userSubject.next(data);
   }
 
+  storeBiometricData(data) {
+    localStorage.setItem('biometric', JSON.stringify(data));
+    this.biometricSubject.next(data);
+  }
+
   public get userData(): User {
     return this.userSubject.value;
   }
 
+  public get getBiometricData(): Biometric {
+    return this.biometricSubject.value;
+  }
+
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('user');
+    localStorage.removeItem('notifToken');
     this.userSubject.next(null);
     this.navCtrl.navigateRoot('login');
   }

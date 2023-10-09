@@ -33,10 +33,17 @@
             <ion-text>{{ error }}</ion-text>
           </ion-item>
 
-          <ion-button expand="block" mode="ios" [disabled]="loginForm.invalid || loader.isLoading.value"
-            (click)="login()"><ion-spinner name="crescent" *ngIf="loader.isLoading.value" class="mx-2"></ion-spinner>{{
-            loader.isLoading.value ? 'Logging In...' : 'Masuk'
-            }}</ion-button>
+          <div class="flex">
+            <ion-button expand="block" mode="ios" [disabled]="loginForm.invalid || loader.isLoading.value"
+              (click)="login()" class="w-full"><ion-spinner name="crescent" *ngIf="loader.isLoading.value"
+                class="mx-2"></ion-spinner>{{
+              loader.isLoading.value ? 'Logging In...' : 'Masuk'
+              }}</ion-button>
+            <ion-button expand="block" mode="ios" class="ml-2" (click)="performBiometric()"
+              *ngIf="isBiometricAvailable && biometricData">
+              <ion-icon src="assets/images/face-id.svg"></ion-icon>
+            </ion-button>
+          </div>
         </form>
 
         <!-- <div class="flex justify-end mt-4">
