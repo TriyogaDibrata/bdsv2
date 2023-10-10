@@ -110,6 +110,7 @@ export class BiometricRegistrationPage implements OnInit {
           })
           .then(() => {
             this.auth.storeUserData(data);
+            this.auth.storeTempUser(data);
             this.auth.storeBiometricData(data.biometric);
             this.navCtrl.pop();
           });

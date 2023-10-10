@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
+import { BiometryType } from '@capgo/capacitor-native-biometric';
+import { SigninModalComponent } from '@components/signin-modal/signin-modal.component';
 import { ApiResponse } from '@interfaces/api-response';
 import { Biometric } from '@interfaces/user';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
 import { AuthService } from '@services/auth.service';
 import { BiometricsService } from '@services/biometrics.service';
@@ -23,7 +25,8 @@ export class LoginPage implements OnInit {
   });
   public showPassword: boolean = false;
   public error: any = '';
-  isBiometricAvailable: boolean = false;
+  isBiometric: boolean = false;
+  biometricType: BiometryType;
   biometricData: Biometric = this.auth.getBiometricData;
 
   constructor(
@@ -33,13 +36,17 @@ export class LoginPage implements OnInit {
     private alertService: AlertService,
     private pushNotif: PushNotifService,
     private biometricService: BiometricsService,
+    private modalCtrl: ModalController,
   ) {}
 
   async ngOnInit() {
     if (await Capacitor.isNativePlatform()) {
-      this.isBiometricAvailable = (
+      this.isBiometric = (
         await this.biometricService.checkAvailablity()
       ).isAvailable;
+      this.biometricType = (
+        await this.biometricService.checkAvailablity()
+      ).biometryType;
     }
   }
 
@@ -132,5 +139,18 @@ export class LoginPage implements OnInit {
           status: 'error',
         });
       });
+  }
+
+  async openSignInModal() {
+    const modal = await this.modalCtrl.create({
+      component: SigninModalComponent,
+      breakpoints: [1, 0],
+      initialBreakpoint: 1,
+      cssClass: 'modal-sheet-auto-height',
+      handle: true,
+      backdropDismiss: false,
+    });
+
+    await modal.present();
   }
 }

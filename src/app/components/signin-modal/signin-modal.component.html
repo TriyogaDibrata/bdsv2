@@ -1,0 +1,33 @@
+<div class="p-6">
+  <form [formGroup]="loginForm">
+    <div class="my-4 px-2 text-gray-400">Masukan username dan password anda untuk masuk ke aplikasi</div>
+    <ion-item lines="none" class="border border-gray-300 rounded-xl my-2"
+      [ngClass]="{'border-red-400' : loginForm.get('username')?.invalid && loginForm.get('username')?.touched, 'border-green-400' : loginForm.get('username')?.valid}">
+      <ion-icon name="person-outline" class="mr-4"></ion-icon>
+      <ion-input type="text" formControlName="username" placeholder="Username" [readonly]="loader.isLoading.value"
+        (ionInput)="onInput($event)"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="border border-gray-300 rounded-xl my-2"
+      [ngClass]="{'border-red-400' : loginForm.get('password')?.invalid && loginForm.get('password')?.touched, 'border-green-400' : loginForm.get('password')?.valid}">
+      <ion-icon name="lock-closed-outline" class="mr-4"></ion-icon>
+      <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password"
+        [readonly]="loader.isLoading.value" (ionInput)="onInput($event)"></ion-input>
+      <ion-button fill="clear" (click)="showPassword = !showPassword" [disabled]="loader.isLoading.value">
+        <ion-icon slot="icon-only" [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item class="flex items-center text-red-500 my-2" lines="none" *ngIf="error">
+      <ion-icon slot="start" class="mr-2" name="alert-circle-outline" color="danger"></ion-icon>
+      <ion-text>{{ error }}</ion-text>
+    </ion-item>
+
+    <div class="flex">
+      <ion-button expand="block" mode="ios" [disabled]="loginForm.invalid || loader.isLoading.value" (click)="login()"
+        class="w-full"><ion-spinner name="crescent" *ngIf="loader.isLoading.value" class="mx-2"></ion-spinner>{{
+        loader.isLoading.value ? 'Logging In...' : 'Masuk'
+        }}</ion-button>
+    </div>
+  </form>
+</div>

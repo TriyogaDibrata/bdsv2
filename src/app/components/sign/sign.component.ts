@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BiometryType } from '@capgo/capacitor-native-biometric';
 import { Biometric } from '@interfaces/user';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
@@ -16,6 +17,7 @@ export class SignComponent implements OnInit {
   public passphrase: string;
   public showPassword: boolean = false;
   public isBiometricAvailable: boolean = false;
+  public biometricType: BiometryType;
   public biometric: Biometric = this.auth.getBiometricData;
 
   constructor(
@@ -26,9 +28,12 @@ export class SignComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.isBiometricAvailable = await (
+    this.isBiometricAvailable = (
       await this.biometricService.checkAvailablity()
     ).isAvailable;
+    this.biometricType = (
+      await this.biometricService.checkAvailablity()
+    ).biometryType;
   }
 
   doSign() {

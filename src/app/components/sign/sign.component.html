@@ -24,9 +24,17 @@
         (click)="doSign()" [disabled]="data?.state === 1 && !passphrase">{{ data?.state === 1 ?
         'Tandatangani' :
         'Kembalikan'}}</ion-button>
-      <ion-button class="ml-2" *ngIf="data?.state === 1 && isBiometricAvailable && biometric"
-        (click)="performBiometric()">
-        <ion-icon src="assets/images/face-id.svg"></ion-icon>
+    </div>
+
+    <div class="my-2" *ngIf="data?.state === 1 && isBiometricAvailable && biometric">
+      <div class="w-full border-b border-b-gray-300 my-2"></div>
+      <div class="text-gray-500 text-sm">Tanda tangan lebih cepat dan aman dengan {{ biometricType === 2 ? 'Face ID' :
+        'Finger ID'}}. Anda tidak perlu
+        memasukan passphrase anda</div>
+      <ion-button mode="ios" class="my-2" expand="block" (click)="performBiometric()">Gunakan {{ biometricType === 2 ?
+        'Face ID' : 'Finger ID'}}
+        <ion-icon slot="end"
+          [src]="biometricType === 2 ? 'assets/images/face-id.svg' : 'assets/images/finger-id.svg'"></ion-icon>
       </ion-button>
     </div>
   </div>

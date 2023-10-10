@@ -9,7 +9,9 @@
     </div>
     <div class="flex-grow w-full bg-white rounded-t-2xl">
       <div class="container mx-auto p-4">
-        <form [formGroup]="loginForm">
+
+        <!-- Login With Username and Password -->
+        <form [formGroup]="loginForm" *ngIf="!isBiometric || !biometricData">
           <div class="my-4 px-2 text-gray-400">Masukan username dan password anda untuk masuk ke aplikasi</div>
           <ion-item lines="none" class="border border-gray-300 rounded-xl my-2"
             [ngClass]="{'border-red-400' : loginForm.get('username')?.invalid && loginForm.get('username')?.touched, 'border-green-400' : loginForm.get('username')?.valid}">
@@ -39,16 +41,30 @@
                 class="mx-2"></ion-spinner>{{
               loader.isLoading.value ? 'Logging In...' : 'Masuk'
               }}</ion-button>
-            <ion-button expand="block" mode="ios" class="ml-2" (click)="performBiometric()"
-              *ngIf="isBiometricAvailable && biometricData">
-              <ion-icon src="assets/images/face-id.svg"></ion-icon>
-            </ion-button>
           </div>
         </form>
 
-        <!-- <div class="flex justify-end mt-4">
-          <ion-button fill="clear">Lupa Password ?</ion-button>
-        </div> -->
+
+        <!-- Login With Biometrics -->
+        <div class="my-10 flex flex-col items-center" *ngIf="isBiometric && biometricData">
+          <ion-icon class="h-16 w-16 text-red-500 "
+            [src]="biometricType === 2  ? 'assets/images/face-id.svg' : 'assets/images/finger-id.svg'"></ion-icon>
+
+          <div class="my-4 text-xl font-bold">Login dengan {{ biometricType === 2 ? 'Face ID' : 'Finger ID'}}</div>
+
+          <div class="text-center text-gray-500">Login menggunakan {{ biometricType === 2 ? 'Face ID' : 'Finger ID'}}
+            lebih cepat dan
+            memudahkan untuk
+            masuk ke akun anda</div>
+
+          <ion-button mode="ios" class="my-4" shape="round" (click)="performBiometric()">
+            Login dengan {{ biometricType === 2 ? 'Face ID' : 'Finger ID'}}
+          </ion-button>
+
+          <ion-button class="my-4" fill="outline" color="dark" mode="ios" size="small" shape="round"
+            (click)="openSignInModal()">Login dengan akun lain</ion-button>
+        </div>
+
       </div>
     </div>
   </div>
