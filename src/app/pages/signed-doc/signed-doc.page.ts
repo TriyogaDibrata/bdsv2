@@ -194,4 +194,36 @@ export class SignedDocPage implements OnInit {
       this.selectedEndDate = null;
     }
   }
+
+  async handleRefresh(ev) {
+    this.infiniteScrollData.enable = false;
+    this.infiniteScrollData.page = 1;
+    return await this.getSignedDoc().subscribe({
+      next: (res: ApiResponse) => {
+        if (res) {
+          this.docs = res.data;
+          if (res['next_page_url']) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          }
+        }
+      },
+      error: (err) => {
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
+      },
+      complete: () => {
+        ev.target.complete();
+      },
+    });
+  }
 }

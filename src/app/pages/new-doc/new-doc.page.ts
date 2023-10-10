@@ -194,4 +194,36 @@ export class NewDocPage implements OnInit {
       this.selectedEndDate = null;
     }
   }
+
+  async handleRefresh(ev) {
+    this.infiniteScrollData.enable = false;
+    this.infiniteScrollData.page = 1;
+    return (await this.getNewDoc()).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.docs = res.data.docs.data;
+          if (res.data.docs.next_page_url) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          }
+        }
+      },
+      error: (err) => {
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
+      },
+      complete: () => {
+        ev.target.complete();
+      },
+    });
+  }
 }

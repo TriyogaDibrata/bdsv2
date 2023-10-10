@@ -1,15 +1,16 @@
 <ion-content [fullscreen]="true" id="main-content" scrollEvents="true" (ionScroll)="handleScrollEvents($event)">
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content [refreshingSpinner]="'crescent'"></ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
 
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
     <div class="w-full p-4 flex justify-between items-center plt-ios:pt-10 sticky top-0 z-50"
       [ngClass]="{'bg-[#d42d2d] bg-opacity-100' : scrollTop > 100}">
       <ion-button mode="ios" fill="clear" (click)="toggleSideMenu()">
-        <ion-icon class="p-1 text-white" [name]="isMenuOpen ? 'close-outline' : 'menu-outline'"></ion-icon>
+        <ion-icon class="p-0 text-white" [name]="isMenuOpen ? 'close-outline' : 'menu-outline'"></ion-icon>
       </ion-button>
+
       <ion-button mode="ios" fill="clear" (click)="navCtrl.navigateForward('/notifications')">
         <ion-icon name="notifications-outline" class="p-1 text-white"
           [ngClass]="{'after:h-2 after:w-2 after:bg-yellow-500 after:rounded-full after:absolute after:top-0 after:right-0' : notifs?.length > 0 }"></ion-icon>

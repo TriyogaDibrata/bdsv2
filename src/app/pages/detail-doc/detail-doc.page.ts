@@ -66,6 +66,33 @@ export class DetailDocPage implements OnInit {
     });
   }
 
+  async handleRefresh(ev) {
+    await this.req.apiGet('doc/' + this.doc_id).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.detailDoc = res.data.doc;
+          this.detailDoc['ack_status'] = res.data.ack_status;
+        }
+      },
+      error: (err) => {
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
+      },
+      complete: () => {
+        ev.target.complete();
+      },
+    });
+  }
+
   handleScroll(e) {
     this.scrollTop = e.detail.scrollTop;
   }

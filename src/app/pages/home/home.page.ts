@@ -102,9 +102,24 @@ export class HomePage implements OnInit {
   }
 
   handleRefresh(ev) {
-    setTimeout(() => {
-      ev.target.complete();
-    }, 2000);
+    this.req.apiGet('home/stat').subscribe({
+      next: (res: ApiResponse) => {
+        this.homeData = res.data;
+        this.renderDateTime(res.data.time);
+      },
+      error: (err) => {
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          title: err?.statusText,
+          text: err?.message,
+          showConfirmButton: true,
+        });
+      },
+      complete: () => {
+        ev.target.complete();
+      },
+    });
   }
 
   async logoutPrompt() {

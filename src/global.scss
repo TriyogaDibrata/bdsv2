@@ -63,3 +63,19 @@ body.scanner-active {
     --background: transparent;
     --ion-background-color: transparent;
 }
+
+.ios ion-refresher {
+    position: absolute;
+    top: 60px;
+    z-index: 99;
+    
+    ion-refresher-content {
+        ion-spinner {
+            --color : var(--ion-color-dark) !important;
+        }
+        
+        ion-icon {
+            color : var(--ion-color-dark) !important;
+        }
+    }
+}

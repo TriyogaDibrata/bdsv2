@@ -1,4 +1,9 @@
 <ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content [refreshingSpinner]="'crescent'"></ion-refresher-content>
+  </ion-refresher>
+
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
     <div class="w-full h-[92px] p-4 flex flex-col mt-4 plt-ios:pt-10 plt-ios:h-[120px] sticky top-0 z-50"

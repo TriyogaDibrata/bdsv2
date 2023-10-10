@@ -26,6 +26,7 @@ export class DetailMailPage implements OnInit {
   public canDisposisi: boolean;
   public balasan: any;
   public data: any;
+  public maiUrl: string;
   constructor(
     private req: RequestService,
     private route: ActivatedRoute,
@@ -40,9 +41,9 @@ export class DetailMailPage implements OnInit {
     let inbox_id = this.route.snapshot.paramMap.get('inbox_id');
     let url = 'surat/detail/' + doc_id;
     if (inbox_id !== 'outbox') {
-      url = url + '/' + inbox_id;
+      this.maiUrl = url + '/' + inbox_id;
     }
-    this.getDetailDoc(url);
+    this.getDetailDoc(this.maiUrl);
   }
 
   private async getDetailDoc(url) {
@@ -171,5 +172,36 @@ export class DetailMailPage implements OnInit {
     });
 
     await modal.present();
+  }
+
+  async handleRefresh(ev) {
+    await this.req.apiGet(this.maiUrl, {}).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.data = res.data;
+          this.mailDetail = res.data.detail;
+          this.balasan = res.data.balasan;
+          this.fileSurat = res.data.file_surat;
+          this.lampirans = res.data.lampiran;
+          this.canDisposisi = res.data.action['add_disposisi'];
+        }
+      },
+      error: (err) => {
+        this.alertService
+          .showAlert({
+            status: 'error',
+            autoClose: false,
+            showConfirmButton: true,
+            title: err?.statusText,
+            text: err?.message,
+          })
+          .then(() => {
+            this.navCtrl.pop();
+          });
+      },
+      complete: () => {
+        ev.target.complete();
+      },
+    });
   }
 }

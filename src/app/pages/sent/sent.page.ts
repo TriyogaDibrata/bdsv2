@@ -184,4 +184,33 @@ export class SentPage implements OnInit {
       this.selectedEndDate = null;
     }
   }
+
+  async handleRefresh(ev) {
+    this.infiniteScrollData.enable = false;
+    this.infiniteScrollData.page = 1;
+
+    (await this.getInbox()).subscribe({
+      next: (res: ApiResponse) => {
+        if (res && res.success) {
+          this.mails = res.data.surat.data;
+          if (res.data.surat.next_page_url) {
+            this.infiniteScrollData.enable = true;
+            this.infiniteScrollData.page++;
+          }
+        }
+      },
+      error: (err) => {
+        this.alertService.showAlert({
+          status: 'error',
+          autoClose: false,
+          showConfirmButton: true,
+          title: 'Something went wrong',
+          text: err.message,
+        });
+      },
+      complete: () => {
+        ev.target.complete();
+      },
+    });
+  }
 }
