@@ -1,12 +1,12 @@
 <div class="p-8">
-  <div class="flex gap-4 items-center justify-center" *ngIf="doc.type_user == 0 && doc.ack_status == 0">
-    <div class="p-4 w-32 bg-red-50 flex flex-col items-center rounded-xl" (click)="onDismiss(-1, 'reject')">
+  <div class="flex items-center justify-center" *ngIf="doc.type_user === 0 && doc.ack_status === 0">
+    <div class="p-4 mx-4 w-32 bg-red-50 flex flex-col items-center rounded-xl" (click)="onDismiss(-1, 'reject')">
       <div class="text-center bg-red-300 h-10 w-10 flex justify-center items-center rounded-full">
         <ion-icon class="h-6 w-6 text-red-500" name="arrow-undo-outline"></ion-icon>
       </div>
       <div class="text-red-600 font-bold">Kembalikan</div>
     </div>
-    <div class="p-4 w-32 bg-green-50 flex flex-col items-center rounded-xl" (click)="onDismiss(1, 'accept')">
+    <div class="p-4 mx-4 w-32 bg-green-50 flex flex-col items-center rounded-xl" (click)="onDismiss(1, 'accept')">
       <div class="text-center bg-green-300 h-10 w-10 flex justify-center items-center rounded-full">
         <ion-icon class="h-6 w-6 text-green-500" name="checkmark-outline"></ion-icon>
       </div>
@@ -14,24 +14,24 @@
     </div>
   </div>
 
-  <div class="flex gap-4 items-center justify-center" *ngIf="doc.type_user == 1 && doc.status == 0">
-    <div class="p-4 w-32 bg-red-50 flex flex-col items-center rounded-xl" (click)="onDismiss(-1, 'reject')">
+  <div class="flex items-center justify-center" *ngIf="doc.type_user === 1 && doc.status === 0">
+    <div class="p-4 mx-4 w-32 bg-red-50 flex flex-col items-center rounded-xl" (click)="onDismiss(-1, 'reject')">
       <div class="text-center bg-red-300 h-10 w-10 flex justify-center items-center rounded-full">
         <ion-icon class="h-6 w-6 text-red-500" name="arrow-undo-outline"></ion-icon>
       </div>
       <div class="text-red-600 font-bold">Kembalikan</div>
     </div>
-    <div class="p-4 w-32 bg-green-50 flex flex-col items-center rounded-xl" (click)="onDismiss(1, 'accept')">
+    <div class="p-4 mx-4 w-32 bg-green-50 flex flex-col items-center rounded-xl" (click)="onDismiss(1, 'accept')">
       <div class="text-center bg-green-300 h-10 w-10 flex justify-center items-center rounded-full">
         <ion-icon class="h-6 w-6 text-green-500" name="checkmark-outline"></ion-icon>
       </div>
       <div class="text-green-600 font-bold">Tandatangani</div>
     </div>
   </div>
-  <div class="text-center font-bold my-6" *ngIf="doc.type_user == 0 && doc.ack_status !== 0">
+  <div class="text-center font-bold my-6" *ngIf="doc.type_user === 0 && doc.ack_status !== 0">
     Dokumen Sudah Diproses
   </div>
-  <div class="text-center font-bold my-6" *ngIf="doc.type_user == 1 && doc.status !== 0">
+  <div class="text-center font-bold my-6" *ngIf="doc.type_user === 1 && doc.status !== 0">
     Dokumen Sudah Diproses
   </div>
 </div>

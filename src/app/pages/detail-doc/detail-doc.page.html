@@ -1,8 +1,8 @@
 <ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="handleScroll($event)">
 
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content [refreshingSpinner]="'crescent'"></ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher> -->
 
   <div class="container flex flex-col flex-grow min-h-full mx-auto">
     <!-- Header -->
@@ -91,9 +91,7 @@
           [ngClass]="{'!bg-red-200 !border-solid !border-red-400 border-2 !text-red-600' : detailDoc?.status === -1, '!bg-green-200 !border-solid !border-green-400 border-2 !text-green-600' : detailDoc?.status === 1}">
           <div>
             {{ detailDoc?.status === 1 ? "Dokumen Telah Ditandangani" : detailDoc?.status === -1 ? "Dokumen
-            Dikembalikan"
-            :
-            "Dokumen Akan Ditandatangani" }} Oleh
+            Dikembalikan" : "Dokumen Akan Ditandatangani" }} Oleh
           </div>
           <div class="font-bold" *ngIf="detailDoc?.status === 1 || detailDoc?.status === 0">{{
             detailDoc?.ttds.join(',')}}
@@ -129,7 +127,7 @@
     </div>
 
     <div
-      class="h-14 w-14 bg-red-600 rounded-full fixed right-4 bottom-10 shadow-lg shadow-red-200 flex items-center justify-center"
+      class="!fixed right-4 bottom-10 h-14 w-14 bg-red-600 rounded-full shadow-lg shadow-red-200 flex items-center justify-center"
       (click)="openActionSheet(detailDoc)">
       <ion-icon class="h-6 w-6" src="assets/images/pen.svg" color="light"></ion-icon>
     </div>

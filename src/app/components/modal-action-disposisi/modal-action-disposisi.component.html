@@ -1,13 +1,13 @@
 <div class="p-8">
-  <div class="flex gap-4 items-center justify-center">
-    <div class="p-4 w-32 bg-red-50 flex flex-col items-center justify-center rounded-xl min-h-[120px]"
+  <div class="flex items-center justify-center">
+    <div class="p-4 mx-4 w-32 bg-red-50 flex flex-col items-center justify-center rounded-xl min-h-[120px]"
       (click)="closeModal('riwayat')">
       <div class="text-center bg-red-300 h-10 w-10 flex justify-center items-center rounded-full">
         <ion-icon class="h-6 w-6 text-red-500" name="list-outline"></ion-icon>
       </div>
       <div class="text-red-600 font-bold text-center">Riwayat Disposisi</div>
     </div>
-    <div class="p-4 w-32 bg-green-50 flex flex-col items-center justify-center rounded-xl min-h-[120px]"
+    <div class="p-4 mx-4 w-32 bg-green-50 flex flex-col items-center justify-center rounded-xl min-h-[120px]"
       (click)="closeModal('disposisi')" *ngIf="candisposisi">
       <div class="text-center bg-green-300 h-10 w-10 flex justify-center items-center rounded-full">
         <ion-icon class="h-6 w-6 text-green-500" name="arrow-redo-outline"></ion-icon>

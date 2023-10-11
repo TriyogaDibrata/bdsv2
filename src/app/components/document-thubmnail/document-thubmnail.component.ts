@@ -10,6 +10,7 @@ import * as moment from 'moment';
 })
 export class DocumentThubmnailComponent implements OnInit {
   @Input() data: DocThumb;
+  @Input() isNew: boolean = false;
 
   constructor(private navCtrl: NavController) {}
 
