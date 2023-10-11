@@ -3,8 +3,8 @@
     <ion-datetime [presentation]="presentation" [(ngModel)]="value" [min]="min ? min : emptyDate"
       [max]="max ? max : emptyDate" #datetime></ion-datetime>
     <div class="flex justify-between my-4">
-      <ion-button color="danger" fill="clear" (click)="reset()">Reset</ion-button>
-      <ion-button color="secondary" fill="clear" (click)="confirm()">Confirm</ion-button>
+      <ion-button mode="ios" color="danger" fill="clear" (click)="reset()">Reset</ion-button>
+      <ion-button mode="ios" color="secondary" fill="clear" (click)="confirm()">Confirm</ion-button>
     </div>
   </div>
 </div>

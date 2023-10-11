@@ -1,20 +1,20 @@
 <div class="p-6">
   <div class="my-2 flex flex-col items-center">
     <div class="icon-wrapper flex justify-center items-center h-16 w-16 rounded-full"
-      [ngClass]="{'bg-green-200' : status == 'success', 'bg-red-200' : status == 'error', 'bg-yellow-200' : status == 'warning', 'bg-blue-200' : status == 'info'}">
+      [ngClass]="{'bg-green-200' : status === 'success', 'bg-red-200' : status === 'error', 'bg-yellow-200' : status === 'warning', 'bg-blue-200' : status === 'info'}">
       <ion-icon class="text-2xl font-bold"
-        [ngClass]="{'text-green-500' : status == 'success', 'text-red-500' : status == 'error', 'text-yellow-500' : status == 'warning', 'text-blue-500' : status == 'info'}"
-        [name]="status == 'success' ? 'checkmark' : status == 'error' ? 'close' : status == 'warning' ? 'alert' : 'information'"></ion-icon>
+        [ngClass]="{'text-green-500' : status === 'success', 'text-red-500' : status === 'error', 'text-yellow-500' : status === 'warning', 'text-blue-500' : status === 'info'}"
+        [name]="status === 'success' ? 'checkmark' : status === 'error' ? 'close' : status === 'warning' ? 'alert' : 'information'"></ion-icon>
     </div>
     <div class="text-2xl font-bold my-2"
-      [ngClass]="{'text-green-500' : status == 'success', 'text-red-500' : status == 'error', 'text-yellow-500' : status == 'warning', 'text-blue-500' : status == 'info'}">
+      [ngClass]="{'text-green-500' : status === 'success', 'text-red-500' : status === 'error', 'text-yellow-500' : status === 'warning', 'text-blue-500' : status === 'info'}">
       {{ title }}
     </div>
     <div class="my-2 text-center text-gray-500 max-w-[300px]">
       {{ text }}
     </div>
-    <ion-button expand="block"
-      [color]="status == 'success' ? 'success' : status == 'error' ? 'danger' : status == 'warning' ? 'warning' : 'secondary'"
+    <ion-button expand="block" mode="ios"
+      [color]="status === 'success' ? 'success' : status === 'error' ? 'danger' : status === 'warning' ? 'warning' : 'secondary'"
       *ngIf="showConfirmButton" (click)="dismissModal()">
       Oke
     </ion-button>

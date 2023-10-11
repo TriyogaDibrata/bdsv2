@@ -57,8 +57,11 @@
             memudahkan untuk
             masuk ke akun anda</div>
 
-          <ion-button mode="ios" class="my-4" shape="round" (click)="performBiometric()">
-            Login dengan {{ biometricType === 2 ? 'Face ID' : 'Finger ID'}}
+          <ion-button mode="ios" class="my-4" shape="round" (click)="performBiometric()"
+            [disabled]="loader.isLoading.value">
+            <ion-label *ngIf="!loader.isLoading.value">Login dengan {{ biometricType === 2 ? 'Face ID' :
+              'FingerID'}}</ion-label>
+            <ion-label *ngIf="loader.isLoading.value">Logging in...</ion-label>
           </ion-button>
 
           <ion-button class="my-4" fill="outline" color="dark" mode="ios" size="small" shape="round"
