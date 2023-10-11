@@ -4,6 +4,7 @@ import { TextZoom } from '@capacitor/text-zoom';
 import { EnvService } from '@services/env.service';
 import { PushNotifService } from '@services/push-notif.service';
 import { TextService } from '@services/text.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
 
   async initApp() {
     if (await Capacitor.isNativePlatform()) {
+      await SplashScreen.hide();
       this.setTextSize();
       this.pushNotif.initPushNotif();
       this.envService.checkingDemo();
