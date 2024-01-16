@@ -14,7 +14,8 @@ export class DocumentThubmnailComponent implements OnInit {
 
   constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   convertDate(date) {
     moment.locale('ID');
@@ -23,5 +24,18 @@ export class DocumentThubmnailComponent implements OnInit {
 
   showDetail() {
     this.navCtrl.navigateForward(['detail-doc/', this.data.id]);
+  }
+
+  sliceWords(sentence) {
+    let words = [];
+    let newSentence = "";
+    words = sentence.split(" ");
+    if(words.length > 10) {
+      newSentence = words.splice(0, 10).join(" ") + '...';
+    } else {
+      newSentence = sentence;
+    }
+
+    return newSentence;
   }
 }
