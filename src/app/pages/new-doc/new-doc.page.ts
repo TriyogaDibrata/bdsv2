@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { ApiResponse } from '@interfaces/api-response';
 import { DocThumb } from '@interfaces/doc-thumb';
+import { User } from '@interfaces/user';
 import { ModalController, NavController } from '@ionic/angular';
 import { AlertService } from '@services/alert.service';
+import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
 import { RequestService } from '@services/request.service';
 import * as moment from 'moment';
@@ -29,6 +31,7 @@ export class NewDocPage implements OnInit {
   selectedStartDate: Date;
   selectedEndDate: Date;
   emptyDate: Date;
+  user: User = this.auth.userData;
 
   constructor(
     private req: RequestService,
@@ -36,6 +39,7 @@ export class NewDocPage implements OnInit {
     public loader: LoadingService,
     private alertService: AlertService,
     private modalCtrl: ModalController,
+    private auth: AuthService,
   ) {}
 
   ngOnInit() {

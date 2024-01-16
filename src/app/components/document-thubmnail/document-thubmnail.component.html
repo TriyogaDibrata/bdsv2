@@ -8,8 +8,13 @@
       <div>Perihal : {{ data?.desc }}</div>
       <div class="text-sm text-gray-400">{{ convertDate(data?.date) }}</div>
       <div class="text-sm"
-        [ngClass]="{'text-blue-400' : data?.status === 0, 'text-red-400' : data?.status === -1, 'text-green-400' : data?.status === 1}">
+        [ngClass]="{'text-blue-400' : data?.status === 0, 'text-red-400' : data?.status === -1, 'text-green-400' : data?.status === 1}"
+        *ngIf="role.slug === 'signer'">
         {{ data?.status_label }}</div>
+      <div class="text-sm"
+        [ngClass]="{'text-blue-400' : data?.flag_proses === 0, 'text-red-400' : data?.flag_proses === -1, 'text-green-400' : data?.flag_proses === 1}"
+        *ngIf="role.slug === 'ack'">
+        {{ data?.proses_label }}</div>
     </div>
   </div>
 </ion-card>

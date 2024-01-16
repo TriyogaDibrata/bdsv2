@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Capacitor } from '@capacitor/core';
 import {
   AppUpdate,
   AppUpdateAvailability,

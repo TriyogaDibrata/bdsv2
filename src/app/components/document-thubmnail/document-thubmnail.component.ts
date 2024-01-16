@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DocThumb } from '@interfaces/doc-thumb';
+import { Role } from '@interfaces/user';
 import { NavController } from '@ionic/angular';
+import { AuthService } from '@services/auth.service';
 import * as moment from 'moment';
 
 @Component({
@@ -11,8 +13,12 @@ import * as moment from 'moment';
 export class DocumentThubmnailComponent implements OnInit {
   @Input() data: DocThumb;
   @Input() isNew: boolean = false;
+  @Input() role: Role;
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController,
+    private auth: AuthService,
+  ) {}
 
   ngOnInit() {
   }

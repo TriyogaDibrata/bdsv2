@@ -24,7 +24,7 @@ export class BiometricsService {
   async setCredential(username, password) {
     const platfrom = await Capacitor.getPlatform();
     return await NativeBiometric.setCredentials({
-      server: 'com.badungkab.digitalsignature',
+      server: 'com.badungkab.bsc',
       username: username,
       password: password,
     });

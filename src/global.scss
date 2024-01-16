@@ -50,6 +50,12 @@
     --overflow: auto;
 }
 
+.modal-popup-height100 {
+    --height: 100% !important;
+    --width: 100% !important;
+    --overflow: auto;
+}
+
 ion-textarea.custom {
     --background: theme(backgroundColor.gray.500);
     --color: #ffffff;
