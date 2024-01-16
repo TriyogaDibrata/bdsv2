@@ -100,7 +100,7 @@ export class DetailMailPage implements OnInit {
   prepareSurat(data) {
     let files = [];
     files.push(data);
-    this.showPdfViewer(files);
+    this.showPdfViewer(files, 'surat');
   }
 
   prepareLampiran(data) {
@@ -108,15 +108,17 @@ export class DetailMailPage implements OnInit {
     data.forEach((el) => {
       files.push(el);
     });
-    this.showPdfViewer(files);
+    this.showPdfViewer(files, 'lampiran');
   }
 
-  public async showPdfViewer(files: string[]) {
+  public async showPdfViewer(files: string[], type) {
     if (files.length > 0) {
       const modal = await this.modalCtrl.create({
         component: PdfViewerComponent,
         componentProps: {
           files: files,
+          title: this.mailDetail.nomor,
+          type: type,
         },
       });
       await modal.present();

@@ -11,4 +11,6 @@ export interface DocThumb {
   date: Date;
   signed_date: Date;
   public_url: string;
+  flag_proses: number;
+  proses_label: string;
 }

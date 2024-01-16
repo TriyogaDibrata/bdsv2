@@ -78,8 +78,8 @@
           <ion-icon src="assets/images/file-pdf.svg" class="text-3xl"></ion-icon>
           <ion-text class="text-sm my-2"> Tidak ada dokumen terbaru </ion-text>
         </div>
-        <app-document-thubmnail *ngFor="let doc of homeData?.lastest" [data]="doc"
-          [isNew]="true"></app-document-thubmnail>
+        <app-document-thubmnail *ngFor="let doc of homeData?.lastest" [data]="doc" [isNew]="true"
+          [role]="user.role"></app-document-thubmnail>
         <div *ngIf="loader.isLoading.value && !homeData?.lastest">
           <app-skeleton *ngFor="let i of [1,2,3,4,5]" [type]="'doc-thumb'"></app-skeleton>
         </div>
@@ -97,8 +97,8 @@
           <ion-icon src="assets/images/file-pdf.svg" class="text-3xl"></ion-icon>
           <ion-text class="text-sm my-2"> Tidak ada riwayat dokumen terakhir </ion-text>
         </div>
-        <app-document-thubmnail *ngFor="let doc of homeData?.histories" [data]="doc"
-          [isNew]="false"></app-document-thubmnail>
+        <app-document-thubmnail *ngFor="let doc of homeData?.histories" [data]="doc" [isNew]="false"
+          [role]="user.role"></app-document-thubmnail>
         <div *ngIf="loader.isLoading.value && !homeData?.histories">
           <app-skeleton *ngFor="let i of [1,2,3,4,5]" [type]="'doc-thumb'"></app-skeleton>
         </div>

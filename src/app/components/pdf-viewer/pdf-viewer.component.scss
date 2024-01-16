@@ -1,0 +1,17 @@
+::ng-deep pdf-viewer {
+    --page-margin: 12px 0px !important;
+    --page-border: 9px solid transparent !important;
+    // --shadow: none !important;
+}
+
+::ng-deep pdf-viewer .textLayer {
+    // border: 1px solid #000000 !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+::ng-deep pdf-viewer .canvasWrapper {
+    width: 100% !important;
+    height: 100% !important;
+}

@@ -57,7 +57,8 @@
         <app-skeleton [type]="'doc-thumb'" *ngFor="let i of [1,2,3,4,5]"></app-skeleton>
       </div>
 
-      <app-document-thubmnail *ngFor="let doc of docs" [data]="doc" [isNew]="false"></app-document-thubmnail>
+      <app-document-thubmnail *ngFor="let doc of docs" [data]="doc" [isNew]="false"
+        [role]="user.role"></app-document-thubmnail>
 
       <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!infiniteScrollData.enable">
         <ion-infinite-scroll-content [loadingSpinner]="'crescent'"></ion-infinite-scroll-content>

@@ -109,7 +109,7 @@ export class DetailDocPage implements OnInit {
     data.forEach((el) => {
       surats.push(el.doc_url);
     });
-    this.showPdfViewer(surats);
+    this.showPdfViewer(surats, 'surat');
   }
 
   prepareLampirans(data: lampiran[]) {
@@ -117,14 +117,17 @@ export class DetailDocPage implements OnInit {
     data.forEach((el) => {
       lampirans.push(el.external_path);
     });
-    this.showPdfViewer(lampirans);
+    this.showPdfViewer(lampirans, 'lampiran');
   }
 
-  public async showPdfViewer(files: string[]) {
+  public async showPdfViewer(files: string[], type) {
     const modal = await this.modalCtrl.create({
+      cssClass: 'modal-popup-height100',
       component: PdfViewerComponent,
       componentProps: {
         files: files,
+        title: this.detailDoc.name,
+        type: type,
       },
     });
     await modal.present();
