@@ -9,7 +9,7 @@ export const environment = {
     android: 'com.badungkab.digital_signature',
   },
   url: {
-    live: 'https://tte.badungkab.go.id/api/',
+    live: 'https://demo-tte.badungkab.go.id/api/',
     demo: 'https://demo-tte.badungkab.go.id/api/',
   },
 };

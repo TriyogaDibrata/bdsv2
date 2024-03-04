@@ -65,7 +65,7 @@
             Perihal
           </div>
           <div class="text-sm" *ngIf="!loader.isLoading.value">
-            {{ detailDoc?.desc }}
+            {{ detailDoc?.desc ? detailDoc?.desc : "-"}}
           </div>
           <app-skeleton [type]="'text-thumb-full'" *ngIf="loader.isLoading.value"></app-skeleton>
           <app-skeleton [type]="'text-thumb-5/6'" *ngIf="loader.isLoading.value"></app-skeleton>
