@@ -1,17 +1,17 @@
 export interface User {
-  id: number;
-  opd_id: number;
-  username: string;
-  name: string;
-  signing_name: string;
-  jabatan: string;
-  email_contact: string;
-  avatar: string;
+  id?: number;
+  opd_id?: number;
+  username?: string;
+  name?: string;
+  signing_name?: string;
+  jabatan?: string;
+  email_contact?: string;
+  avatar?: string;
   api_token?: string;
-  role: Role;
-  is_biometric: number;
-  is_biometric_login: number;
-  biometric: Biometric;
+  role?: Role;
+  is_biometric?: number;
+  is_biometric_login?: number;
+  biometric?: Biometric;
 }
 
 export class Role {
@@ -19,12 +19,12 @@ export class Role {
   static Signer = 'signer';
   static User = 'user';
 
-  id: number;
-  name: string;
-  slug: string;
+  id?: number;
+  name?: string;
+  slug?: string;
 }
 
 export class Biometric {
-  biometric_token: String;
-  biometric_user_id: String;
+  biometric_token?: String;
+  biometric_user_id?: String;
 }

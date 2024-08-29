@@ -25,7 +25,19 @@ export class UpdateProfilePage implements OnInit {
     private navCtrl: NavController,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUser();
+  }
+
+  async getUser() {
+    await this.req.apiGet('user').subscribe({
+      next: (res : ApiResponse) => {
+        if(res && res.success) {
+          this.user = res.data.user;
+        }
+      }
+    })
+  }
 
   handleScroll(e) {
     this.scrollTop = e.detail.scrollTop;
