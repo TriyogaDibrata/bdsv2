@@ -29,7 +29,7 @@ export class AboutAppPage implements OnInit {
 
   async getCurrentVersion() {
     const result = await AppUpdate.getAppUpdateInfo({ country: 'ID' });
-    this.currentVersion = result.currentVersion;
+    this.currentVersion = result.currentVersionName;
   }
 
   checkUpdates() {
@@ -43,7 +43,7 @@ export class AboutAppPage implements OnInit {
         result.updateAvailability === AppUpdateAvailability.UPDATE_AVAILABLE
       ) {
         this.isUpdateAvailable = true;
-        this.availableVersion = result.availableVersion;
+        this.availableVersion = result.availableVersionName;
         this.checkString = 'New version available : ' + this.availableVersion;
       } else {
         this.isUpdateAvailable = false;

@@ -8,7 +8,7 @@ import {
 import { Injectable } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { LoadingService } from '@services/loading.service';
-import { throwError } from 'rxjs';
+import { retry, throwError } from 'rxjs';
 import { Observable, catchError, finalize } from 'rxjs';
 
 @Injectable()
@@ -40,6 +40,9 @@ export class HeaderInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
+        if(err.status == 401 || err.status == 403) {
+          this.auth.logout();
+        }
         return throwError(() => err);
       }),
       finalize(() => {
