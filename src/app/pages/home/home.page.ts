@@ -74,8 +74,8 @@ export class HomePage implements OnInit {
         this.alertService.showAlert({
           status: 'error',
           autoClose: false,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
           showConfirmButton: true,
         });
       },
@@ -111,8 +111,8 @@ export class HomePage implements OnInit {
         this.alertService.showAlert({
           status: 'error',
           autoClose: false,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
           showConfirmButton: true,
         });
       },

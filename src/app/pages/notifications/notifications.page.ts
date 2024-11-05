@@ -53,15 +53,17 @@ export class NotificationsPage implements OnInit {
           status: 'error',
           autoClose: false,
           showConfirmButton: true,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
         });
       },
     });
   }
 
   public async loadMore(ev) {
-    return (await this.userNotif.getUserNotif()).subscribe({
+    return (
+      await this.userNotif.getUserNotif(this.infiniteScrollData.page)
+    ).subscribe({
       next: (res: ApiResponse) => {
         if (res && res.success) {
           res.data.notif.data.forEach((el) => {
@@ -80,8 +82,8 @@ export class NotificationsPage implements OnInit {
           status: 'error',
           autoClose: false,
           showConfirmButton: true,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
         });
       },
       complete: () => {

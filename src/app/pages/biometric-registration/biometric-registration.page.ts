@@ -80,8 +80,8 @@ export class BiometricRegistrationPage implements OnInit {
       },
       error: (err) => {
         this.alertService.showAlert({
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
           status: 'error',
           autoClose: false,
           showConfirmButton: true,

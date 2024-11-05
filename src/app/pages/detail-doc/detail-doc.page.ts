@@ -53,8 +53,8 @@ export class DetailDocPage implements OnInit {
             status: 'error',
             autoClose: false,
             showConfirmButton: true,
-            title: err?.statusText,
-            text: err?.message,
+            title: err?.statusText || err?.status_text,
+            text: err?.message || err?.msg,
           })
           .then(() => {
             this.navCtrl.pop();
@@ -80,8 +80,8 @@ export class DetailDocPage implements OnInit {
             status: 'error',
             autoClose: false,
             showConfirmButton: true,
-            title: err?.statusText,
-            text: err?.message,
+            title: err?.statusText || err?.status_text,
+            text: err?.message || err?.msg,
           })
           .then(() => {
             this.navCtrl.pop();
@@ -244,8 +244,8 @@ export class DetailDocPage implements OnInit {
           status: 'error',
           autoClose: false,
           showConfirmButton: true,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
         });
       },
     });
@@ -305,8 +305,8 @@ export class DetailDocPage implements OnInit {
           status: 'error',
           autoClose: false,
           showConfirmButton: true,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
         });
       },
     });
@@ -343,8 +343,8 @@ export class DetailDocPage implements OnInit {
           status: 'error',
           autoClose: false,
           showConfirmButton: true,
-          title: err?.statusText,
-          text: err?.message,
+          title: err?.statusText || err?.status_text,
+          text: err?.message || err?.msg,
         });
       },
     });

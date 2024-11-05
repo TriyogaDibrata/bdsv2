@@ -40,10 +40,10 @@ export class HeaderInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        if(err.status == 401 || err.status == 403) {
+        if (err.status === 401 || err.status === 403) {
           this.auth.logout();
         }
-        return throwError(() => err);
+        return throwError(() => err?.error || err);
       }),
       finalize(() => {
         this.loader.isLoading.next(false);
